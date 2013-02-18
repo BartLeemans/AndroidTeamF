@@ -35,7 +35,7 @@ public class Menu extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
         TextView username = (TextView)findViewById(R.id.usernametekst);
-
+        //test
         String test="";
 
         try
