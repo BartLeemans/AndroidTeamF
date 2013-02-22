@@ -13,6 +13,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+import teamf.controller.ServerCaller;
+import teamf.model.User;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,7 +30,8 @@ public class Menu extends Activity {
 
     private List<HttpMessageConverter<?>> messageConverters;
     private RestTemplate restTemplate = new RestTemplate();
-    private static final String ipAddress = "127.0.0.1:8080";
+    private static final String ipAddress = "10.0.2.2";
+    private List<User> usernames;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,16 +43,12 @@ public class Menu extends Activity {
 
         try
         {
-            HttpClient hc = new DefaultHttpClient();
-            HttpPost post = new HttpPost("http://127.0.0.1:8080/ProjectTeamF-1.0/user/getUserName");
 
-            HttpResponse rp = hc.execute(post);
+            usernames = restTemplate.getForObject("http://" + ipAddress + "ProjectTeamF-1.0/user/getUsers", List.class);
+            User u = usernames.get(0);
+            Toast.makeText(getApplicationContext(),"lelele",Toast.LENGTH_LONG).show();
 
-            if(rp.getStatusLine().getStatusCode() == HttpStatus.SC_OK)
-            {
-                test = EntityUtils.toString(rp.getEntity());
-            }
-        }catch(IOException e){
+        }catch(Exception e){
             e.printStackTrace();
         }
         Toast.makeText(getApplicationContext(), test, Toast.LENGTH_LONG).show();

@@ -3,7 +3,10 @@
           package="com.project.TeamFAndroid"
           android:versionCode="1"
           android:versionName="1.0">
-    <uses-sdk android:minSdkVersion="17"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="17"/>
 
     <application android:label="@string/app_name" android:icon="@drawable/compass_login">
         <activity android:name="teamf.view.Login"
@@ -22,5 +25,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
     </application>
+
+
 </manifest>
