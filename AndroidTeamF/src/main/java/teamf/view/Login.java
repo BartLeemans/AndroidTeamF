@@ -45,29 +45,39 @@ public class Login extends Activity {
 
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                username = (EditText) findViewById(R.id.username);
-                password = (EditText) findViewById(R.id.password);
+//                username = (EditText) findViewById(R.id.username);
+//                password = (EditText) findViewById(R.id.password);
+//
+//                if (username.getText().toString().length() == 0 && password.getText().toString().length() == 0) {
+//                    Toast.makeText(getApplicationContext(), "Please fill in your username and password", Toast.LENGTH_SHORT).show();
+//                } else if (username.getText().toString().length() == 0) {
+//                    Toast.makeText(getApplicationContext(), "Fill in your username", Toast.LENGTH_SHORT).show();
+//                } else if (password.getText().toString().length() == 0) {
+//                    Toast.makeText(getApplicationContext(), "Fill in your password", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    Toast.makeText(getApplicationContext(), username.getText(), Toast.LENGTH_SHORT).show();
+//                    ServerError se = serverCaller.login(username.getText().toString(), password.getText().toString());
+//
+//                    if (serverCaller.getReceivedUser().getUsername().length() > 0 && se == ServerError.NoError) {
+//                        Intent intent = new Intent(Login.this, Menu.class);
+//                        startActivity(intent);
+//                    } else if (serverCaller.getReceivedUser().getUsername().length() == 0) {
+//                        Toast.makeText(getApplicationContext(), "Your login credentials were wrong", Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        String message = GlobalController.getCorrispondingErrorMessage(se);
+//                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+//                    }
+//                }
 
-                if (username.getText().toString().length() == 0 && password.getText().toString().length() == 0) {
-                    Toast.makeText(getApplicationContext(), "Please fill in your username and password", Toast.LENGTH_SHORT).show();
-                } else if (username.getText().toString().length() == 0) {
-                    Toast.makeText(getApplicationContext(), "Fill in your username", Toast.LENGTH_SHORT).show();
-                } else if (password.getText().toString().length() == 0) {
-                    Toast.makeText(getApplicationContext(), "Fill in your password", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), username.getText(), Toast.LENGTH_SHORT).show();
-                    ServerError se = serverCaller.login(username.getText().toString(), password.getText().toString());
-
-                    if (serverCaller.getReceivedUser().getUsername().length() > 0 && se == ServerError.NoError) {
-                        Intent intent = new Intent(Login.this, Menu.class);
-                        startActivity(intent);
-                    } else if (serverCaller.getReceivedUser().getUsername().length() == 0) {
-                        Toast.makeText(getApplicationContext(), "Your login credentials were wrong", Toast.LENGTH_SHORT).show();
+                    ServerError se;
+                    se = serverCaller.getAllUsernames();
+                    if(se == ServerError.NoError){
+                       Toast.makeText(getApplicationContext(),"GREAT SUCCES! :D" + serverCaller.getUsernames().size(),Toast.LENGTH_SHORT).show();
                     } else {
-                        String message = GlobalController.getCorrispondingErrorMessage(se);
-                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                       Toast.makeText(getApplicationContext(),"Fail :(" + serverCaller.getUsernames().size(),Toast.LENGTH_SHORT).show();
                     }
-                }
+
+
             }
         });
 

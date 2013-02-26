@@ -20,8 +20,8 @@ public class ServerCaller {
 
     private User receivedUser;
     private List<Message> messagesList;
-    private List<String> usernames;
-    private static final String ipAddress = "10.0.2.2:8080";
+    private List<String> usernames = new ArrayList<String>();
+    private static final String ipAddress = "192.168.56.1:8080";
     private RestTemplate restTemplate = new RestTemplate();
     
     private List<HttpMessageConverter<?>> messageConverters;
@@ -51,8 +51,7 @@ public class ServerCaller {
 
     public ServerError getAllUsernames() {
         try {
-
-         usernames = restTemplate.getForObject("http://" + ipAddress + "ProjectTeamF-1.0/user/getUsers", List.class);
+         usernames = restTemplate.getForObject("http://" + ipAddress + "/ProjectTeamF-1.0/service/getUsernames.json", ArrayList.class);
 
         } catch (ResourceAccessException rae) {
             return ServerError.ServerNotFound;
@@ -62,6 +61,10 @@ public class ServerCaller {
             return ServerError.OtherError;
         }
         return ServerError.NoError;
+    }
+
+    public List<String> getUsernames() {
+            return usernames;
     }
 
     public User getReceivedUser() {
@@ -74,7 +77,8 @@ public class ServerCaller {
            user.setPassword(password);
 
            try {
-               receivedUser = restTemplate.postForObject("http://" + ipAddress + "/ProjectTeamF-1.0/service/login", user, User.class);
+               receivedUser = restTemplate.postForObject("http://" + ipAddress + "ProjectTeamF-1.0/service/login", user, User.class);
+               System.out.println(receivedUser.getUsername());
            } catch (ResourceAccessException rae) {
                receivedUser = null;
                return ServerError.ServerNotFound;

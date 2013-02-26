@@ -30,7 +30,7 @@ public class Menu extends Activity {
 
     private List<HttpMessageConverter<?>> messageConverters;
     private RestTemplate restTemplate = new RestTemplate();
-    private static final String ipAddress = "10.0.2.2";
+    private static final String ipAddress = "10.0.2.2:8080";
     private List<User> usernames;
 
     @Override
@@ -44,9 +44,7 @@ public class Menu extends Activity {
         try
         {
 
-            usernames = restTemplate.getForObject("http://" + ipAddress + "ProjectTeamF-1.0/user/getUsers", List.class);
-            User u = usernames.get(0);
-            Toast.makeText(getApplicationContext(),"lelele",Toast.LENGTH_LONG).show();
+           Toast.makeText(getApplicationContext(),"test",Toast.LENGTH_LONG).show();
 
         }catch(Exception e){
             e.printStackTrace();
