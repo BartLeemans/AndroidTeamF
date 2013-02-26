@@ -5,4 +5,6 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">TRIP PLANNER</string>
+    <string name="mytrips">My trips</string>
+    <string name="myacc">My account</string>
 </resources>

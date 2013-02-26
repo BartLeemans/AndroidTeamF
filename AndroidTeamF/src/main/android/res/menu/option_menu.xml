@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/my_acc"
+          android:title="@string/myacc"
+            android:icon="@drawable/accicon"/>
+    <item android:id="@+id/my_trips"
+          android:title="@string/mytrips"
+            android:icon="@drawable/tripsicon"/>
+</menu>

@@ -2,6 +2,8 @@ package teamf.view;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.project.TeamFAndroid.R;
@@ -28,28 +30,39 @@ import java.util.List;
  */
 public class Menu extends Activity {
 
-    private List<HttpMessageConverter<?>> messageConverters;
-    private RestTemplate restTemplate = new RestTemplate();
-    private static final String ipAddress = "10.0.2.2:8080";
-    private List<User> usernames;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
         TextView username = (TextView)findViewById(R.id.usernametekst);
-        //test
-        String test="";
+    }
 
-        try
-        {
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.option_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-           Toast.makeText(getApplicationContext(),"test",Toast.LENGTH_LONG).show();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-        }catch(Exception e){
-            e.printStackTrace();
+        super.onOptionsItemSelected(item);
+
+        switch(item.getItemId()){
+            case R.id.my_acc:
+                Toast.makeText(getBaseContext(), "You selected Account", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.my_trips:
+                Toast.makeText(getBaseContext(), "You selected trips", Toast.LENGTH_SHORT).show();
+                break;
+
         }
-        Toast.makeText(getApplicationContext(), test, Toast.LENGTH_LONG).show();
+        return true;
+
+    }
 
 
-    }}
+}
