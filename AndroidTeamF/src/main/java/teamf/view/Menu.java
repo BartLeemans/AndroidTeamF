@@ -24,20 +24,22 @@ public class Menu extends TabActivity {
         TabHost tabHost = getTabHost();
 
         //account tab
+        Intent accountIntent = new Intent(this,Account.class);
         TabHost.TabSpec accountspec = tabHost.newTabSpec("Account");
         accountspec.setIndicator("Account",getResources().getDrawable(R.drawable.tab_icon));
-        Intent accountIntent = new Intent(this,Account.class);
         accountspec.setContent(accountIntent);
 
-        //options tab
-        TabHost.TabSpec optionsspec = tabHost.newTabSpec("Options");
-        accountspec.setIndicator("Options",getResources().getDrawable(R.drawable.tab_icon));
-        Intent optionsIntent = new Intent(this,Options.class);
-        accountspec.setContent(optionsIntent);
-
         tabHost.addTab(accountspec);
+
+        //options tab
+        Intent optionsIntent = new Intent(this,Options.class);
+        TabHost.TabSpec optionsspec = tabHost.newTabSpec("Options");
+        optionsspec.setIndicator("Options",getResources().getDrawable(R.drawable.tab_icon));
+        optionsspec.setContent(optionsIntent);
+
         tabHost.addTab(optionsspec);
-       tabHost.setCurrentTab(0);
+
+       tabHost.setCurrentTab(1);
 
     }
 }
