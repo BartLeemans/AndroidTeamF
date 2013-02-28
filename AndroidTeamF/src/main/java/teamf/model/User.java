@@ -1,132 +1,216 @@
 package teamf.model;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: Jeroen
+ * Date: 5/02/13
+ * Time: 14:57
+ * To change this template use File | Settings | File Templates.
+ */
 
 public class User implements Serializable {
 
-    @JsonProperty
     private int userID;
-    @JsonProperty
-    private String username = "";
-    @JsonProperty
-    private String password = "";
-    @JsonProperty
-    private String email = "";
-    @JsonProperty
-    private String telephone = "";
-    @JsonProperty
-    private String firstname = "";
-    @JsonProperty
-    private String lastname = "";
-    @JsonProperty
-    private String dateOfBirth = "";
-    @JsonProperty
-    private String street = "";
-    @JsonProperty
-    private String number = "";
-    @JsonProperty
-    private int zipcode;
-    @JsonProperty
-    private String city = "";
+
+    private String username;
+
+    private String password;
+
+    private String email;
+
+    private String telephone;
+
+    private String firstName;
+
+    private String lastName;
+
+    private Date dateOfBirth;
+
+    private String street;
+
+    private String number;
+
+    private String zipcode;
+
+    private String city;
+
+
+
+
+    private Collection<Deelname> deelnames;
+
+    private Collection<Trip> trips;
 
     public User() {
+
+    }
+
+    public User(String city, String zipcode, String number, String street, Date dateOfBirth, String lastName, String firstName, String telephone, String email, String password, String username)  {
+        this.password =  password;
+        this.city = city;
+        this.zipcode = zipcode;
+        this.number = number;
+        this.street = street;
+        this.dateOfBirth = dateOfBirth;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.telephone = telephone;
+        this.email = email;
+        this.username = username;
+
+
     }
 
     public int getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
-    }
-
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
     }
 
     public String getStreet() {
         return street;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
     public String getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public int getZipcode() {
+    public String getZipcode() {
         return zipcode;
-    }
-
-    public void setZipcode(int zipcode) {
-        this.zipcode = zipcode;
     }
 
     public String getCity() {
         return city;
     }
 
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
     public void setCity(String city) {
         this.city = city;
     }
+
+    public Collection<Deelname> getDeelnames() {
+        return deelnames;
+    }
+
+    public void setDeelnames(Collection<Deelname> deelnames) {
+        this.deelnames = deelnames;
+    }
+
+    public Collection<Trip> getTrips() {
+        return trips;
+    }
+
+    public void setTrips(Collection<Trip> trips) {
+        this.trips = trips;
+    }
+
+    public void setShowPosition(boolean showPosition) {
+        //this.showPosition = showPosition;
+    }
+
+    public boolean isShowPosition() {
+
+        return true;
+    }
+
+    public void setNotificationEmail(boolean notificationEmail) {
+        //this.notificationEmail = notificationEmail;
+    }
+
+    public boolean isNotificationEmail() {
+
+        return true;
+    }
+
+
+
+  /*  @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (userID != user.userID) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return userID;
+    } */
 }

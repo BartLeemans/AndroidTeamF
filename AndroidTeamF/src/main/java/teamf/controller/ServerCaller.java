@@ -10,6 +10,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import teamf.controller.methods.getUserName;
 import teamf.model.User;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.List;
 
 public class ServerCaller {
 
+    private String test;
     private User receivedUser;
     private List<Message> messagesList;
     private List<String> usernames = new ArrayList<String>();
@@ -95,6 +97,30 @@ public class ServerCaller {
            }
            return ServerError.NoError;
        }
+
+    public ServerError getTest() {
+        try {
+            String URL = "http://" + ipAddress + "/ProjectTeamF-1.0/service/getUsernames.json";
+            String dings = new getUserName().execute(URL).get();
+            test = dings;
+
+        } catch (ResourceAccessException rae) {
+            test=rae.getMessage();
+            return ServerError.ServerNotFound;
+        } catch (HttpServerErrorException hsee) {
+            test=hsee.getMessage();
+            return ServerError.WrongData;
+        } catch (Exception e) {
+            test=e.getMessage();
+            return ServerError.OtherError;
+        }
+        return ServerError.NoError;
+    }
+
+
+    public String pakTest(){
+        return test;
+    }
 }
 
 

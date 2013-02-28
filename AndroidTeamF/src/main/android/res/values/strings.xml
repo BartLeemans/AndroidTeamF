@@ -7,4 +7,7 @@
     <string name="login">TRIP PLANNER</string>
     <string name="mytrips">My trips</string>
     <string name="myacc">My account</string>
+    <string name="general"><u>General</u></string>
+    <string name="account">ACCOUN HERE</string>
+    <string name="options">OPTIONS HERE</string>
 </resources>

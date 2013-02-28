@@ -1,7 +1,6 @@
 package teamf.view;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.project.TeamFAndroid.R;
-import teamf.controller.GlobalController;
 import teamf.controller.ServerCaller;
 import teamf.controller.ServerError;
 
@@ -69,16 +67,9 @@ public class Login extends Activity {
 //                    }
 //                }
 
-                    ServerError se;
-                    se = serverCaller.getAllUsernames();
-                    if(se == ServerError.NoError){
-                       Toast.makeText(getApplicationContext(),"GREAT SUCCES! :D" + serverCaller.getUsernames().size(),Toast.LENGTH_SHORT).show();
-                    } else {
-                       Toast.makeText(getApplicationContext(),"Fail :(" + serverCaller.getUsernames().size(),Toast.LENGTH_SHORT).show();
-                    }
-
-
-            }
+                    ServerError se = serverCaller.getTest();
+                    Toast.makeText(getApplicationContext(),serverCaller.pakTest(),Toast.LENGTH_SHORT).show();
+                  }
         });
 
     }

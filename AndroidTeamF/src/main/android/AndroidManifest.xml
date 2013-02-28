@@ -6,9 +6,12 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="17"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <application android:label="@string/app_name" android:icon="@drawable/compass_login">
+    <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="17"/>
+
+    <application android:label="@string/app_name" android:icon="@drawable/compass_login" android:theme="@style/MyTheme">
         <activity android:name="teamf.view.Login"
                   android:label="@string/app_name"
                   android:theme="@android:style/Theme.NoTitleBar"
@@ -19,13 +22,22 @@
             </intent-filter>
         </activity>
         <activity android:name="teamf.view.Menu"
-                  android:label="@string/app_name"
-                  android:theme="@android:style/Widget.ActionBar">
+                  android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name="teamf.view.Account"
+                  android:label="@string/myacc">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name="teamf.view.Account"/>
+        <activity android:name="teamf.view.Options"/>
 
     </application>
 
