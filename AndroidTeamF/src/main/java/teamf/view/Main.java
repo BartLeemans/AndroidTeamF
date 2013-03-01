@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
+import android.widget.*;
 import com.project.TeamFAndroid.R;
 
 /**
@@ -17,6 +17,8 @@ import com.project.TeamFAndroid.R;
  * To change this template use File | Settings | File Templates.
  */
 public class Main extends Activity {
+
+    private String[] values;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,27 @@ public class Main extends Activity {
             public void onClick(View v) {
                 Intent login = new Intent(Main.this,Login.class);
                 startActivity(login);
+            }
+        });
+
+        ListView listView = (ListView) findViewById(R.id.openTripList);
+        String[] values = new String[] { "VoorbeeldTrip1", "VoorbeeldTrip2", "VoorbeeldTrip3",
+                "VoorbeeldTrip4", "VoorbeeldTrip5", "VoorbeeldTrip6", "VoorbeeldTrip7", "VoorbeeldTrip8",
+                "VoorbeeldTrip9", "VoorbeeldTrip10" };
+
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, values);
+
+
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+                Toast.makeText(getApplicationContext(),"Click ListItem Number " + position, Toast.LENGTH_LONG).show();
+                Intent tripDetail = new Intent(Main.this,Trip_detail.class);
+                tripDetail.putExtra("TripName",parent.getItemIdAtPosition(position));
+                startActivity(tripDetail);
             }
         });
 
