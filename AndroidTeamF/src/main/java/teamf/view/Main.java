@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.*;
 import com.project.TeamFAndroid.R;
+import teamf.model.Trip;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,7 +19,8 @@ import com.project.TeamFAndroid.R;
  */
 public class Main extends Activity {
 
-    private String[] values;
+    Trip[] testValues;
+    String[] stringValues = new String[10];
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,13 +38,18 @@ public class Main extends Activity {
         });
 
         ListView listView = (ListView) findViewById(R.id.openTripList);
-        String[] values = new String[] { "VoorbeeldTrip1", "VoorbeeldTrip2", "VoorbeeldTrip3",
-                "VoorbeeldTrip4", "VoorbeeldTrip5", "VoorbeeldTrip6", "VoorbeeldTrip7", "VoorbeeldTrip8",
-                "VoorbeeldTrip9", "VoorbeeldTrip10" };
+        testValues = new Trip[10];
+        for(int i = 0;i<10;i++){
+            Trip t = new Trip();
+            t.setTripName("TestTrip_"+i);
+            testValues[i]=t;
+        }
 
+        for(int j =0;j<10;j++){
+            stringValues[j] = testValues[j].getTripName();
+        }
 
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, values);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, stringValues);
 
 
         listView.setAdapter(adapter);
@@ -51,7 +58,7 @@ public class Main extends Activity {
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
                 Toast.makeText(getApplicationContext(),"Click ListItem Number " + position, Toast.LENGTH_LONG).show();
                 Intent tripDetail = new Intent(Main.this,Trip_detail.class);
-                tripDetail.putExtra("TripName",parent.getItemIdAtPosition(position));
+                tripDetail.putExtra("TripName",testValues[position]);
                 startActivity(tripDetail);
             }
         });

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Window;
 import android.widget.TextView;
 import com.project.TeamFAndroid.R;
+import teamf.model.Trip;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,7 +21,7 @@ public class Trip_detail extends Activity {
         setContentView(R.layout.trip_detail);
 
         TextView tripName = (TextView)findViewById(R.id.tripname);
-        tripName.setText(getIntent().getSerializableExtra("TripName").toString());
-
+        Trip detail = (Trip)getIntent().getSerializableExtra("TripName");
+        tripName.setText(detail.getTripName());
     }
 }

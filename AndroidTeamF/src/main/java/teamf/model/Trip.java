@@ -1,5 +1,8 @@
 package teamf.model;
 
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
@@ -12,7 +15,7 @@ import java.util.Date;
  */
 
 
-public class Trip {
+public class Trip implements Serializable {
 
     private int tripId;
 
