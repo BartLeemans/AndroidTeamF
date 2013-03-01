@@ -12,7 +12,7 @@
             android:id="@+id/login_title"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login"
+            android:text="@string/title"
             android:textSize="95dp"
             android:gravity="center_horizontal"
             android:layout_alignParentTop="true"/>
@@ -28,6 +28,15 @@
 
 
 
+    <Button
+            android:id="@+id/main"
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:text="Main"
+            android:layout_margin="10dp"
+            android:background="@drawable/button"
+            android:layout_gravity="center"
+            android:layout_alignParentBottom="true"/>
         <Button
                 android:id="@+id/login"
                 android:layout_width="fill_parent"
@@ -36,7 +45,7 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/button"
                 android:layout_gravity="center"
-                android:layout_alignParentBottom="true"/>
+                android:layout_above="@id/main"/>
 
     <EditText
             android:id="@+id/password"

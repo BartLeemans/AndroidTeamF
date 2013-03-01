@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="android:Theme.Black">
+        <item name="android:windowTitleSize">35dip</item>
+        <item name="android:windowTitleBackgroundStyle">@style/CustomTitleBarBackground</item>
+    </style>
+
+    <style name="CustomTitleBarBackground">
+        <item name="android:background">#323331</item>
+    </style>
+</resources>

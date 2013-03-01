@@ -9,12 +9,13 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="17"/>
+    <uses-sdk android:minSdkVersion="2" android:targetSdkVersion="17"/>
 
-    <application android:label="@string/app_name" android:icon="@drawable/compass_login" android:theme="@style/MyTheme">
+    <application android:label="@string/app_name" android:icon="@drawable/compass_login" android:theme="@style/AppTheme">
         <activity android:name="teamf.view.Login"
                   android:label="@string/app_name"
                   android:theme="@android:style/Theme.NoTitleBar"
+                  android:windowSoftInputMode="adjustResize"
                   android:debuggable="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -28,13 +29,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="teamf.view.Account"
-                  android:label="@string/myacc">
+        <activity android:name="teamf.view.Main"
+                  android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
 
         <activity android:name="teamf.view.Account"/>
         <activity android:name="teamf.view.Options"/>

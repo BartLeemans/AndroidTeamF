@@ -19,7 +19,7 @@ public class Login extends Activity {
     String userName, passWord;
 
     EditText username, password;
-    Button login;
+    Button login,main;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,16 @@ public class Login extends Activity {
 
     private void instantiateElements() {
         login = (Button) findViewById(R.id.login);
+        main = (Button) findViewById((R.id.main));
+
         serverCaller = ServerCaller.getInstance();
+
+        main.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent mainPage = new Intent(Login.this,Main.class);
+                startActivity(mainPage);
+            }
+        });
 
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -55,7 +64,6 @@ public class Login extends Activity {
                 } else if (password.getText().toString().length() == 0) {
                     Toast.makeText(getApplicationContext(), "Fill in your password", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), username.getText(), Toast.LENGTH_SHORT).show();
                     ServerError se = serverCaller.login(username.getText().toString(), password.getText().toString());
 
                     if (serverCaller.getReceivedUser().getUsername().length() > 0 && se == ServerError.NoError) {
