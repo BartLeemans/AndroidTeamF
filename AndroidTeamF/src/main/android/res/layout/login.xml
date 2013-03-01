@@ -4,7 +4,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="horizontal"
-        android:background="@drawable/background">
+        android:background="@drawable/backgroundlogin">
 
 
     <!-- Login Title -->
@@ -19,8 +19,9 @@
 
     <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_centerInParent="true"
             android:src="@drawable/compass_login"
             android:textAlignment="center"
             android:layout_margin="5dp"/>

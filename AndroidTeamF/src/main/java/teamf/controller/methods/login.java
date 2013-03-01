@@ -11,45 +11,33 @@ import teamf.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
  * User: Jeroen
- * Date: 27/02/13
- * Time: 21:08
+ * Date: 28/02/13
+ * Time: 17:13
  * To change this template use File | Settings | File Templates.
  */
-public class getUserName extends AsyncTask<String,Integer,String> {
+public class login extends AsyncTask<Object[],Integer,User> {
 
     @Override
-    protected String doInBackground(String... strings) {
-        String test ="";
+    protected User doInBackground(Object[]... params) {
         List<MediaType> mediaTypes = new ArrayList<MediaType>();
         mediaTypes.add(MediaType.APPLICATION_JSON);
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(mediaTypes);
-        HttpEntity<User> httpEntity = new HttpEntity<User>(null, headers);
+        Object o = params[0][1];
+        User u = (User)o;
+        HttpEntity<User> httpEntity = new HttpEntity<User>(u, headers);
         List<HttpMessageConverter<?>> messageConverters;
         messageConverters = new ArrayList<HttpMessageConverter<?>>();
         messageConverters.add(new FormHttpMessageConverter());
         messageConverters.add(new StringHttpMessageConverter());
         messageConverters.add(new MappingJacksonHttpMessageConverter());
-
-        try{
         RestTemplate restTemplate = new RestTemplate();
-            ResponseEntity<User[]> users = restTemplate.exchange(strings[0], HttpMethod.GET, httpEntity, User[].class);
-            User[] userss = users.getBody();
-            User zooi = userss[0];
-            test=zooi.getUsername();
-
-
-        }catch(Exception e) {
-            test=e.getMessage();
-
-        }
-        return test;
-
+        ResponseEntity<User> userEnt = restTemplate.exchange(params[0][0].toString(), HttpMethod.POST, httpEntity, User.class);
+        User user = userEnt.getBody();
+        return user;
     }
-
 }

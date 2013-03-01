@@ -10,7 +10,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-import teamf.controller.methods.getUserName;
+import teamf.controller.methods.*;
 import teamf.model.User;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class ServerCaller {
     private User receivedUser;
     private List<Message> messagesList;
     private List<String> usernames = new ArrayList<String>();
-    private static final String ipAddress = "192.168.56.1:8080";
+    private static final String ipAddress = "192.168.120.1:8080";
     private RestTemplate restTemplate = new RestTemplate();
     
     private List<HttpMessageConverter<?>> messageConverters;
@@ -79,8 +79,10 @@ public class ServerCaller {
            user.setPassword(password);
 
            try {
-               receivedUser = restTemplate.postForObject("http://" + ipAddress + "ProjectTeamF-1.0/service/login", user, User.class);
-               System.out.println(receivedUser.getUsername());
+               String URL = "http://"+ipAddress+"/ProjectTeamF-1.0/service/login.json";
+               Object[] params = new Object[]{URL,user};
+               User u = new login().execute(params).get();
+                receivedUser = u;
            } catch (ResourceAccessException rae) {
                receivedUser = null;
                return ServerError.ServerNotFound;
