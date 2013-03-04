@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
+import android.view.Window;
 import android.widget.TabHost;
 import com.project.TeamFAndroid.R;
 
@@ -23,7 +24,9 @@ public class Menu extends TabActivity implements OnGestureListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.menu);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
         init_tabs();
         gDetector = new GestureDetector(this);
     }
@@ -34,7 +37,7 @@ public class Menu extends TabActivity implements OnGestureListener {
         //account tab
         Intent accountIntent = new Intent(this,Account.class);
         TabHost.TabSpec accountspec = tabHost.newTabSpec("Account");
-        accountspec.setIndicator("Account",getResources().getDrawable(R.drawable.tab_icon));
+        accountspec.setIndicator("Account",getResources().getDrawable(R.drawable.acc_icon));
         accountspec.setContent(accountIntent);
 
         tabHost.addTab(accountspec);
@@ -42,7 +45,7 @@ public class Menu extends TabActivity implements OnGestureListener {
         //options tab
         Intent optionsIntent = new Intent(this,Options.class);
         TabHost.TabSpec optionsspec = tabHost.newTabSpec("Options");
-        optionsspec.setIndicator("Options",getResources().getDrawable(R.drawable.tab_icon));
+        optionsspec.setIndicator("Options",getResources().getDrawable(R.drawable.options_icon));
         optionsspec.setContent(optionsIntent);
 
         tabHost.addTab(optionsspec);

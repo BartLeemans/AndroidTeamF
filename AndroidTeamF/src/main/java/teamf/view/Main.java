@@ -29,7 +29,9 @@ public class Main extends Activity {
         setContentView(R.layout.main);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
 
+
         Button loginButton = (Button)findViewById(R.id.loginButton);
+        loginButton.setVisibility(View.VISIBLE);
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent login = new Intent(Main.this,Login.class);
