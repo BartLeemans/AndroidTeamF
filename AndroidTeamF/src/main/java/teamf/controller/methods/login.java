@@ -19,10 +19,13 @@ import java.util.List;
  * Time: 17:13
  * To change this template use File | Settings | File Templates.
  */
-public class login extends AsyncTask<Object[],Integer,User> {
+public class login extends AsyncTask<Object[],Integer,String> {
 
     @Override
-    protected User doInBackground(Object[]... params) {
+    protected String doInBackground(Object[]... params) {
+
+        String message = "";
+
         List<MediaType> mediaTypes = new ArrayList<MediaType>();
         mediaTypes.add(MediaType.APPLICATION_JSON);
         HttpHeaders headers = new HttpHeaders();
@@ -35,9 +38,14 @@ public class login extends AsyncTask<Object[],Integer,User> {
         messageConverters.add(new FormHttpMessageConverter());
         messageConverters.add(new StringHttpMessageConverter());
         messageConverters.add(new MappingJacksonHttpMessageConverter());
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<User> userEnt = restTemplate.exchange(params[0][0].toString(), HttpMethod.POST, httpEntity, User.class);
-        User user = userEnt.getBody();
-        return user;
+        try{
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<User> userEnt = restTemplate.exchange(params[0][0].toString(), HttpMethod.POST, httpEntity, User.class);
+            User user = userEnt.getBody();
+        }catch(Exception e){
+            message = e.getMessage();
+        }
+
+        return message;
     }
 }

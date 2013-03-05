@@ -38,10 +38,9 @@ public class getUserName extends AsyncTask<String,Integer,String> {
 
         try{
         RestTemplate restTemplate = new RestTemplate();
-            ResponseEntity<User[]> users = restTemplate.exchange(strings[0], HttpMethod.GET, httpEntity, User[].class);
-            User[] userss = users.getBody();
-            User zooi = userss[0];
-            test=zooi.getUsername();
+            ResponseEntity<String> users = restTemplate.exchange(strings[0], HttpMethod.GET, httpEntity, String.class);
+            String userss = users.getBody();
+            test=userss;
 
 
         }catch(Exception e) {

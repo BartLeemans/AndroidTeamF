@@ -23,7 +23,7 @@ public class ServerCaller {
     private User receivedUser;
     private List<Message> messagesList;
     private List<String> usernames = new ArrayList<String>();
-    private static final String ipAddress = "192.168.120.1:8080";
+    private static final String ipAddress = "192.168.173.1:8080";
     private RestTemplate restTemplate = new RestTemplate();
     
     private List<HttpMessageConverter<?>> messageConverters;
@@ -81,8 +81,8 @@ public class ServerCaller {
            try {
                String URL = "http://"+ipAddress+"/ProjectTeamF-1.0/service/login.json";
                Object[] params = new Object[]{URL,user};
-               User u = new login().execute(params).get();
-                receivedUser = u;
+               String u = new login().execute(params).get();
+                test = u;
            } catch (ResourceAccessException rae) {
                receivedUser = null;
                return ServerError.ServerNotFound;

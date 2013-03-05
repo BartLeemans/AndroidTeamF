@@ -54,7 +54,7 @@ public class Login extends Activity {
 
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                username = (EditText) findViewById(R.id.username);
+                /*username = (EditText) findViewById(R.id.username);
                 password = (EditText) findViewById(R.id.password);
 
                 if (username.getText().toString().length() == 0 && password.getText().toString().length() == 0) {
@@ -66,10 +66,10 @@ public class Login extends Activity {
                 } else {
                     ServerError se = serverCaller.login(username.getText().toString(), password.getText().toString());
 
-                    if (serverCaller.getReceivedUser().getUsername().length() > 0 && se == ServerError.NoError) {
+                    if (serverCaller.getReceivedUser()!=null && serverCaller.getReceivedUser().getUsername().length() > 0 && se == ServerError.NoError ) {
                         Intent intent = new Intent(Login.this, Menu.class);
                         startActivity(intent);
-                    } else if (serverCaller.getReceivedUser().getUsername().length() == 0) {
+                    } else if (serverCaller.getReceivedUser()!=null && serverCaller.getReceivedUser().getUsername().length() == 0) {
                         Toast.makeText(getApplicationContext(), "Your login credentials were wrong", Toast.LENGTH_SHORT).show();
                     } else {
                         String message = GlobalController.getCorrispondingErrorMessage(se);
@@ -77,8 +77,10 @@ public class Login extends Activity {
                     }
                 }
 
-                  }
-        });
+                  }*/
+                ServerError se = serverCaller.login(username.getText().toString(), password.getText().toString());
+                Toast.makeText(getApplicationContext(), serverCaller.pakTest(), Toast.LENGTH_SHORT).show();
+            }});
 
     }
 }
