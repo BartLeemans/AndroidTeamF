@@ -79,7 +79,8 @@ public class Login extends Activity {
 
                   }*/
 
-                ServerError se = serverCaller.login("test", "test");
+
+                ServerError se = serverCaller.getTest();
                 Toast.makeText(getApplicationContext(), serverCaller.pakTest(), Toast.LENGTH_SHORT).show();
             }});
 

@@ -30,25 +30,23 @@ public class login extends AsyncTask<Object[],Integer,String> {
 
         Object o = params[0][1];
         User u = (User)o;
+       try{
+           HttpHeaders headers = new HttpHeaders();
+               headers.setContentType(MediaType.APPLICATION_JSON);
+           HttpEntity httpEntity = new HttpEntity(null, headers);
+           List<HttpMessageConverter<?>> messageConverters;
+           messageConverters = new ArrayList<HttpMessageConverter<?>>();
+           messageConverters.add(new MappingJacksonHttpMessageConverter());
 
-        List<HttpMessageConverter<?>> messageConverters;
-        messageConverters = new ArrayList<HttpMessageConverter<?>>();
-        messageConverters.add(new FormHttpMessageConverter());
-        messageConverters.add(new StringHttpMessageConverter());
-        messageConverters.add(new MappingJacksonHttpMessageConverter());
-        try{
-            RestTemplate restTemplate = new RestTemplate();
-            restTemplate.getMessageConverters().add(new GsonHttpMessageConverter());
-            HttpHeaders requestHeaders = new HttpHeaders();
-            requestHeaders.setContentType(MediaType.APPLICATION_JSON);
-            requestHeaders.setAccept(Arrays.asList(new MediaType[]{MediaType.APPLICATION_JSON}));
-            HttpEntity<User> httpEntity = new HttpEntity<User>(u, requestHeaders);
-            ResponseEntity<String> userEnt = restTemplate.exchange(params[0][0].toString(), HttpMethod.POST, httpEntity, String.class);
-            message = userEnt.getBody();
+           RestTemplate restTemplate = new RestTemplate();
+           restTemplate.setMessageConverters(messageConverters);
+        ResponseEntity<User> response = restTemplate.exchange(params[0][0].toString(),HttpMethod.POST ,httpEntity,User.class);
+        message = response.getBody().getUsername();
+         return message;
         }catch(Exception e){
-            message = e.getMessage();
+           message = e.getMessage();
+           return message;
         }
 
-        return message;
     }
 }

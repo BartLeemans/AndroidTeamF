@@ -81,7 +81,7 @@ public class ServerCaller {
            try {
                String URL = "http://"+ipAddress+"/ProjectTeamF-1.0/service/login.json";
                Object[] params = new Object[]{URL,user};
-               String u = new login().execute(params).get();
+               String u = new login().execute(params).toString();
                 test = u;
            } catch (ResourceAccessException rae) {
                receivedUser = null;

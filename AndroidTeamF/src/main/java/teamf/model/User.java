@@ -12,7 +12,7 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 
-public class User implements Serializable {
+public class User{
 
     private int userID;
 
