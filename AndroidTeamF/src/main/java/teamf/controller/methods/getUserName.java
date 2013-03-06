@@ -32,8 +32,7 @@ public class getUserName extends AsyncTask<String,Integer,String> {
         HttpEntity<User> httpEntity = new HttpEntity<User>(null, headers);
         List<HttpMessageConverter<?>> messageConverters;
         messageConverters = new ArrayList<HttpMessageConverter<?>>();
-        messageConverters.add(new FormHttpMessageConverter());
-        messageConverters.add(new StringHttpMessageConverter());
+
         messageConverters.add(new MappingJacksonHttpMessageConverter());
 
         try{
