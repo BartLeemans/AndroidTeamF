@@ -1,13 +1,14 @@
 package teamf.model;
 
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.*;
 
 import java.io.Serializable;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,47 +19,64 @@ import java.util.Date;
  */
 
 
-@JsonIgnoreProperties(ignoreUnknown=true)
-public class User implements Serializable{
-
+//@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonTypeName(value = "user")
+public class User{
+   @JsonProperty
     private int userID;
-
+    @JsonProperty
     private String username;
-
+    @JsonProperty
     private String password;
-
+    @JsonProperty
     private String email;
-
+    @JsonProperty
     private String telephone;
-
+    @JsonProperty
     private String firstName;
-
+    @JsonProperty
     private String lastName;
-
-
+    @JsonProperty
     private Date dateOfBirth;
-
+    @JsonProperty
     private String street;
-
+    @JsonProperty
     private String number;
-
+    @JsonProperty
     private String zipcode;
-
+    @JsonProperty
     private String city;
-
+    @JsonProperty
     private boolean showPosition;
-
+    @JsonProperty
     private boolean notificationEmail;
-
+    @JsonProperty
 
     private Blob profielFoto;
-
+    @JsonProperty
     private Collection<Deelname> deelnames;
-
+    @JsonProperty
 
     private Collection<Trip> trips;
-
+    @JsonProperty
     private Collection<Chat> chats;
+    @JsonProperty
+    private boolean accountNonExpired;
+    @JsonProperty
+    private boolean accountNonLocked;
+    @JsonProperty
+    private boolean credentialsNonExpired;
+    @JsonProperty
+    private Map<String,String> authorities;
+
+
+    public Map<String, String> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Map<String, String> authorities) {
+        this.authorities = authorities;
+    }
 
     public Collection<Chat> getChats() {
         return chats;
@@ -230,8 +248,18 @@ public class User implements Serializable{
         this.profielFoto = profielFoto;
     }
 
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
+    }
 
-    /*  @Override
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+/*  @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
