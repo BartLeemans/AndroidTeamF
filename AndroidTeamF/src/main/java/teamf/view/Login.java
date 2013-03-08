@@ -13,6 +13,10 @@ import com.project.TeamFAndroid.R;
 import teamf.controller.GlobalController;
 import teamf.controller.ServerCaller;
 import teamf.controller.ServerError;
+import teamf.model.Trip;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Login extends Activity {
     private ServerCaller serverCaller;
@@ -80,7 +84,8 @@ public class Login extends Activity {
                   }*/
 
 
-                ServerError se = serverCaller.getTest();
+                ServerError se = serverCaller.login("test","test");
+                //List<Trip> openTrips = new ArrayList<Trip>(serverCaller.getOpenTrips());
                 Toast.makeText(getApplicationContext(), serverCaller.pakTest(), Toast.LENGTH_SHORT).show();
             }});
 

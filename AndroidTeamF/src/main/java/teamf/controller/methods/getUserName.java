@@ -1,19 +1,12 @@
 package teamf.controller.methods;
 
 import android.os.AsyncTask;
-import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.http.converter.FormHttpMessageConverter;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
-import teamf.controller.ServerCaller;
-import teamf.model.User;
+import teamf.model.Trip;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,22 +15,23 @@ import java.util.Map;
  * Time: 21:08
  * To change this template use File | Settings | File Templates.
  */
-public class getUserName extends AsyncTask<String,Integer,String> {
+public class getUserName extends AsyncTask<String,Integer,List<Trip>> {
 
     @Override
-    protected String doInBackground(String... strings) {
-        String test ="";
+    protected List<Trip> doInBackground(String... strings) {
+        List<Trip> trips=new ArrayList<Trip>();
+        String error;
 
 
         try{
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
             final String url = strings[0];
-            test = restTemplate.getForObject(url,String.class);
+            trips = restTemplate.getForObject(url,List.class);
         }catch(Exception e) {
-            test=e.getMessage();
+            error=e.getMessage();
         }
-        return test;
+        return trips;
 
     }
 

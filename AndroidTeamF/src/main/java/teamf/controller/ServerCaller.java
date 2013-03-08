@@ -1,7 +1,6 @@
 package teamf.controller;
 
 import android.os.Message;
-import android.widget.Toast;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -11,6 +10,7 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import teamf.controller.methods.*;
+import teamf.model.Trip;
 import teamf.model.User;
 
 import java.util.ArrayList;
@@ -28,6 +28,8 @@ public class ServerCaller {
     
     private List<HttpMessageConverter<?>> messageConverters;
 
+    private List<Trip> trips;
+
     private static ServerCaller instance = null;
 
     private ServerCaller(){
@@ -42,6 +44,10 @@ public class ServerCaller {
         if(instance == null){
             instance = new ServerCaller();
         }
+    }
+
+    public void setReceivedUser(User receivedUser) {
+        this.receivedUser = receivedUser;
     }
 
     public static ServerCaller getInstance(){
@@ -73,16 +79,20 @@ public class ServerCaller {
            return receivedUser;
     }
 
+    public void setTest(Object o){
+        test =  (String)o;
+    }
+
     public ServerError login(String username, String password) {
            User user = new User();
            user.setUsername(username);
            user.setPassword(password);
 
+
            try {
                String URL = "http://"+ipAddress+"/ProjectTeamF-1.0/service/login.json";
                Object[] params = new Object[]{URL,user};
-               String u = new login().execute(params).toString();
-                test = u;
+               new login().execute(params);
            } catch (ResourceAccessException rae) {
                receivedUser = null;
                return ServerError.ServerNotFound;
@@ -100,11 +110,10 @@ public class ServerCaller {
            return ServerError.NoError;
        }
 
-    public ServerError getTest() {
+    public ServerError getOpenTripsMethod() {
         try {
-            String URL = "http://" + ipAddress + "/ProjectTeamF-1.0/service/getUsernames.json";
-            String dings = new getUserName().execute(URL).get();
-            test = dings;
+            String URL = "http://" + ipAddress + "/ProjectTeamF-1.0/service/getOpenTrips.json";
+            trips = new ArrayList<Trip>(new getTripsUser().execute().get());
 
         } catch (ResourceAccessException rae) {
             test=rae.getMessage();
@@ -117,6 +126,10 @@ public class ServerCaller {
             return ServerError.OtherError;
         }
         return ServerError.NoError;
+    }
+
+    public List<Trip> getOpenTrips(){
+        return trips;
     }
 
 

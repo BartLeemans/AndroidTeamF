@@ -1,6 +1,9 @@
 package teamf.model;
 
+
 import java.io.Serializable;
+import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -12,7 +15,7 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 
-public class User{
+public class User implements Serializable{
 
     private int userID;
 
@@ -28,6 +31,7 @@ public class User{
 
     private String lastName;
 
+
     private Date dateOfBirth;
 
     private String street;
@@ -38,30 +42,29 @@ public class User{
 
     private String city;
 
+    private boolean showPosition;
+
+    private boolean notificationEmail;
 
 
+    private Blob profielFoto;
 
     private Collection<Deelname> deelnames;
 
+
     private Collection<Trip> trips;
 
-    public User() {
+    private Collection<Chat> chats;
 
+    public Collection<Chat> getChats() {
+        return chats;
     }
 
-    public User(String city, String zipcode, String number, String street, Date dateOfBirth, String lastName, String firstName, String telephone, String email, String password, String username)  {
-        this.password =  password;
-        this.city = city;
-        this.zipcode = zipcode;
-        this.number = number;
-        this.street = street;
-        this.dateOfBirth = dateOfBirth;
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.telephone = telephone;
-        this.email = email;
-        this.username = username;
+    public void setChats(Collection<Chat> chats) {
+        this.chats = chats;
+    }
 
+    public User() {
 
     }
 
@@ -72,6 +75,26 @@ public class User{
     public String getUsername() {
         return username;
     }
+
+
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+
+    public boolean isEnabled() {
+        return true;
+    }
+
 
     public String getPassword() {
         return password;
@@ -178,26 +201,33 @@ public class User{
     }
 
     public void setShowPosition(boolean showPosition) {
-        //this.showPosition = showPosition;
+        this.showPosition = showPosition;
     }
 
     public boolean isShowPosition() {
 
-        return true;
+        return showPosition;
     }
 
     public void setNotificationEmail(boolean notificationEmail) {
-        //this.notificationEmail = notificationEmail;
+        this.notificationEmail = notificationEmail;
     }
 
     public boolean isNotificationEmail() {
 
-        return true;
+        return notificationEmail;
+    }
+
+    public Blob getProfielFoto() {
+        return profielFoto;
+    }
+
+    public void setProfielFoto(Blob profielFoto) {
+        this.profielFoto = profielFoto;
     }
 
 
-
-  /*  @Override
+    /*  @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
