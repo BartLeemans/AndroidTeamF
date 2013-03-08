@@ -1,25 +1,20 @@
 package teamf.controller.methods;
 
 import android.os.AsyncTask;
-import com.fasterxml.jackson.core.JsonParser;
 import com.google.gson.Gson;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.http.*;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.GsonHttpMessageConverter;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-import teamf.controller.ServerCaller;
 import teamf.model.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -74,20 +69,28 @@ public class login extends AsyncTask<Object[],Integer,User> {
         String gebruiker = null;
         try {
             JSONObject jsonObject = new JSONObject(nieuwe);
-           gebruiker=  jsonObject.get("user").toString();
+           gebruiker=  jsonObject.get("androidUser").toString();
         } catch (JSONException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-// yolo = nieuwe.getFirstName();
+
+
         ObjectMapper mapper = new ObjectMapper();
-//User user = mapper.readValue(nieuwe, User.class);
         Gson gson = new Gson();
 
-      /*  User test = new User();
+        User test = new User();
         test.setUsername("bla");
         test.setPassword("aze");
-        String bla = gson.toJson(test);*.*/
+        test.setZipcode("test");
+        test.setEmail("test");
+        test.setDateOfBirth(new Date("10/10/10"));
+        test.setFirstName("test");
+        test.setLastName("test");
+        test.setNumber(null);
 
+
+        String bla = gson.toJson(test);
+        User testUser = gson.fromJson(bla,User.class);
 
         User u =  gson.fromJson(gebruiker,User.class);
         String s = nieuwe;

@@ -1,14 +1,16 @@
 package teamf.model;
 
 
-import org.codehaus.jackson.annotate.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,63 +21,66 @@ import java.util.Map;
  */
 
 
-//@JsonIgnoreProperties(ignoreUnknown=true)
-@JsonTypeName(value = "user")
-public class User{
-   @JsonProperty
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class User implements UserDetails, Serializable{
+   //@JsonProperty
     private int userID;
-    @JsonProperty
+    //@JsonProperty
     private String username;
-    @JsonProperty
+    //@JsonProperty
     private String password;
-    @JsonProperty
+    //@JsonProperty
     private String email;
-    @JsonProperty
+    //@JsonProperty
     private String telephone;
-    @JsonProperty
+   // @JsonProperty
     private String firstName;
-    @JsonProperty
+   // @JsonProperty
     private String lastName;
-    @JsonProperty
+   // @JsonProperty
     private Date dateOfBirth;
-    @JsonProperty
+    //@JsonProperty
     private String street;
-    @JsonProperty
+   // @JsonProperty
     private String number;
-    @JsonProperty
+    //@JsonProperty
     private String zipcode;
-    @JsonProperty
+   // @JsonProperty
     private String city;
-    @JsonProperty
+   // @JsonProperty
     private boolean showPosition;
-    @JsonProperty
+   // @JsonProperty
     private boolean notificationEmail;
-    @JsonProperty
+   // @JsonProperty
 
     private Blob profielFoto;
-    @JsonProperty
+  //  @JsonProperty
     private Collection<Deelname> deelnames;
-    @JsonProperty
+   // @JsonProperty
 
     private Collection<Trip> trips;
-    @JsonProperty
+   // @JsonProperty
     private Collection<Chat> chats;
-    @JsonProperty
+  //  @JsonProperty
     private boolean accountNonExpired;
-    @JsonProperty
+    //@JsonProperty
     private boolean accountNonLocked;
-    @JsonProperty
+    //@JsonProperty
     private boolean credentialsNonExpired;
-    @JsonProperty
-    private Map<String,String> authorities;
+   // @JsonProperty
+    private boolean enabled;
+    Collection<? extends GrantedAuthority> authorities;
 
 
-    public Map<String, String> getAuthorities() {
-        return authorities;
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        ArrayList<GrantedAuthority> g =new ArrayList<GrantedAuthority>();
+        g.add(new SimpleGrantedAuthority("ROLE_USER"));
+        return g;
     }
 
-    public void setAuthorities(Map<String, String> authorities) {
-        this.authorities = authorities;
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+       this.authorities = authorities;
     }
 
     public Collection<Chat> getChats() {
@@ -259,7 +264,12 @@ public class User{
     public void setCredentialsNonExpired(boolean credentialsNonExpired) {
         this.credentialsNonExpired = credentialsNonExpired;
     }
-/*  @Override
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    /*  @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

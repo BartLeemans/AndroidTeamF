@@ -23,7 +23,10 @@ public class ServerCaller {
     private User receivedUser;
     private List<Message> messagesList;
     private List<String> usernames = new ArrayList<String>();
-    private static final String ipAddress = "192.168.173.1:8080";
+    //10.0.2.2
+    //192.168.173.1
+    private static final String ipAddress = "10.0.2.2:8080";
+    //private static final String ipAddress = "192.168.173.1:8080";
     private RestTemplate restTemplate = new RestTemplate();
     
     private List<HttpMessageConverter<?>> messageConverters;
