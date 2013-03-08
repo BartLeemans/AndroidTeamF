@@ -1,6 +1,8 @@
 package teamf.model;
 
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.sql.Blob;
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 
+
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class User implements Serializable{
 
     private int userID;
