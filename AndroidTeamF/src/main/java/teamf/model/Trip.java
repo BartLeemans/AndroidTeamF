@@ -1,7 +1,5 @@
 package teamf.model;
 
-import android.os.Parcelable;
-
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -58,6 +56,8 @@ public class Trip implements Serializable {
     private Collection<TripCategorie> tripCategorieen;
 
     private Collection<Deelname> deelnames;
+
+    private Collection<Chat> chats;
 
     public Trip() {
     }
@@ -221,5 +221,13 @@ public class Trip implements Serializable {
 
     public void setShowRoute(Boolean showRoute) {
         this.showRoute = showRoute;
+    }
+
+    public Collection<Chat> getChats() {
+        return chats;
+    }
+
+    public void setChats(Collection<Chat> chats) {
+        this.chats = chats;
     }
 }
