@@ -21,6 +21,7 @@ public class Deelname {
 
     private Collection<String> equipment;
 
+    private Collection<Kost> kosten;
     public Deelname() {
     }
 
@@ -59,5 +60,13 @@ public class Deelname {
 
     public void setEquipment(Collection<String> userEquipment) {
         this.equipment = userEquipment;
+    }
+
+    public Collection<Kost> getKosten() {
+        return kosten;
+    }
+
+    public void setKosten(Collection<Kost> kosten) {
+        this.kosten = kosten;
     }
 }

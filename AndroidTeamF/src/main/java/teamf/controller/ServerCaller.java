@@ -28,7 +28,7 @@ public class ServerCaller {
     private static final String ipAddress = "10.0.2.2:8080";
     //private static final String ipAddress = "192.168.173.1:8080";
     private RestTemplate restTemplate = new RestTemplate();
-    
+
     private List<HttpMessageConverter<?>> messageConverters;
 
     private List<Trip> trips;
@@ -40,7 +40,7 @@ public class ServerCaller {
         messageConverters.add(new FormHttpMessageConverter());
         messageConverters.add(new StringHttpMessageConverter());
         messageConverters.add(new MappingJacksonHttpMessageConverter());
-        restTemplate.setMessageConverters(messageConverters); 
+        restTemplate.setMessageConverters(messageConverters);
     }
 
     private static void createMessageService(){
@@ -62,7 +62,7 @@ public class ServerCaller {
 
     public ServerError getAllUsernames() {
         try {
-         usernames = restTemplate.getForObject("http://" + ipAddress + "/ProjectTeamF-1.0/service/getUsernames.json", ArrayList.class);
+            usernames = restTemplate.getForObject("http://" + ipAddress + "/ProjectTeamF-1.0/service/getUsernames.json", ArrayList.class);
 
         } catch (ResourceAccessException rae) {
             return ServerError.ServerNotFound;
@@ -75,11 +75,11 @@ public class ServerCaller {
     }
 
     public List<String> getUsernames() {
-            return usernames;
+        return usernames;
     }
 
     public User getReceivedUser() {
-           return receivedUser;
+        return receivedUser;
     }
 
     public void setTest(Object o){
@@ -87,32 +87,62 @@ public class ServerCaller {
     }
 
     public ServerError login(String username, String password) {
-           User user = new User();
-           user.setUsername(username);
-           user.setPassword(password);
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
 
 
-           try {
-               String URL = "http://"+ipAddress+"/ProjectTeamF-1.0/service/login.json";
-               Object[] params = new Object[]{URL,user};
-               new login().execute(params);
-           } catch (ResourceAccessException rae) {
-               receivedUser = null;
-               return ServerError.ServerNotFound;
-           } catch (HttpServerErrorException hsee) {
-               receivedUser = null;
-               return ServerError.WrongData;
-           } catch(RestClientException rce){
-               receivedUser = null;
-               return ServerError.WrongData;
-           } catch (Exception e) {
-               System.out.println("error " + e);
-               receivedUser = null;
-               return ServerError.OtherError;
-           }
-           return ServerError.NoError;
-       }
+        try {
+            String URL = "http://"+ipAddress+"/ProjectTeamF-1.0/service/login.json";
+            Object[] params = new Object[]{URL,user};
+            login log = new login();
+            log.execute(params);
+            receivedUser = log.get();
+            String u = "";
+        } catch (ResourceAccessException rae) {
+            receivedUser = null;
+            return ServerError.ServerNotFound;
+        } catch (HttpServerErrorException hsee) {
+            receivedUser = null;
+            return ServerError.WrongData;
+        } catch(RestClientException rce){
+            receivedUser = null;
+            return ServerError.WrongData;
+        } catch (Exception e) {
+            System.out.println("error " + e);
+            receivedUser = null;
+            return ServerError.OtherError;
+        }
+        return ServerError.NoError;
+    }
+    public ServerError listTrips(){
+        try {
+            String URL = "http://"+ipAddress+"/ProjectTeamF-1.0/service/tripList.json";
+            Object[] params = new Object[]{URL};
+            getTripList gtl = new getTripList();
+            gtl.execute(params);
+            trips =  gtl.get() ;
 
+
+            String u = "";
+            //new login().execute(params);
+        } catch (ResourceAccessException rae) {
+            receivedUser = null;
+            return ServerError.ServerNotFound;
+        } catch (HttpServerErrorException hsee) {
+            receivedUser = null;
+            return ServerError.WrongData;
+        } catch(RestClientException rce){
+            receivedUser = null;
+            return ServerError.WrongData;
+        } catch (Exception e) {
+            System.out.println("error " + e);
+            receivedUser = null;
+            return ServerError.OtherError;
+        }
+
+        return ServerError.NoError;
+    }
     public ServerError getOpenTripsMethod() {
         try {
             String URL = "http://" + ipAddress + "/ProjectTeamF-1.0/service/getOpenTrips.json";

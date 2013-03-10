@@ -80,6 +80,6 @@ public class StopPlaats {
     }
 
     public void setNaam(String naam) {
-        naam = naam;
+        this.naam = naam;
     }
 }

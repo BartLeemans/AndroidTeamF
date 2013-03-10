@@ -41,9 +41,9 @@ public class Trip implements Serializable {
 
     private String bgcolor = "#1C263C";
 
-    private Boolean showMap = false;
+    private boolean showMap = false;
 
-    private Boolean showRoute = true;
+    private boolean showRoute = true;
 
     private String travelType;
 

@@ -10,17 +10,22 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-import teamf.model.User;
+import teamf.model.Trip;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class login extends AsyncTask<Object[],Integer,User> {
+/**
+ * Created with IntelliJ IDEA.
+ * User: Jorne
+ * Date: 9/03/13
+ * Time: 15:12
+ * To change this template use File | Settings | File Templates.
+ */
+public class getTripList extends AsyncTask<Object[],Integer,List<Trip>> {
 
     @Override
-    protected User doInBackground(Object[]... params) {
-        String message = "";
+    protected List<Trip> doInBackground(Object[]... params) {
 
 
         String url = params[0][0].toString();
@@ -32,35 +37,22 @@ public class login extends AsyncTask<Object[],Integer,User> {
         messageConverters.add(new FormHttpMessageConverter());
         messageConverters.add(new StringHttpMessageConverter());
         restTemplate.setMessageConverters(messageConverters);
-        String nieuwe = restTemplate.postForObject(url, mvm, String.class);
-        String gebruiker = null;
+        String jsonFromWebserver = restTemplate.postForObject(url, mvm, String.class);
+
+
+        String triplijst = null;
         try {
-            JSONObject jsonObject = new JSONObject(nieuwe);
-          // gebruiker=  jsonObject.get("androidUser").toString();
-           gebruiker=  jsonObject.get("user").toString();
+            JSONObject jsonObject = new JSONObject(jsonFromWebserver);
+            // gebruiker=  jsonObject.get("androidUser").toString();
+            triplijst=  jsonObject.get("tripList").toString();
         } catch (JSONException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-
-
         Gson gson = new Gson();
+       // Type listType = new TypeToken<List<Trip>>(){}.getType();
 
-        /*User test = new User();
-        test.setUsername("bla");
-        test.setPassword("aze");
-        test.setZipcode("test");
-        test.setEmail("test");
-        test.setDateOfBirth(new Date("10/10/10"));
-        test.setFirstName("test");
-        test.setLastName("test");
-        test.setNumber(null); */
+       // List<Trip> trips =  gson.fromJson(triplijst,listType);
 
-
-       // String bla = gson.toJson(test);
-       // User testUser = gson.fromJson(bla,User.class);
-
-        User u =  gson.fromJson(gebruiker,User.class);
-        String s = nieuwe;
-        return u;
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }
