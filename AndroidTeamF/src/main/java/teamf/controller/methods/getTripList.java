@@ -48,18 +48,11 @@ public class getTripList extends AsyncTask<String,Integer,List<Trip>> {
 
             Type collectionType = new TypeToken<Trip[]>(){}.getType();
 
-            //String jsonTrips = restTemplate.getForObject(url,String.class);
-            //JSONObject jsonObject = new JSONObject(jsonTrips);
-
-            //String jsonTrips2 =  jsonObject.toString();
             Gson gson = new Gson();
-
 
             Trip[] u =  gson.fromJson(restTemplate.getForObject(url,String.class),collectionType);
 
             trips = Arrays.asList(u);
-
-
         }catch(Exception e) {
             error=e.getMessage();
         }
