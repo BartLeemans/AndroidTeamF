@@ -2,6 +2,7 @@ package teamf.controller.methods;
 
 import android.os.AsyncTask;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -14,7 +15,9 @@ import org.springframework.web.client.RestTemplate;
 import teamf.model.Trip;
 import teamf.model.User;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,17 +27,17 @@ import java.util.List;
  * Time: 15:12
  * To change this template use File | Settings | File Templates.
  */
-public class getTripList extends AsyncTask<String,Integer,List<Trip>> {
+public class getTripList extends AsyncTask<String, Integer, List<Trip>> {
 
     @Override
     protected List<Trip> doInBackground(String... params) {
 
 
-        List<Trip> trips=new ArrayList<Trip>();
+        List<Trip> trips = new ArrayList<Trip>();
         String error;
 
 
-        try{
+        try {
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
             List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
@@ -43,22 +46,15 @@ public class getTripList extends AsyncTask<String,Integer,List<Trip>> {
             restTemplate.setMessageConverters(messageConverters);
             final String url = params[0];
 
-            //Type collectionType = new TypeToken<Facility[]>(){}.getType();
-
-            String jsonTrips = restTemplate.getForObject(url,String.class);
-            JSONObject jsonObject = new JSONObject(jsonTrips);
-
-            String jsonTrips2 =  jsonObject.toString();
+            Type collectionType = new TypeToken<Trip[]>() {}.getType();
             Gson gson = new Gson();
+            Trip[] u = gson.fromJson(restTemplate.getForObject(url, String.class), collectionType);
+
+            trips = Arrays.asList(u);
 
 
-            List<Trip> u =  gson.fromJson(jsonTrips2,ArrayList.class);
-
-            trips = u;
-
-
-        }catch(Exception e) {
-            error=e.getMessage();
+        } catch (Exception e) {
+            error = e.getMessage();
         }
         return trips;
     }
