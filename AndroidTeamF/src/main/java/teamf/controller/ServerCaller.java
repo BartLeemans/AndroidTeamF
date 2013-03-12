@@ -1,38 +1,39 @@
 package teamf.controller;
 
 import android.os.Message;
+import org.springframework.http.*;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import teamf.controller.methods.*;
+import teamf.model.Chat;
 import teamf.model.Trip;
 import teamf.model.User;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 
 public class ServerCaller {
-
-    private String test;
     private User receivedUser;
-    private List<Message> messagesList;
+    private List<Chat> chatList;
     private List<String> usernames = new ArrayList<String>();
-    //10.0.2.2
-    //192.168.173.1
-    //private static final String ipAddress = "10.0.2.2:8080";
-    private static final String ipAddress = "192.168.173.1:8080";
+
+    String test = "";
+
+
+
+    private static final String ipAddress = "192.168.0.105:8080";
     private RestTemplate restTemplate = new RestTemplate();
-
     private List<HttpMessageConverter<?>> messageConverters;
-
     private List<Trip> trips;
-
     private static ServerCaller instance = null;
 
     private ServerCaller(){
@@ -48,6 +49,52 @@ public class ServerCaller {
             instance = new ServerCaller();
         }
     }
+
+   /* chat */
+
+    public List<Chat> getChatList() {
+        return chatList;
+    }
+
+    public void setChatList(List<Chat> chatList) {
+        this.chatList = chatList;
+    }
+
+
+    public ServerError addChat(String msg, int trip ) {
+        String URL = "http://"+ipAddress+"/ProjectTeamF-1.0/android/add.json";
+
+        MultiValueMap<String, String> mvm = new LinkedMultiValueMap<String, String>();
+        mvm.add("msg", msg);
+        mvm.add("trip", String.valueOf(trip));
+        mvm.add("userid", String.valueOf(1));
+
+        restTemplate.postForLocation(URL, mvm);
+        return ServerError.NoError;
+    }
+
+    public static class ChatlistTest extends ArrayList<Chat>{ }
+
+    public ServerError getChats(int tripid) {
+       /* chatList = new ArrayList<Chat>();
+        chatList = restTemplate.getForObject("http://" + ipAddress + "/ProjectTeamF-1.0/chat/getChat.json?trip=1", ArrayList.class);*/
+
+        String URL = "http://" + ipAddress + "/ProjectTeamF-1.0/chat/getChat.json?trip=1";
+
+        getChatList gcl = new getChatList();
+        gcl.execute(URL);
+        try {
+            chatList = gcl.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (ExecutionException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        return ServerError.NoError;
+    }
+    /* end chat */
+
 
     public void setReceivedUser(User receivedUser) {
         this.receivedUser = receivedUser;
@@ -82,9 +129,11 @@ public class ServerCaller {
         return receivedUser;
     }
 
-    public void setTest(Object o){
-        test =  (String)o;
+
+    public String getTest() {
+        return test;
     }
+
 
     public ServerError login(String username, String password) {
         User user = new User();

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="159dp"
+            android:text="New Text"
+            android:id="@+id/chatTextview" android:layout_gravity="left|center_vertical"/>
+    <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/inputChat" android:layout_gravity="center"/>
+
+    <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chatUpdate"
+            android:id="@+id/btnUpdate" android:layout_gravity="center"
+            android:layout_alignParentLeft="true" android:layout_marginLeft="154dp"
+            android:layout_alignParentTop="true"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chatChat"
+            android:id="@+id/btnChat" android:layout_gravity="right|center_vertical"
+            android:layout_alignParentRight="true" android:layout_alignTop="@+id/btnUpdate"/>
+    </RelativeLayout>
+</LinearLayout>
