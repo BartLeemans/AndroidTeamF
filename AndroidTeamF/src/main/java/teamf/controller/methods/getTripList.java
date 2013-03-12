@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -11,6 +12,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import teamf.model.Trip;
+import teamf.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,37 +24,42 @@ import java.util.List;
  * Time: 15:12
  * To change this template use File | Settings | File Templates.
  */
-public class getTripList extends AsyncTask<Object[],Integer,List<Trip>> {
+public class getTripList extends AsyncTask<String,Integer,List<Trip>> {
 
     @Override
-    protected List<Trip> doInBackground(Object[]... params) {
+    protected List<Trip> doInBackground(String... params) {
 
 
-        String url = params[0][0].toString();
-        MultiValueMap<String, String> mvm = new LinkedMultiValueMap<String, String>();
-        mvm.add("uname", "test");
-        mvm.add("pw", "test");
-        RestTemplate restTemplate = new RestTemplate();
-        List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
-        messageConverters.add(new FormHttpMessageConverter());
-        messageConverters.add(new StringHttpMessageConverter());
-        restTemplate.setMessageConverters(messageConverters);
-        String jsonFromWebserver = restTemplate.postForObject(url, mvm, String.class);
+        List<Trip> trips=new ArrayList<Trip>();
+        String error;
 
 
-        String triplijst = null;
-        try {
-            JSONObject jsonObject = new JSONObject(jsonFromWebserver);
-            // gebruiker=  jsonObject.get("androidUser").toString();
-            triplijst=  jsonObject.get("tripList").toString();
-        } catch (JSONException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        try{
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
+            List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
+            messageConverters.add(new FormHttpMessageConverter());
+            messageConverters.add(new StringHttpMessageConverter());
+            restTemplate.setMessageConverters(messageConverters);
+            final String url = params[0];
+
+            //Type collectionType = new TypeToken<Facility[]>(){}.getType();
+
+            String jsonTrips = restTemplate.getForObject(url,String.class);
+            JSONObject jsonObject = new JSONObject(jsonTrips);
+
+            String jsonTrips2 =  jsonObject.toString();
+            Gson gson = new Gson();
+
+
+            List<Trip> u =  gson.fromJson(jsonTrips2,ArrayList.class);
+
+            trips = u;
+
+
+        }catch(Exception e) {
+            error=e.getMessage();
         }
-        Gson gson = new Gson();
-       // Type listType = new TypeToken<List<Trip>>(){}.getType();
-
-       // List<Trip> trips =  gson.fromJson(triplijst,listType);
-
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return trips;
     }
 }

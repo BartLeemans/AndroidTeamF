@@ -8,7 +8,11 @@ import android.view.View;
 import android.view.Window;
 import android.widget.*;
 import com.project.TeamFAndroid.R;
+import teamf.controller.ServerCaller;
 import teamf.model.Trip;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,7 +24,8 @@ import teamf.model.Trip;
 public class Main extends Activity {
 
     Trip[] testValues;
-    String[] stringValues = new String[10];
+
+    List<String> tripNames = new ArrayList<String>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,16 +45,19 @@ public class Main extends Activity {
         });
 
         ListView listView = (ListView) findViewById(R.id.openTripList);
-        testValues = new Trip[10];
-        for(int i = 0;i<10;i++){
-            Trip t = new Trip();
-            t.setTripName("TestTrip_"+i);
-            testValues[i]=t;
+
+        ServerCaller sc = ServerCaller.getInstance();
+        sc.listTrips();
+        final List<Trip> trips = new ArrayList<Trip>(sc.getOpenTrips());
+
+        for(Trip t:trips){
+            tripNames.add(t.getTripName());
+        }
+        String[] stringValues = new String[tripNames.size()];
+        for(int i = 0;i<tripNames.size();i++){
+            stringValues[i]=tripNames.get(i);
         }
 
-        for(int j =0;j<10;j++){
-            stringValues[j] = testValues[j].getTripName();
-        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, stringValues);
 
@@ -60,7 +68,7 @@ public class Main extends Activity {
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
                 Toast.makeText(getApplicationContext(),"Click ListItem Number " + position, Toast.LENGTH_LONG).show();
                 Intent tripDetail = new Intent(Main.this,Trip_detail.class);
-                tripDetail.putExtra("TripName",testValues[position]);
+                tripDetail.putExtra("Trip",trips.get(position));
                 startActivity(tripDetail);
             }
         });

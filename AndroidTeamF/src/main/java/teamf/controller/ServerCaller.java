@@ -25,8 +25,8 @@ public class ServerCaller {
     private List<String> usernames = new ArrayList<String>();
     //10.0.2.2
     //192.168.173.1
-    private static final String ipAddress = "10.0.2.2:8080";
-    //private static final String ipAddress = "192.168.173.1:8080";
+    //private static final String ipAddress = "10.0.2.2:8080";
+    private static final String ipAddress = "192.168.173.1:8080";
     private RestTemplate restTemplate = new RestTemplate();
 
     private List<HttpMessageConverter<?>> messageConverters;
@@ -117,11 +117,11 @@ public class ServerCaller {
     }
     public ServerError listTrips(){
         try {
-            String URL = "http://"+ipAddress+"/ProjectTeamF-1.0/service/tripList.json";
-            Object[] params = new Object[]{URL};
+            String URL = "http://"+ipAddress+"/ProjectTeamF-1.0/service/getOpenTrips.json";
+
             getTripList gtl = new getTripList();
-            gtl.execute(params);
-            trips =  gtl.get() ;
+            gtl.execute(URL);
+            trips =  gtl.get();
 
 
             String u = "";

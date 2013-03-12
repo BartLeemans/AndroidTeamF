@@ -82,7 +82,7 @@ public class Login extends Activity {
                 ServerError se = serverCaller.login("test","test");
                 se = serverCaller.listTrips();
                 //List<Trip> openTrips = new ArrayList<Trip>(serverCaller.getOpenTrips());
-                Toast.makeText(getApplicationContext(), serverCaller.pakTest(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), serverCaller.getReceivedUser().getUsername(), Toast.LENGTH_SHORT).show();
             }});
 
     }
