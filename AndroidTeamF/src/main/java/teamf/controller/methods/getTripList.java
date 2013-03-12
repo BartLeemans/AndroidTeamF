@@ -2,6 +2,7 @@ package teamf.controller.methods;
 
 import android.os.AsyncTask;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -14,7 +15,9 @@ import org.springframework.web.client.RestTemplate;
 import teamf.model.Trip;
 import teamf.model.User;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -43,18 +46,18 @@ public class getTripList extends AsyncTask<String,Integer,List<Trip>> {
             restTemplate.setMessageConverters(messageConverters);
             final String url = params[0];
 
-            //Type collectionType = new TypeToken<Facility[]>(){}.getType();
+            Type collectionType = new TypeToken<Trip[]>(){}.getType();
 
-            String jsonTrips = restTemplate.getForObject(url,String.class);
-            JSONObject jsonObject = new JSONObject(jsonTrips);
+            //String jsonTrips = restTemplate.getForObject(url,String.class);
+            //JSONObject jsonObject = new JSONObject(jsonTrips);
 
-            String jsonTrips2 =  jsonObject.toString();
+            //String jsonTrips2 =  jsonObject.toString();
             Gson gson = new Gson();
 
 
-            List<Trip> u =  gson.fromJson(jsonTrips2,ArrayList.class);
+            Trip[] u =  gson.fromJson(restTemplate.getForObject(url,String.class),collectionType);
 
-            trips = u;
+            trips = Arrays.asList(u);
 
 
         }catch(Exception e) {
