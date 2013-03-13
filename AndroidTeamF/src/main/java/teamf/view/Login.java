@@ -85,7 +85,7 @@ public class Login extends Activity {
                 ServerError se = serverCaller.login(username.getText().toString(),password.getText().toString());
                 if(se == ServerError.NoError){
 
-                    Intent intent = new Intent(Login.this, Menu.class);
+                    Intent intent = new Intent(Login.this, Main.class);
                     startActivity(intent);
 
                 }else{

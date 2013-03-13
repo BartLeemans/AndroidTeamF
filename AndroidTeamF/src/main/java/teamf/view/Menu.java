@@ -8,9 +8,7 @@ import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.widget.TabHost;
-import android.widget.TextView;
 import com.project.TeamFAndroid.R;
-import teamf.controller.ServerCaller;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,9 +23,9 @@ public class Menu extends TabActivity implements OnGestureListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        ServerCaller sc = ServerCaller.getInstance();
+       /* ServerCaller sc = ServerCaller.getInstance();
         TextView username = (TextView) findViewById(R.id.username);
-        username.setText(sc.getCurrentUser().getUsername());
+        username.setText(sc.getCurrentUser().getUsername()); */
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.menu);
