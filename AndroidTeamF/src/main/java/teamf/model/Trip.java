@@ -13,7 +13,7 @@ import java.util.Date;
  */
 
 
-public class Trip implements Serializable {
+public class Trip implements Serializable{
 
     private int tripId;
 

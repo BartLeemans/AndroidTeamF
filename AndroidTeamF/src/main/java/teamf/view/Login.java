@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.project.TeamFAndroid.R;
 import teamf.controller.ServerCaller;
 import teamf.controller.ServerError;
+import teamf.model.User;
 
 public class Login extends Activity {
     private ServerCaller serverCaller;
@@ -79,10 +80,16 @@ public class Login extends Activity {
                   }*/
 
 
-                ServerError se = serverCaller.login("test","test");
-                se = serverCaller.listTrips();
+                //ServerError se = serverCaller.login("trip","planner");
+                //se = serverCaller.listTrips();
                 //List<Trip> openTrips = new ArrayList<Trip>(serverCaller.getOpenTrips());
-                Toast.makeText(getApplicationContext(), serverCaller.getReceivedUser().getUsername(), Toast.LENGTH_SHORT).show();
+                User u = new User();
+                u.setUsername("JeroenDierckx.1");
+                u.setPassword("methmeh");
+                serverCaller.setCurrentUser(u);
+                Intent menuIntent = new Intent(Login.this,Menu.class);
+                startActivity(menuIntent);
+
             }});
 
     }

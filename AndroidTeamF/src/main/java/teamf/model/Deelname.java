@@ -1,6 +1,7 @@
 package teamf.model;
 
 
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Collection;
  * To change this template use File | Settings | File Templates.
  */
 
-public class Deelname {
+public class Deelname implements Serializable {
 
     private int deelnameID;
 

@@ -28,9 +28,11 @@ public class ServerCaller {
 
     String test = "";
 
+    private User currentUser;
 
 
-    private static final String ipAddress = "192.168.0.105:8080";
+
+    private static final String ipAddress = "192.168.43.176:8080";
     private RestTemplate restTemplate = new RestTemplate();
     private List<HttpMessageConverter<?>> messageConverters;
     private List<Trip> trips;
@@ -58,6 +60,13 @@ public class ServerCaller {
 
     public void setChatList(List<Chat> chatList) {
         this.chatList = chatList;
+    }
+
+    public void setCurrentUser(User u){
+        currentUser = u;
+    }
+    public User getCurrentUser(){
+        return currentUser;
     }
 
 
@@ -192,10 +201,12 @@ public class ServerCaller {
 
         return ServerError.NoError;
     }
-    public ServerError getOpenTripsMethod() {
+    public ServerError getTripsUser(User u) {
         try {
-            String URL = "http://" + ipAddress + "/ProjectTeamF-1.0/service/getOpenTrips.json";
-            trips = new ArrayList<Trip>(new getTripsUser().execute().get());
+            String URL = "http://" + ipAddress + "/ProjectTeamF-1.0/service/getTripsUser.json";
+            Object[] params = new Object[]{URL,u};
+            getTripsUser log = new getTripsUser();
+            trips = log.execute(params).get();
 
         } catch (ResourceAccessException rae) {
             test=rae.getMessage();
@@ -210,7 +221,7 @@ public class ServerCaller {
         return ServerError.NoError;
     }
 
-    public List<Trip> getOpenTrips(){
+    public List<Trip> getTrips(){
         return trips;
     }
 

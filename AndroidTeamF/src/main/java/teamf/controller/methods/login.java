@@ -21,46 +21,31 @@ public class login extends AsyncTask<Object[],Integer,User> {
     @Override
     protected User doInBackground(Object[]... params) {
         String message = "";
-
+        User u=new User();
 
         String url = params[0][0].toString();
+        User uu = (User)params[0][1];
         MultiValueMap<String, String> mvm = new LinkedMultiValueMap<String, String>();
-        mvm.add("uname", "test");
-        mvm.add("pw", "test");
+        mvm.add("uname", uu.getUsername());
+        mvm.add("pw", uu.getPassword());
         RestTemplate restTemplate = new RestTemplate();
         List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
         messageConverters.add(new FormHttpMessageConverter());
         messageConverters.add(new StringHttpMessageConverter());
         restTemplate.setMessageConverters(messageConverters);
-        String nieuwe = restTemplate.postForObject(url, mvm, String.class);
+
         String gebruiker = null;
         try {
-            JSONObject jsonObject = new JSONObject(nieuwe);
-          // gebruiker=  jsonObject.get("androidUser").toString();
-           gebruiker=  jsonObject.get("user").toString();
-        } catch (JSONException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            Gson gson = new Gson();
+            JSONObject json = new JSONObject(restTemplate.postForObject(url,mvm,String.class));
+
+            u =  gson.fromJson(json.get("user").toString(),User.class);
+
+        } catch (Exception e) {
+            message = e.getMessage();
         }
 
 
-        Gson gson = new Gson();
-
-        /*User test = new User();
-        test.setUsername("bla");
-        test.setPassword("aze");
-        test.setZipcode("test");
-        test.setEmail("test");
-        test.setDateOfBirth(new Date("10/10/10"));
-        test.setFirstName("test");
-        test.setLastName("test");
-        test.setNumber(null); */
-
-
-       // String bla = gson.toJson(test);
-       // User testUser = gson.fromJson(bla,User.class);
-
-        User u =  gson.fromJson(gebruiker,User.class);
-        String s = nieuwe;
         return u;
     }
 }

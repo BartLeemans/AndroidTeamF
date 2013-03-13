@@ -14,4 +14,5 @@
     <string name="opentrips"><b>Open trips</b></string>
     <string name="chatChat">Chat!</string>
     <string name="chatUpdate">Update</string>
+    <string name="ParticipatingTrips">Participating Trips</string>
 </resources>

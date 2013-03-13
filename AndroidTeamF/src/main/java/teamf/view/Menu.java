@@ -9,6 +9,8 @@ import android.view.MotionEvent;
 import android.view.Window;
 import android.widget.TabHost;
 import com.project.TeamFAndroid.R;
+import teamf.controller.ServerCaller;
+import teamf.model.User;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,6 +29,8 @@ public class Menu extends TabActivity implements OnGestureListener {
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.menu);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
+
+
         init_tabs();
         gDetector = new GestureDetector(this);
     }

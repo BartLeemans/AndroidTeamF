@@ -1,5 +1,7 @@
 package teamf.model;
 
+import java.io.Serializable;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Jorne
@@ -7,7 +9,7 @@ package teamf.model;
  * Time: 15:32
  * To change this template use File | Settings | File Templates.
  */
-public class Kost {
+public class Kost implements Serializable {
     private int kostId;
 
     private double prijs;
