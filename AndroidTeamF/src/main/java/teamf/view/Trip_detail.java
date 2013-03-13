@@ -39,12 +39,6 @@ public class Trip_detail extends TabActivity {
         tripLoc.setText(detail.getStartLocation());
         RelativeLayout BG = (RelativeLayout)findViewById(R.id.DetailBG);
         BG.setBackgroundColor(Color.parseColor(detail.getBgcolor()));
-        List<String> equipment = new ArrayList<String>(detail.getEquipment());
-        StringBuilder eq = new StringBuilder();
-        for(String e:equipment){
-            eq.append(e+"\n");
-        }
-        equipmentText.setText(eq);
         init_tabs();
 
     }

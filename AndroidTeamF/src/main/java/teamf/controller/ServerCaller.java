@@ -33,7 +33,7 @@ public class ServerCaller {
     private List<Chat> chatList;
     //10.0.2.2
     //192.168.173.1
-    private static final String ipAddress = "10.0.43.176:8080";
+    private static final String ipAddress = "192.168.43.176:8080";
     //private static final String ipAddress = "192.168.173.1:8080";
     private RestTemplate restTemplate = new RestTemplate();
 
