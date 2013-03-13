@@ -75,11 +75,11 @@ public class ServerCaller {
 
     public static class ChatlistTest extends ArrayList<Chat>{ }
 
-    public ServerError getChats(int tripid) {
+    public ServerError getChats(int tripid, int lastid) {
        /* chatList = new ArrayList<Chat>();
         chatList = restTemplate.getForObject("http://" + ipAddress + "/ProjectTeamF-1.0/chat/getChat.json?trip=1", ArrayList.class);*/
 
-        String URL = "http://" + ipAddress + "/ProjectTeamF-1.0/chat/getChat.json?trip=1";
+        String URL = "http://" + ipAddress + "/ProjectTeamF-1.0/chat/getChat.json?trip=" + tripid + "&lastId=" + lastid;
 
         getChatList gcl = new getChatList();
         gcl.execute(URL);

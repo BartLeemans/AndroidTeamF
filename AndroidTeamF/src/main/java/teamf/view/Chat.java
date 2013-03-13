@@ -19,6 +19,8 @@ import java.util.List;
  */
 public class Chat extends Activity {
     private ServerCaller se = ServerCaller.getInstance();
+    private int lastChatId = 0;
+    List<String> chat = new ArrayList<String>();
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat);
@@ -38,16 +40,19 @@ public class Chat extends Activity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                List<String> chat = new ArrayList<String>();
+
                 ListView listView = (ListView) findViewById(R.id.chatListView);
 
-                se.getChats(1);  //parameter = trip ID
+                se.getChats(1, lastChatId);  //parameter = trip ID
                 List<teamf.model.Chat> cl = se.getChatList();
-                for(teamf.model.Chat c : cl) {
-                     chat.add(/*"(" + c.getDate() + ")" +*/ c.getUser().getUsername() + ": " + c.getMsg());
+                if(cl != null) {
+                    for(teamf.model.Chat c : cl) {
+                        chat.add(/*"(" + c.getDate() + ")" +*/ c.getUser().getUsername() + ": " + c.getMsg());
+                        lastChatId = c.getChatID();
+                    }
+                    ArrayAdapter<String> arrayAdapt = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, chat);
+                    listView.setAdapter(arrayAdapt);
                 }
-                ArrayAdapter<String> arrayAdapt = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, chat);
-                listView.setAdapter(arrayAdapt);
                 listView.setSelection(listView.getCount() - 1);
             }
         });

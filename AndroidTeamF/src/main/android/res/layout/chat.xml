@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:text="@string/chatUpdate"
             android:id="@+id/btnUpdate" android:layout_gravity="center"
-            android:layout_alignParentLeft="true" android:layout_marginLeft="154dp"
+            android:layout_alignParentLeft="true" android:layout_marginLeft="147dp"
             android:layout_alignParentTop="true"/>
     <Button
             android:layout_width="wrap_content"
