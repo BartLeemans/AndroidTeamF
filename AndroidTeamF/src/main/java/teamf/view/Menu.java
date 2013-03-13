@@ -42,7 +42,7 @@ public class Menu extends TabActivity implements OnGestureListener {
         tabHost = getTabHost();
 
        //Trips tab
-       Intent tripIntent = new Intent(this,ViewTrips.class);
+       Intent tripIntent = new Intent(this,Trips.class);
        TabHost.TabSpec tripspec = tabHost.newTabSpec("Trips");
        tripspec.setIndicator("Trips",getResources().getDrawable(R.drawable.acc_icon));
        tripspec.setContent(tripIntent);

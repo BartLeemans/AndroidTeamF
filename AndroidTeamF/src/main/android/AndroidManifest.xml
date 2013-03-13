@@ -49,7 +49,6 @@
 
         <activity android:name="teamf.view.Account"/>
         <activity android:name="teamf.view.Options"/>
-        <activity android:name="teamf.view.Trips"/>
 
     </application>
 
