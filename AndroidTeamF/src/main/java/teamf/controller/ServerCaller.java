@@ -215,6 +215,10 @@ chatList = restTemplate.getForObject("http://" + ipAddress + "/ProjectTeamF-1.0/
     public String pakTest(){
         return test;
     }
+
+    public List<Trip> getTrips() {
+        return trips;
+    }
 }
 
 
