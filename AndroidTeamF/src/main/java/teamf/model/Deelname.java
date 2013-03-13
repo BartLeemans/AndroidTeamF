@@ -1,5 +1,7 @@
 package teamf.model;
 
+
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -10,21 +12,17 @@ import java.util.Collection;
  * To change this template use File | Settings | File Templates.
  */
 
-public class Deelname {
+public class Deelname implements Serializable {
 
     private int deelnameID;
 
-
     private Trip trip;
 
-
     private User user;
-
 
     private Collection<String> equipment;
 
     private Collection<Kost> kosten;
-
     public Deelname() {
     }
 
@@ -72,5 +70,4 @@ public class Deelname {
     public void setKosten(Collection<Kost> kosten) {
         this.kosten = kosten;
     }
-
 }

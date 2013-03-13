@@ -1,5 +1,6 @@
 package teamf.model;
 
+
 import java.util.Date;
 
 /**
@@ -11,14 +12,13 @@ import java.util.Date;
  */
 
 
-public class Chat {
+public class Chat implements Serializable{
 
     private int chatID;
 
     private String msg;
 
     private Date date;
-
 
     private Trip trip;
 
@@ -70,7 +70,6 @@ public class Chat {
     public void setMsg(String msg) {
         this.msg = msg;
     }
-
 
 
     public void setDate(Date date) {

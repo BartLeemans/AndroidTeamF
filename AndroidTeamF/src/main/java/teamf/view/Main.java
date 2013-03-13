@@ -48,7 +48,7 @@ public class Main extends Activity {
 
         ServerCaller sc = ServerCaller.getInstance();
         sc.listTrips();
-        final List<Trip> trips = new ArrayList<Trip>(sc.getOpenTrips());
+        final List<Trip> trips = new ArrayList<Trip>(sc.getTrips());
 
         for(Trip t:trips){
             tripNames.add(t.getTripName());

@@ -1,20 +1,18 @@
 package teamf.model;
 
+import java.io.Serializable;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Jorne
- * Date: 5/03/13
- * Time: 10:50
+ * Date: 10/03/13
+ * Time: 15:32
  * To change this template use File | Settings | File Templates.
  */
-
-public class Kost {
-
+public class Kost implements Serializable {
     private int kostId;
 
-
     private double prijs;
-
 
     private String beschrijving;
 
@@ -28,16 +26,8 @@ public class Kost {
         return kostId;
     }
 
-    public void setKostId(int id) {
-        this.kostId = id;
-    }
-
-    public String getBeschrijving() {
-        return beschrijving;
-    }
-
-    public void setBeschrijving(String beschrijving) {
-        this.beschrijving = beschrijving;
+    public void setKostId(int kostId) {
+        this.kostId = kostId;
     }
 
     public double getPrijs() {
@@ -46,6 +36,14 @@ public class Kost {
 
     public void setPrijs(double prijs) {
         this.prijs = prijs;
+    }
+
+    public String getBeschrijving() {
+        return beschrijving;
+    }
+
+    public void setBeschrijving(String beschrijving) {
+        this.beschrijving = beschrijving;
     }
 
     public Deelname getDeelname() {

@@ -9,6 +9,8 @@ import android.view.MotionEvent;
 import android.view.Window;
 import android.widget.TabHost;
 import com.project.TeamFAndroid.R;
+import teamf.controller.ServerCaller;
+import teamf.model.User;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,12 +29,22 @@ public class Menu extends TabActivity implements OnGestureListener {
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.menu);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
+
+
         init_tabs();
         gDetector = new GestureDetector(this);
     }
 
    private void init_tabs() {
         tabHost = getTabHost();
+
+       //Trips tab
+       Intent tripIntent = new Intent(this,Trips.class);
+       TabHost.TabSpec tripspec = tabHost.newTabSpec("Trips");
+       tripspec.setIndicator("Trips",getResources().getDrawable(R.drawable.acc_icon));
+       tripspec.setContent(tripIntent);
+
+       tabHost.addTab(tripspec);
 
         //account tab
         Intent accountIntent = new Intent(this,Account.class);
@@ -50,7 +62,9 @@ public class Menu extends TabActivity implements OnGestureListener {
 
         tabHost.addTab(optionsspec);
 
-        tabHost.setCurrentTab(0);
+
+
+       tabHost.setCurrentTab(0);
 
 
 

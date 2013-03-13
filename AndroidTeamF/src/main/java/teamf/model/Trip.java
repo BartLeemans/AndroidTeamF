@@ -1,5 +1,6 @@
 package teamf.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
@@ -12,11 +13,10 @@ import java.util.Date;
  */
 
 
-//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-
-public class Trip {
+public class Trip implements Serializable {
 
     private int tripId;
+
 
     private String tripName;
 
@@ -30,9 +30,10 @@ public class Trip {
 
     private String startLocation;
 
+
     private Collection<String> equipment;
 
-    private boolean visible = true;
+    private boolean visible;
 
     private String fontcolorTitle = "#9CFF00";
 
@@ -46,31 +47,17 @@ public class Trip {
 
     private String travelType;
 
-
     private User organiser;
-
 
     private TripType tripType;
 
-
     private Collection<StopPlaats> stopPlaatsen;
-
 
     private Collection<TripCategorie> tripCategorieen;
 
-
     private Collection<Deelname> deelnames;
 
-
     private Collection<Chat> chats;
-
-    public Collection<Chat> getChats() {
-        return chats;
-    }
-
-    public void setChats(Collection<Chat> chats) {
-        this.chats = chats;
-    }
 
     public Trip() {
     }
@@ -212,29 +199,35 @@ public class Trip {
         this.visible = visible;
     }
 
-    public boolean getShowMap() {
-        return showMap;
-    }
+    public Boolean getShowMap() {
+          return showMap;
+      }
 
-    public void setShowMap(boolean showMap) {
-        this.showMap = showMap;
-    }
+      public void setShowMap(Boolean showMap) {
+          this.showMap = showMap;
+      }
 
-    public String getTravelType() {
-        return travelType;
-    }
+      public String getTravelType() {
+          return travelType;
+      }
 
-    public void setTravelType(String travelType) {
-        this.travelType = travelType;
-    }
+      public void setTravelType(String travelType) {
+          this.travelType = travelType;
+      }
 
-    public boolean getShowRoute() {
+    public Boolean getShowRoute() {
         return showRoute;
     }
 
-    public void setShowRoute(boolean showRoute) {
+    public void setShowRoute(Boolean showRoute) {
         this.showRoute = showRoute;
     }
 
+    public Collection<Chat> getChats() {
+        return chats;
+    }
 
+    public void setChats(Collection<Chat> chats) {
+        this.chats = chats;
+    }
 }

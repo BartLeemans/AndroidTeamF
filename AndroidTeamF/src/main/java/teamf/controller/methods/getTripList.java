@@ -36,8 +36,8 @@ public class getTripList extends AsyncTask<String, Integer, List<Trip>> {
         List<Trip> trips = new ArrayList<Trip>();
         String error;
 
-        try {
 
+        try {
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
             List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
