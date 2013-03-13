@@ -3,13 +3,11 @@ package teamf.view;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import android.widget.*;
 import com.project.TeamFAndroid.R;
 import teamf.controller.ServerCaller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,11 +23,8 @@ public class Chat extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat);
 
-
         Button btnChat = (Button) findViewById(R.id.btnChat);
         Button btnUpdate = (Button) findViewById(R.id.btnUpdate);
-
-        //ScrollView scrollview = (ScrollView) findViewById(R.id.scrollviewChat);
 
 
         btnChat.setOnClickListener(new View.OnClickListener() {
@@ -41,21 +36,19 @@ public class Chat extends Activity {
         });
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
-            TextView tv = (TextView) findViewById(R.id.chatTextview);
 
             public void onClick(View view) {
-                           String text = "";
-                se.getChats(1);
+                List<String> chat = new ArrayList<String>();
+                ListView listView = (ListView) findViewById(R.id.chatListView);
 
+                se.getChats(1);  //parameter = trip ID
                 List<teamf.model.Chat> cl = se.getChatList();
-
                 for(teamf.model.Chat c : cl) {
-                  text += c.getUser().getUsername() + ": " + c.getMsg()  + "\n";
+                     chat.add(c.getUser().getUsername() + ": " + c.getMsg());
                 }
-                tv.setText(text);
-               // se.getChatList(1);
-                //String t = se.getTest();
-               // tv.setText("derp");
+                ArrayAdapter<String> arrayAdapt = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, chat);
+                listView.setAdapter(arrayAdapt);
+                listView.setSelection(listView.getCount() - 1);
             }
         });
     }

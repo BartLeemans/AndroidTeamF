@@ -5,11 +5,10 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
+    <ListView
             android:layout_width="fill_parent"
-            android:layout_height="159dp"
-            android:text="New Text"
-            android:id="@+id/chatTextview" android:layout_gravity="left|center_vertical"/>
+            android:layout_height="198dp"
+            android:id="@+id/chatListView"/>
     <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -18,9 +17,9 @@
     <RelativeLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
 
 
     <Button
