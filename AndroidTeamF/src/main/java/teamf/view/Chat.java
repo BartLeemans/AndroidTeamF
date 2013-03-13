@@ -44,7 +44,7 @@ public class Chat extends Activity {
                 se.getChats(1);  //parameter = trip ID
                 List<teamf.model.Chat> cl = se.getChatList();
                 for(teamf.model.Chat c : cl) {
-                     chat.add(c.getUser().getUsername() + ": " + c.getMsg());
+                     chat.add(/*"(" + c.getDate() + ")" +*/ c.getUser().getUsername() + ": " + c.getMsg());
                 }
                 ArrayAdapter<String> arrayAdapt = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, chat);
                 listView.setAdapter(arrayAdapt);

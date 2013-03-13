@@ -35,6 +35,10 @@ public class Chat {
         this.msg = msg;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
     public int getChatID() {
         return chatID;
     }

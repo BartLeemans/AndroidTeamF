@@ -2,6 +2,7 @@ package teamf.controller.methods;
 
 import android.os.AsyncTask;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.FormHttpMessageConverter;
@@ -14,6 +15,7 @@ import teamf.model.Trip;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,7 +43,7 @@ public class getChatList extends AsyncTask<String, Integer, List<Chat>> {
             final String url = params[0];
 
             Type collectionType = new TypeToken<Chat[]>() {}.getType();
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new JsonDateDeserializer()).create();
             Chat[] u = gson.fromJson(restTemplate.getForObject(url, String.class), collectionType);
 
             chats = Arrays.asList(u);
