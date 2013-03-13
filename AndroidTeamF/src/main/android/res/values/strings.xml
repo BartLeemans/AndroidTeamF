@@ -12,4 +12,6 @@
     <string name="account">ACCOUN HERE</string>
     <string name="options">OPTIONS HERE</string>
     <string name="opentrips"><b>Open trips</b></string>
+    <string name="chatChat">Chat!</string>
+    <string name="chatUpdate">Update</string>
 </resources>
