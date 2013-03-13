@@ -40,13 +40,16 @@ public class Menu extends TabActivity implements OnGestureListener {
         tabHost = getTabHost();
 
        //Trips tab
+       try{
        Intent tripIntent = new Intent(this,Trips.class);
        TabHost.TabSpec tripspec = tabHost.newTabSpec("Trips");
        tripspec.setIndicator("Trips",getResources().getDrawable(R.drawable.acc_icon));
        tripspec.setContent(tripIntent);
 
        tabHost.addTab(tripspec);
-
+       }catch(Exception e){
+           String message = e.getMessage();
+       }
         //account tab
         Intent accountIntent = new Intent(this,Account.class);
         TabHost.TabSpec accountspec = tabHost.newTabSpec("account");

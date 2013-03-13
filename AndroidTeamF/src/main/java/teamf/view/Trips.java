@@ -12,6 +12,7 @@ import com.project.TeamFAndroid.R;
 import teamf.controller.ServerCaller;
 import teamf.model.Trip;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class Trips extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trips);
 
-        ListView listView = (ListView) findViewById(R.id.openTripList);
+        ListView listView = (ListView) findViewById(R.id.ParticipatingList);
 
         ServerCaller sc = ServerCaller.getInstance();
         sc.getTripsUser(sc.getCurrentUser());
@@ -53,9 +54,13 @@ public class Trips extends Activity {
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+                try{
                 Intent tripDetail = new Intent(Trips.this,Trip_detail.class);
-                tripDetail.putExtra("Trip", (Parcelable) trips.get(position));
+                tripDetail.putExtra("Trip",trips.get(position));
                 startActivity(tripDetail);
+                }catch(Exception e){
+                    String message = e.getMessage();
+                }
             }
         });
     }
