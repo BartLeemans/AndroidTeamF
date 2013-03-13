@@ -1,6 +1,7 @@
 package teamf.model;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Date;
  */
 
 
-public class Chat implements Serializable{
+public class Chat implements Serializable {
 
     private int chatID;
 
