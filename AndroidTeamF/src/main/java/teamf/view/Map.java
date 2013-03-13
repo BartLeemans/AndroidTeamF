@@ -3,6 +3,7 @@ package teamf.view;
 
 import android.app.Activity;
 import android.os.Bundle;
+import com.google.android.maps.MapActivity;
 import com.project.TeamFAndroid.R;
 
 
@@ -15,7 +16,7 @@ import com.project.TeamFAndroid.R;
  */
 
 
-public class Map extends Activity
+public class Map extends MapActivity
 {
 
 /** Called when the activity is first created. */
@@ -23,8 +24,13 @@ public class Map extends Activity
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.main);
+    setContentView(R.layout.map);
 }
+
+    @Override
+    protected boolean isRouteDisplayed() {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 
 
 }

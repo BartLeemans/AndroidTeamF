@@ -40,8 +40,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
+    <orderEntry type="jdk" jdkName="Android 4.2.2 Google APIs" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Google play" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.android:android:2.2.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.httpcomponents:httpclient:4.0.1" level="project" />
@@ -68,7 +68,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:3.2.0.BUILD-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:3.2.0.BUILD-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
-    <orderEntry type="inheritedJdk" />
   </component>
 </module>
 
