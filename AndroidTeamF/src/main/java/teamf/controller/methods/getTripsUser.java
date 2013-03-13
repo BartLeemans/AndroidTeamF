@@ -54,7 +54,7 @@ public class getTripsUser extends AsyncTask<Object[],Integer,List<Trip>> {
         restTemplate.setMessageConverters(messageConverters);
 
             Type collectionType = new TypeToken<Trip[]>(){}.getType();
-            Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new JsonDateDeserializer()).create();
+            Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new JsonDateDeserializer2()).create();
 
 
             JSONObject json = new JSONObject(restTemplate.postForObject(url,mvm,String.class));
