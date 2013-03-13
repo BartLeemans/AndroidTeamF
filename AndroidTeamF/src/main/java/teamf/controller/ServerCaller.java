@@ -33,7 +33,7 @@ public class ServerCaller {
     private List<Chat> chatList;
     //10.0.2.2
     //192.168.173.1
-    private static final String ipAddress = "10.0.2.2:8080";
+    private static final String ipAddress = "10.0.43.176:8080";
     //private static final String ipAddress = "192.168.173.1:8080";
     private RestTemplate restTemplate = new RestTemplate();
 
@@ -189,11 +189,12 @@ chatList = restTemplate.getForObject("http://" + ipAddress + "/ProjectTeamF-1.0/
 
         return ServerError.NoError;
     }
-    public ServerError getOpenTripsMethod() {
+    public ServerError getTripsUser(User u) {
         try {
-            String URL = "http://" + ipAddress + "/ProjectTeamF-1.0/service/getOpenTrips.json";
-            trips = new ArrayList<Trip>(new getTripsUser().execute().get());
-
+            String URL = "http://" + ipAddress + "/ProjectTeamF-1.0/service/getTripsUser.json";
+            Object[] params = new Object[]{URL,u};
+            getTripsUser gtu = new getTripsUser();
+            trips = gtu.execute(params).get();
         } catch (ResourceAccessException rae) {
             test=rae.getMessage();
             return ServerError.ServerNotFound;
