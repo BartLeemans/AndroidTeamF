@@ -14,6 +14,7 @@ import com.project.TeamFAndroid.R;
 public class Account extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account);
     }

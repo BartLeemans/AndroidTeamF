@@ -29,6 +29,10 @@ public class Main extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        ServerCaller sc = ServerCaller.getInstance();
+       /* TextView myTextView = (TextView) findViewById(R.id.username);
+        myTextView.setText(sc.getCurrentUser().getUsername());  */
+
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.main);
@@ -46,7 +50,7 @@ public class Main extends Activity {
 
         ListView listView = (ListView) findViewById(R.id.openTripList);
 
-        ServerCaller sc = ServerCaller.getInstance();
+
         sc.listTrips();
         final List<Trip> trips = new ArrayList<Trip>(sc.getTrips());
 
