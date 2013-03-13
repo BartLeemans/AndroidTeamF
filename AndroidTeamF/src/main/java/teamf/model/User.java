@@ -4,7 +4,6 @@ package teamf.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
 import java.sql.Blob;
@@ -22,7 +21,7 @@ import java.util.Date;
 
 
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class User implements UserDetails, Serializable{
+public class User implements  Serializable{
    //@JsonProperty
     private int userID;
     //@JsonProperty
@@ -61,15 +60,7 @@ public class User implements UserDetails, Serializable{
     private Collection<Trip> trips;
    // @JsonProperty
     private Collection<Chat> chats;
-  //  @JsonProperty
-    private boolean accountNonExpired;
-    //@JsonProperty
-    private boolean accountNonLocked;
-    //@JsonProperty
-    private boolean credentialsNonExpired;
-   // @JsonProperty
-    private boolean enabled;
-    Collection<? extends GrantedAuthority> authorities;
+
 
 
 
@@ -79,9 +70,7 @@ public class User implements UserDetails, Serializable{
         return g;
     }
 
-    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
-       this.authorities = authorities;
-    }
+
 
     public Collection<Chat> getChats() {
         return chats;
@@ -102,26 +91,6 @@ public class User implements UserDetails, Serializable{
     public String getUsername() {
         return username;
     }
-
-
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-
-    public boolean isEnabled() {
-        return true;
-    }
-
 
     public String getPassword() {
         return password;
@@ -241,7 +210,6 @@ public class User implements UserDetails, Serializable{
     }
 
     public boolean isNotificationEmail() {
-
         return notificationEmail;
     }
 
@@ -253,21 +221,7 @@ public class User implements UserDetails, Serializable{
         this.profielFoto = profielFoto;
     }
 
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
-    }
 
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
-    }
-
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        this.credentialsNonExpired = credentialsNonExpired;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
 
     /*  @Override
     public boolean equals(Object o) {

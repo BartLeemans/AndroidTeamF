@@ -1,6 +1,5 @@
 package teamf.model;
 
-
 import java.util.Date;
 
 /**
@@ -19,6 +18,7 @@ public class Chat {
     private String msg;
 
     private Date date;
+
 
     private Trip trip;
 
@@ -70,6 +70,7 @@ public class Chat {
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
 
 
     public void setDate(Date date) {

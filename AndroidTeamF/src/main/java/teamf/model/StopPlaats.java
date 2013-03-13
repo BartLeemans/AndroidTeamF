@@ -1,6 +1,6 @@
 package teamf.model;
 
-
+import java.util.Collection;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,17 +12,17 @@ package teamf.model;
 
 public class StopPlaats {
 
+
     private int stopPlaatsID;
-
     private String adres;
-
     private boolean vrijgegeven = true;
-
     private String informatie;
-
     private String type;
-
     private String naam;
+    private String vraag;
+    private String correctAntwoord;
+
+    private Collection<String> antwoorden;
 
     private Trip trip;
 
@@ -81,5 +81,29 @@ public class StopPlaats {
 
     public void setNaam(String naam) {
         this.naam = naam;
+    }
+
+    public String getVraag() {
+        return vraag;
+    }
+
+    public void setVraag(String vraag) {
+        this.vraag = vraag;
+    }
+
+    public String getCorrectAntwoord() {
+        return correctAntwoord;
+    }
+
+    public void setCorrectAntwoord(String antwoord) {
+        this.correctAntwoord = antwoord;
+    }
+
+    public Collection<String> getAntwoorden() {
+        return antwoorden;
+    }
+
+    public void setAntwoorden(Collection<String> antwoorden) {
+        this.antwoorden = antwoorden;
     }
 }

@@ -53,9 +53,10 @@ public class Login extends Activity {
 
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                /*username = (EditText) findViewById(R.id.username);
-                password = (EditText) findViewById(R.id.password);
 
+                username = (EditText) findViewById(R.id.username);
+                password = (EditText) findViewById(R.id.password);
+               /*
                 if (username.getText().toString().length() == 0 && password.getText().toString().length() == 0) {
                     Toast.makeText(getApplicationContext(), "Please fill in your username and password", Toast.LENGTH_SHORT).show();
                 } else if (username.getText().toString().length() == 0) {
@@ -65,24 +66,30 @@ public class Login extends Activity {
                 } else {
                     ServerError se = serverCaller.login(username.getText().toString(), password.getText().toString());
 
-                    if (serverCaller.getReceivedUser()!=null && serverCaller.getReceivedUser().getUsername().length() > 0 && se == ServerError.NoError ) {
+                    if (serverCaller.getCurrentUser()!=null && serverCaller.getCurrentUser().getUsername().length() > 0 && se == ServerError.NoError ) {
                         Intent intent = new Intent(Login.this, Menu.class);
                         startActivity(intent);
-                    } else if (serverCaller.getReceivedUser()!=null && serverCaller.getReceivedUser().getUsername().length() == 0) {
+                    } else if (serverCaller.getCurrentUser()!=null && serverCaller.getCurrentUser().getUsername().length() == 0) {
                         Toast.makeText(getApplicationContext(), "Your login credentials were wrong", Toast.LENGTH_SHORT).show();
                     } else {
                         String message = GlobalController.getCorrispondingErrorMessage(se);
                         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                     }
                 }
+            }*/
 
-                  }*/
 
+                ServerError se = serverCaller.login(username.getText().toString(),password.getText().toString());
+                if(se == ServerError.NoError){
 
-                ServerError se = serverCaller.login("test","test");
-                se = serverCaller.listTrips();
+                    Intent intent = new Intent(Login.this, Menu.class);
+                    startActivity(intent);
+
+                }else{
+                    Toast.makeText(getApplicationContext(), "Error logging in", Toast.LENGTH_SHORT).show();
+                }
+                //se = serverCaller.listTrips();
                 //List<Trip> openTrips = new ArrayList<Trip>(serverCaller.getOpenTrips());
-                Toast.makeText(getApplicationContext(), serverCaller.getReceivedUser().getUsername(), Toast.LENGTH_SHORT).show();
             }});
 
     }

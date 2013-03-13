@@ -1,7 +1,6 @@
 package teamf.controller;
 
 import android.os.Message;
-import org.springframework.http.*;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -12,28 +11,36 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-import teamf.controller.methods.*;
+import teamf.controller.methods.getChatList;
+import teamf.controller.methods.getTripList;
+import teamf.controller.methods.getTripsUser;
+import teamf.controller.methods.login;
 import teamf.model.Chat;
 import teamf.model.Trip;
 import teamf.model.User;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 
 public class ServerCaller {
-    private User receivedUser;
-    private List<Chat> chatList;
+
+    private String test;
+    private User currentUser;
+    private List<Message> messagesList;
     private List<String> usernames = new ArrayList<String>();
-
-    String test = "";
-
-
-
-    private static final String ipAddress = "192.168.0.105:8080";
+    private List<Chat> chatList;
+    //10.0.2.2
+    //192.168.173.1
+    private static final String ipAddress = "10.0.2.2:8080";
+    //private static final String ipAddress = "192.168.173.1:8080";
     private RestTemplate restTemplate = new RestTemplate();
+
     private List<HttpMessageConverter<?>> messageConverters;
+
     private List<Trip> trips;
+
     private static ServerCaller instance = null;
 
     private ServerCaller(){
@@ -49,9 +56,6 @@ public class ServerCaller {
             instance = new ServerCaller();
         }
     }
-
-   /* chat */
-
     public List<Chat> getChatList() {
         return chatList;
     }
@@ -73,11 +77,9 @@ public class ServerCaller {
         return ServerError.NoError;
     }
 
-    public static class ChatlistTest extends ArrayList<Chat>{ }
-
     public ServerError getChats(int tripid, int lastid) {
        /* chatList = new ArrayList<Chat>();
-        chatList = restTemplate.getForObject("http://" + ipAddress + "/ProjectTeamF-1.0/chat/getChat.json?trip=1", ArrayList.class);*/
+chatList = restTemplate.getForObject("http://" + ipAddress + "/ProjectTeamF-1.0/chat/getChat.json?trip=1", ArrayList.class);*/
 
         String URL = "http://" + ipAddress + "/ProjectTeamF-1.0/chat/getChat.json?trip=" + tripid + "&lastId=" + lastid;
 
@@ -86,18 +88,15 @@ public class ServerCaller {
         try {
             chatList = gcl.get();
         } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace(); //To change body of catch statement use File | Settings | File Templates.
         } catch (ExecutionException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace(); //To change body of catch statement use File | Settings | File Templates.
         }
 
         return ServerError.NoError;
     }
-    /* end chat */
-
-
-    public void setReceivedUser(User receivedUser) {
-        this.receivedUser = receivedUser;
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 
     public static ServerCaller getInstance(){
@@ -125,15 +124,13 @@ public class ServerCaller {
         return usernames;
     }
 
-    public User getReceivedUser() {
-        return receivedUser;
+    public User getCurrentUser() {
+        return currentUser;
     }
 
-
-    public String getTest() {
-        return test;
+    public void setTest(Object o){
+        test =  (String)o;
     }
-
 
     public ServerError login(String username, String password) {
         User user = new User();
@@ -146,20 +143,20 @@ public class ServerCaller {
             Object[] params = new Object[]{URL,user};
             login log = new login();
             log.execute(params);
-            receivedUser = log.get();
+            currentUser = log.get();
             String u = "";
         } catch (ResourceAccessException rae) {
-            receivedUser = null;
+            currentUser = null;
             return ServerError.ServerNotFound;
         } catch (HttpServerErrorException hsee) {
-            receivedUser = null;
+            currentUser = null;
             return ServerError.WrongData;
         } catch(RestClientException rce){
-            receivedUser = null;
+            currentUser = null;
             return ServerError.WrongData;
         } catch (Exception e) {
             System.out.println("error " + e);
-            receivedUser = null;
+            currentUser = null;
             return ServerError.OtherError;
         }
         return ServerError.NoError;
@@ -176,17 +173,17 @@ public class ServerCaller {
             String u = "";
             //new login().execute(params);
         } catch (ResourceAccessException rae) {
-            receivedUser = null;
+            currentUser = null;
             return ServerError.ServerNotFound;
         } catch (HttpServerErrorException hsee) {
-            receivedUser = null;
+            currentUser = null;
             return ServerError.WrongData;
         } catch(RestClientException rce){
-            receivedUser = null;
+            currentUser = null;
             return ServerError.WrongData;
         } catch (Exception e) {
             System.out.println("error " + e);
-            receivedUser = null;
+            currentUser = null;
             return ServerError.OtherError;
         }
 

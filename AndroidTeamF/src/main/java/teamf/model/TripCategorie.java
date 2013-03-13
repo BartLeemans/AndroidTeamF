@@ -1,7 +1,5 @@
 package teamf.model;
 
-
-
 /**
  * Created with IntelliJ IDEA.
  * User: Jeroen
@@ -9,6 +7,7 @@ package teamf.model;
  * Time: 14:04
  * To change this template use File | Settings | File Templates.
  */
+
 
 public class TripCategorie {
 

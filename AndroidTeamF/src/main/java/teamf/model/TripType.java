@@ -12,11 +12,13 @@ import java.util.Collection;
 
 public class TripType {
 
+
     private int tripTypeId;
 
     private String tripTypeName;
 
     private String tripTypeDescription;
+
 
     private Collection<Trip> trips;
 

@@ -20,6 +20,7 @@ import java.util.List;
 public class Chat extends Activity {
     private ServerCaller se = ServerCaller.getInstance();
     private int lastChatId = 0;
+
     List<String> chat = new ArrayList<String>();
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

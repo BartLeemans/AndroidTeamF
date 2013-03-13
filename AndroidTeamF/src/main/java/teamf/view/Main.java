@@ -3,7 +3,7 @@ package teamf.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.GestureDetector;
+import android.os.Parcelable;
 import android.view.View;
 import android.view.Window;
 import android.widget.*;
@@ -68,7 +68,7 @@ public class Main extends Activity {
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
                 Toast.makeText(getApplicationContext(),"Click ListItem Number " + position, Toast.LENGTH_LONG).show();
                 Intent tripDetail = new Intent(Main.this,Trip_detail.class);
-                tripDetail.putExtra("Trip",trips.get(position));
+                tripDetail.putExtra("Trip", (Parcelable) trips.get(position));
                 startActivity(tripDetail);
             }
         });

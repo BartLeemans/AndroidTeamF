@@ -1,6 +1,5 @@
 package teamf.model;
 
-
 import java.util.Collection;
 
 /**
@@ -15,13 +14,17 @@ public class Deelname {
 
     private int deelnameID;
 
+
     private Trip trip;
 
+
     private User user;
+
 
     private Collection<String> equipment;
 
     private Collection<Kost> kosten;
+
     public Deelname() {
     }
 
@@ -69,4 +72,5 @@ public class Deelname {
     public void setKosten(Collection<Kost> kosten) {
         this.kosten = kosten;
     }
+
 }
