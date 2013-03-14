@@ -21,4 +21,5 @@
     <string name="dateTitle">Date</string>
     <string name="location">Location</string>
     <string name="message">Message</string>
+    <string name="start">START!</string>
 </resources>

@@ -30,7 +30,9 @@ public class Trip_detail extends TabActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.trip_detail);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
 
         detail = (Trip)getIntent().getSerializableExtra("Trip");
         this.setTitle(detail.getTripName());
