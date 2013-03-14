@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView android:id="@+id/stoptest"
+            android:padding="15dip"
+              android:textSize="18dip"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"/>
+
+    <Button
+            android:id="@+id/nextStop"
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:text="@string/nextStop"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_gold"
+            android:layout_alignParentBottom="true"/>
+
+    <ListView
+            android:id="@+id/antwoordList"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/nextStop"
+            android:visibility="invisible"/>
+
+    <TextView android:id="@+id/vraag"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_above="@id/antwoordList"
+                android:visibility="invisible"/>
+
+
+</RelativeLayout>

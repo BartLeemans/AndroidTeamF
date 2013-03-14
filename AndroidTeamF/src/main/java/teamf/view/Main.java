@@ -60,7 +60,6 @@ public class Main extends Activity {
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-                Toast.makeText(getApplicationContext(),"Click ListItem Number " + position, Toast.LENGTH_LONG).show();
                 Intent tripDetail = new Intent(Main.this,Trip_detail.class);
                 tripDetail.putExtra("Trip", (Parcelable) trips.get(position));
                 startActivity(tripDetail);
