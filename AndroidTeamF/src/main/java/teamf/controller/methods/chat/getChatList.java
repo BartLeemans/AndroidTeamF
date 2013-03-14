@@ -1,4 +1,4 @@
-package teamf.controller.methods;
+package teamf.controller.methods.chat;
 
 import android.os.AsyncTask;
 import com.google.gson.Gson;
@@ -9,6 +9,7 @@ import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+import teamf.controller.methods.JsonDateDeserializer;
 import teamf.model.Chat;
 import teamf.model.Trip;
 

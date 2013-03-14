@@ -11,7 +11,8 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-import teamf.controller.methods.getChatList;
+import teamf.controller.methods.chat.chat;
+import teamf.controller.methods.chat.getChatList;
 import teamf.controller.methods.getTripList;
 import teamf.controller.methods.getTripsUser;
 import teamf.controller.methods.login;
@@ -33,7 +34,7 @@ public class ServerCaller {
     private List<Chat> chatList;
     //10.0.2.2
     //192.168.173.1
-    private static final String ipAddress = "192.168.43.176:8080";
+    private static final String ipAddress = "192.168.43.177:8080";
     //private static final String ipAddress = "192.168.173.1:8080";
     private RestTemplate restTemplate = new RestTemplate();
 
@@ -66,18 +67,11 @@ public class ServerCaller {
 
 
     public ServerError addChat(String msg, int trip ) {
-        try{
+
         String URL = "http://"+ipAddress+"/ProjectTeamF-1.0/android/add.json";
-
-        MultiValueMap<String, String> mvm = new LinkedMultiValueMap<String, String>();
-        mvm.add("msg", msg);
-        mvm.add("trip", String.valueOf(trip));
-        mvm.add("userid", String.valueOf(1));
-
-        restTemplate.postForLocation(URL, mvm);
-        }catch(Exception e){
-            String message = e.getMessage();
-        }
+        Object[] params = new Object[]{URL,msg,trip,restTemplate};
+        chat c = new chat();
+        c.execute(params);
         return ServerError.NoError;
     }
 
