@@ -1,35 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/DetailBG">
-
-    <TextView
-            android:id="@+id/tripname"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:textSize="20dp"
-            />
-
-    <TextView
-            android:id="@+id/tripLoc"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_below="@id/tripname"
-            />
-
     <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
              android:id="@android:id/tabhost"
              android:layout_width="fill_parent"
              android:layout_height="fill_parent"
-             android:background="@drawable/custom_list_shape"
-             android:layout_below="@id/tripLoc"
-             android:layout_margin="15dp">
+             android:background="#777777">
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
         <TabWidget
                 android:id="@android:id/tabs"
                 android:layout_width="fill_parent"
@@ -38,12 +16,5 @@
                 android:id="@android:id/tabcontent"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"/>
-
+    </LinearLayout>
     </TabHost>
-    <TextView
-            android:id="@+id/equipment"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            />
-
-</RelativeLayout>

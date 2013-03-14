@@ -66,6 +66,7 @@ public class ServerCaller {
 
 
     public ServerError addChat(String msg, int trip ) {
+        try{
         String URL = "http://"+ipAddress+"/ProjectTeamF-1.0/android/add.json";
 
         MultiValueMap<String, String> mvm = new LinkedMultiValueMap<String, String>();
@@ -74,6 +75,9 @@ public class ServerCaller {
         mvm.add("userid", String.valueOf(1));
 
         restTemplate.postForLocation(URL, mvm);
+        }catch(Exception e){
+            String message = e.getMessage();
+        }
         return ServerError.NoError;
     }
 

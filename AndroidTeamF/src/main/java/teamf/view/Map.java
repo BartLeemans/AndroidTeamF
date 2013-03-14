@@ -1,3 +1,4 @@
+/*
 
 package teamf.view;
 
@@ -7,19 +8,23 @@ import com.google.android.maps.MapActivity;
 import com.project.TeamFAndroid.R;
 
 
+*/
 /**
  * Created with IntelliJ IDEA.
  * User: BART.LEEMANS
  * Date: 12/03/13
  * Time: 21:02
  * To change this template use File | Settings | File Templates.
- */
+ *//*
+
 
 
 public class Map extends MapActivity
 {
 
-/** Called when the activity is first created. */
+*/
+/** Called when the activity is first created. *//*
+
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -35,3 +40,4 @@ protected void onCreate(Bundle savedInstanceState) {
 
 }
 
+*/

@@ -26,19 +26,16 @@ import java.util.List;
 public class Trip_detail extends TabActivity {
 
     private TabHost tabHost;
+    private Trip detail;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trip_detail);
 
-        TextView tripName = (TextView)findViewById(R.id.tripname);
-        TextView equipmentText = (TextView)findViewById(R.id.equipment);
-        TextView tripLoc = (TextView)findViewById(R.id.tripLoc);
-        Trip detail = (Trip)getIntent().getSerializableExtra("Trip");
-        tripName.setText(detail.getTripName());
-        tripLoc.setText(detail.getStartLocation());
-        RelativeLayout BG = (RelativeLayout)findViewById(R.id.DetailBG);
-        BG.setBackgroundColor(Color.parseColor(detail.getBgcolor()));
+        detail = (Trip)getIntent().getSerializableExtra("Trip");
+        this.setTitle(detail.getTripName());
+
+
         init_tabs();
 
     }
@@ -46,21 +43,23 @@ public class Trip_detail extends TabActivity {
     private void init_tabs() {
         tabHost = getTabHost();
 
-        //options tab
-        Intent optionsIntent = new Intent(this,Options.class);
-        TabHost.TabSpec optionsspec = tabHost.newTabSpec("Options");
-        optionsspec.setIndicator("Options",getResources().getDrawable(R.drawable.options_icon));
-        optionsspec.setContent(optionsIntent);
+        //General tab
+        Intent generalIntent = new Intent(this,Detail_General.class);
+        generalIntent.putExtra("Trip",detail);
+        TabHost.TabSpec generalspec = tabHost.newTabSpec("General");
+        generalspec.setIndicator("General",getResources().getDrawable(R.drawable.options_icon));
+        generalspec.setContent(generalIntent);
 
-        tabHost.addTab(optionsspec);
+        tabHost.addTab(generalspec);
 
-        //options tab
-        Intent optionsIntent2 = new Intent(this,Options.class);
-        TabHost.TabSpec optionsspec2 = tabHost.newTabSpec("Options");
-        optionsspec.setIndicator("Options",getResources().getDrawable(R.drawable.options_icon));
-        optionsspec.setContent(optionsIntent);
+        //Chat tab
+        Intent chatIntent = new Intent(this,Chat.class);
+        chatIntent.putExtra("Trip",detail);
+        TabHost.TabSpec chatspec = tabHost.newTabSpec("Chat");
+        chatspec.setIndicator("Chat",getResources().getDrawable(R.drawable.options_icon));
+        chatspec.setContent(chatIntent);
 
-        tabHost.addTab(optionsspec);
+        tabHost.addTab(chatspec);
 
         tabHost.setCurrentTab(0);
 

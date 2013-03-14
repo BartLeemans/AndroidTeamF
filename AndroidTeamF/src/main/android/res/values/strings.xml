@@ -15,4 +15,7 @@
     <string name="chatChat">Chat!</string>
     <string name="chatUpdate">Update</string>
     <string name="ParticipatingTrips">Participating Trips</string>
+    <string name="equipment">Equipment</string>
+    <string name="startDate">Start Date</string>
+    <string name="endDate">End Date</string>
 </resources>
