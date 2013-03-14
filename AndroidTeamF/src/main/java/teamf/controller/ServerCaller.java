@@ -13,10 +13,12 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import teamf.controller.methods.chat.chat;
 import teamf.controller.methods.chat.getChatList;
+import teamf.controller.methods.getStopTrip;
 import teamf.controller.methods.getTripList;
 import teamf.controller.methods.getTripsUser;
 import teamf.controller.methods.login;
 import teamf.model.Chat;
+import teamf.model.StopPlaats;
 import teamf.model.Trip;
 import teamf.model.User;
 
@@ -41,6 +43,7 @@ public class ServerCaller {
     private List<HttpMessageConverter<?>> messageConverters;
 
     private List<Trip> trips;
+    private List<StopPlaats> stops;
 
     private static ServerCaller instance = null;
 
@@ -206,6 +209,25 @@ chatList = restTemplate.getForObject("http://" + ipAddress + "/ProjectTeamF-1.0/
         return ServerError.NoError;
     }
 
+    public ServerError getStopsTrip(Integer tripid) {
+        try {
+            String URL = "http://" + ipAddress + "/ProjectTeamF-1.0/service/getStopUser.json";
+            Object[] params = new Object[]{URL,tripid};
+            getStopTrip gst = new getStopTrip();
+            stops = gst.execute(params).get();
+        } catch (ResourceAccessException rae) {
+            test=rae.getMessage();
+            return ServerError.ServerNotFound;
+        } catch (HttpServerErrorException hsee) {
+            test=hsee.getMessage();
+            return ServerError.WrongData;
+        } catch (Exception e) {
+            test=e.getMessage();
+            return ServerError.OtherError;
+        }
+        return ServerError.NoError;
+    }
+
     public List<Trip> getOpenTrips(){
         return trips;
     }
@@ -217,6 +239,10 @@ chatList = restTemplate.getForObject("http://" + ipAddress + "/ProjectTeamF-1.0/
 
     public List<Trip> getTrips() {
         return trips;
+    }
+
+    public List<StopPlaats> getStops(){
+        return stops;
     }
 }
 

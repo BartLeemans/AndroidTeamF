@@ -92,7 +92,7 @@
             android:layout_height="45dp"
             android:layout_margin="20dp"
             android:text="@string/start"
-            android:id="@+id/btnChat"
+            android:id="@+id/startTrip"
             android:textStyle="bold"
             android:background="@drawable/button_green"
             android:layout_alignParentBottom="true"

@@ -1,5 +1,6 @@
 package teamf.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Collection;
  * To change this template use File | Settings | File Templates.
  */
 
-public class StopPlaats {
+public class StopPlaats implements Serializable{
 
 
     private int stopPlaatsID;
@@ -25,6 +26,8 @@ public class StopPlaats {
     private Collection<String> antwoorden;
 
     private Trip trip;
+
+    public StopPlaats(){}
 
     public int getStopPlaatsID() {
         return stopPlaatsID;

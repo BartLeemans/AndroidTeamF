@@ -1,12 +1,14 @@
 package teamf.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import com.project.TeamFAndroid.R;
+import teamf.controller.ServerCaller;
 import teamf.model.Trip;
-
-import java.io.StringWriter;
 import java.text.DateFormat;
 
 /**
@@ -31,6 +33,20 @@ public class Detail_General extends Activity {
         setDates();
         setLocation();
         setEquipment();
+
+        setButtonListener();
+
+    }
+
+    private void setButtonListener() {
+        Button start = (Button)findViewById(R.id.startTrip);
+        start.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent startIntent = new Intent(Detail_General.this,Stopplaatsen.class);
+                startIntent.putExtra("tripid",detail.getTripId());
+                startActivity(startIntent);
+            }
+        });
     }
 
     private void setLocation() {
