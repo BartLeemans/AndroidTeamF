@@ -1,39 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <ListView
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:id="@+id/buttonsChat"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:weightSum="2"
+            >
+    <Button
             android:layout_width="fill_parent"
-            android:layout_height="198dp"
-            android:id="@+id/chatListView"/>
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:layout_margin="3dp"
+            android:text="@string/chatUpdate"
+            android:id="@+id/btnUpdate"
+            android:layout_gravity="center"
+            android:background="@drawable/button2"/>
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:layout_margin="3dp"
+            android:text="@string/chatChat"
+            android:id="@+id/btnChat"
+            android:background="@drawable/button2"/>
+</LinearLayout>
+
     <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/inputChat" android:layout_gravity="center"/>
-
-    <RelativeLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:id="@+id/inputChat"
+            android:layout_gravity="center"
+            android:hint="@string/message"
+            android:layout_above="@id/buttonsChat"/>
+    <ListView
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:id="@+id/chatListView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_above="@id/inputChat"/>
 
-
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/chatUpdate"
-            android:id="@+id/btnUpdate" android:layout_gravity="center"
-            android:layout_alignParentLeft="true" android:layout_marginLeft="147dp"
-            android:layout_alignParentTop="true"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/chatChat"
-            android:id="@+id/btnChat" android:layout_gravity="right|center_vertical"
-            android:layout_alignParentRight="true" android:layout_alignTop="@+id/btnUpdate"/>
-    </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>

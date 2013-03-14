@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.*;
 import com.project.TeamFAndroid.R;
 import teamf.controller.ServerCaller;
+import teamf.model.Trip;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +21,13 @@ import java.util.List;
 public class Chat extends Activity {
     private ServerCaller se = ServerCaller.getInstance();
     private int lastChatId = 0;
+    private Trip detail;
 
     List<String> chat = new ArrayList<String>();
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat);
-
+        detail = (Trip)getIntent().getSerializableExtra("Trip");
         Button btnChat = (Button) findViewById(R.id.btnChat);
         Button btnUpdate = (Button) findViewById(R.id.btnUpdate);
 
@@ -33,7 +35,7 @@ public class Chat extends Activity {
         btnChat.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 EditText input = (EditText) findViewById(R.id.inputChat);
-                se.addChat(input.getText().toString(), 1);
+                se.addChat(input.getText().toString(), detail.getTripId());
                 input.setText("");
             }
         });
@@ -44,7 +46,7 @@ public class Chat extends Activity {
 
                 ListView listView = (ListView) findViewById(R.id.chatListView);
 
-                se.getChats(1, lastChatId);  //parameter = trip ID
+                se.getChats(detail.getTripId(), lastChatId);  //parameter = trip ID
                 List<teamf.model.Chat> cl = se.getChatList();
                 if(cl != null) {
                     for(teamf.model.Chat c : cl) {

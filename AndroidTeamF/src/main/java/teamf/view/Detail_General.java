@@ -28,8 +28,14 @@ public class Detail_General extends Activity {
 
         detail = (Trip)getIntent().getSerializableExtra("Trip");
 
-        setEquipment();
         setDates();
+        setLocation();
+        setEquipment();
+    }
+
+    private void setLocation() {
+        TextView loc = (TextView)findViewById(R.id.locationText);
+        loc.setText(detail.getStartLocation());
     }
 
     private void setDates() {
@@ -41,7 +47,7 @@ public class Detail_General extends Activity {
     }
 
     private void setEquipment() {
-        TextView equipment = (TextView)findViewById(R.id.equipment);
+        TextView equipment = (TextView)findViewById(R.id.equipmentText);
         StringBuilder sb = new StringBuilder();
         for(String s:detail.getEquipment()){
             sb.append(s+"\n");

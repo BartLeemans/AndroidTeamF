@@ -18,4 +18,7 @@
     <string name="equipment">Equipment</string>
     <string name="startDate">Start Date</string>
     <string name="endDate">End Date</string>
+    <string name="dateTitle">Date</string>
+    <string name="location">Location</string>
+    <string name="message">Message</string>
 </resources>
