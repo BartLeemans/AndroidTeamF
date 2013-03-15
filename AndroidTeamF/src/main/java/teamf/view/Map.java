@@ -40,20 +40,24 @@ public class Map extends Activity {
             GoogleMap googleMap = mapFragment.getMap();
 
             detail = (Trip)getIntent().getSerializableExtra("Trip");
+            sc.getStopsTrip(detail.getTripId());
             plaatsen = new ArrayList<StopPlaats>(sc.getStops());
 
             final Geocoder geocoder = new Geocoder(getBaseContext());
-            List<Address> GeocodeResponse = geocoder.getFromLocationName(plaatsen.get(0).getAdres(), 10);
-            LatLng position = new LatLng(GeocodeResponse.get(0).getLatitude(), GeocodeResponse.get(0).getLongitude());
-            googleMap.addMarker(new MarkerOptions()
-                    .position(position)
-                    .title("Paris")
-                    .snippet("Population: kaka")
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+            for(StopPlaats p :plaatsen){
+                List<Address> GeocodeResponse = geocoder.getFromLocationName(p.getAdres(), 10);
+                LatLng position = new LatLng(GeocodeResponse.get(0).getLatitude(), GeocodeResponse.get(0).getLongitude());
+                googleMap.addMarker(new MarkerOptions()
+                        .position(position)
+                        .title(p.getAdres())
+                        .snippet(p.getInformatie())
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
-            googleMap.getUiSettings().setCompassEnabled(true);
-            googleMap.getUiSettings().setZoomControlsEnabled(true);
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 10));
+                googleMap.getUiSettings().setCompassEnabled(true);
+                googleMap.getUiSettings().setZoomControlsEnabled(true);
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 11));
+            }
+
 
 
         } catch (Exception e) {

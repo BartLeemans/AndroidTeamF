@@ -26,10 +26,11 @@ import java.util.List;
 public class Stopplaatsen extends Activity {
 
     private Integer tripid;
-    private String[] plaatsNamen;
     private ServerCaller sc = ServerCaller.getInstance();
     private List<StopPlaats> plaatsen;
     private ListView listView;
+    private List<String> plaatsnamen = new ArrayList<String>();
+    private Integer stops;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,19 +40,24 @@ public class Stopplaatsen extends Activity {
         sc.getStopsTrip(tripid);
         plaatsen = new ArrayList<StopPlaats>(sc.getStops());
 
-        plaatsNamen = new String[1];
         if(plaatsen.size()!=0){
-            plaatsNamen[0]=plaatsen.get(0).getAdres();
+            plaatsnamen.add(plaatsen.get(0).getAdres());
         }
+
+        stops=0;
         listView = (ListView) findViewById(R.id.stopPlaatsenList);
 
         setStopsList();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-
+                Boolean end = false;
+                if(position == plaatsen.size()){
+                    end = true;
+                }
                 Intent stopDetail = new Intent(Stopplaatsen.this, Stopplaats_detail.class);
                 stopDetail.putExtra("Stop",plaatsen.get(position));
-                startActivity(stopDetail);
+                stopDetail.putExtra("Einde",end);
+                startActivityForResult(stopDetail, 1);
 
             }
         });
@@ -60,8 +66,27 @@ public class Stopplaatsen extends Activity {
 
 
     private void setStopsList() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, plaatsNamen);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1,plaatsnamen);
         listView.setAdapter(adapter);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+
+            if(resultCode == RESULT_OK){
+                Boolean result = data.getBooleanExtra("result", false);
+                if(plaatsnamen.size()<= plaatsen.size()&& result){
+                    stops++;
+                    plaatsnamen.add(plaatsen.get(stops).getAdres());
+                    setStopsList();
+                }
+
+            }
+            if (resultCode == RESULT_CANCELED) {
+                //Write your code on no result return
+            }
+        }
     }
 
 }

@@ -19,7 +19,8 @@
             android:text="@string/nextStop"
             android:layout_margin="10dp"
             android:background="@drawable/button_gold"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:visibility="invisible"/>
 
     <ListView
             android:id="@+id/antwoordList"

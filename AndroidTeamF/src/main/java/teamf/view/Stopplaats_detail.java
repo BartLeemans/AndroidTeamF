@@ -1,6 +1,7 @@
 package teamf.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
@@ -23,6 +24,8 @@ public class Stopplaats_detail extends Activity {
 
     private ServerCaller se = ServerCaller.getInstance();
     private StopPlaats detail;
+    private Button next;
+    private List<String> antw;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,13 +33,32 @@ public class Stopplaats_detail extends Activity {
 
         detail = (StopPlaats)getIntent().getSerializableExtra("Stop");
         TextView stop = (TextView)findViewById(R.id.stoptest);
-        Button next = (Button)findViewById(R.id.nextStop);
+        next = (Button)findViewById(R.id.nextStop);
         stop.setText(detail.getAdres());
+
+        setButtonListener();
+
 
         if(detail.getVraag()!=null){
             setVraag();
+        }else{
+             next.setVisibility(View.VISIBLE);
+            if(getIntent().getBooleanExtra("Einde",false)){
+                next.setText("Terug");
+            }
         }
 
+    }
+
+    private void setButtonListener() {
+        next.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("result",true);
+                setResult(RESULT_OK,returnIntent);
+                finish();
+            }
+        });
     }
 
     private void setVraag() {
@@ -49,7 +71,8 @@ public class Stopplaats_detail extends Activity {
 
             vraag.setText(detail.getVraag());
 
-            final List<String> antw = new ArrayList<String>(detail.getAntwoorden());
+            antw = new ArrayList<String>(detail.getAntwoorden());
+            antw.add(detail.getCorrectAntwoord());
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, antw);
             antwoorden.setAdapter(adapter);
 
@@ -57,7 +80,7 @@ public class Stopplaats_detail extends Activity {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     String antwoord = antw.get(i);
                     if(antwoord.equals(detail.getCorrectAntwoord())){
-                        Toast.makeText(getApplicationContext(), "Correct", Toast.LENGTH_SHORT).show();
+                        next.setVisibility(View.VISIBLE);
                     }
                 }
             });

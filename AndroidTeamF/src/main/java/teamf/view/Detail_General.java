@@ -42,7 +42,7 @@ public class Detail_General extends Activity {
         start.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent startIntent = new Intent(Detail_General.this,Stopplaatsen.class);
-                startIntent.putExtra("tripid",detail.getTripId());
+                startIntent.putExtra("trip",detail.getTripId());
                 startActivity(startIntent);
             }
         });
