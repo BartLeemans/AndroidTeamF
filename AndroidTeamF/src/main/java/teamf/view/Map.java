@@ -1,5 +1,3 @@
-/*
-
 package teamf.view;
 
 import android.app.Activity;
@@ -8,36 +6,42 @@ import com.google.android.maps.MapActivity;
 import com.project.TeamFAndroid.R;
 
 
-*/
-/**
- * Created with IntelliJ IDEA.
- * User: BART.LEEMANS
- * Date: 12/03/13
- * Time: 21:02
- * To change this template use File | Settings | File Templates.
- *//*
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.os.Bundle;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-
-
-public class Map extends MapActivity
-{
-
-*/
-/** Called when the activity is first created. *//*
-
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.map);
-}
-
+public class Map extends Activity {
     @Override
-    protected boolean isRouteDisplayed() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    public void onCreate(Bundle savedInstanceState) {
+        String message = "";
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.map);
+
+            FragmentManager fragmentManager = getFragmentManager();
+            MapFragment mapFragment = (MapFragment) fragmentManager.findFragmentById(R.id.map);
+            GoogleMap googleMap = mapFragment.getMap();
+            LatLng sfLatLng = new LatLng(37.7750, -122.4183);
+            googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            googleMap.addMarker(new MarkerOptions()
+                    .position(sfLatLng)
+                    .title("San Francisco")
+                    .snippet("Population: 776733")
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+            googleMap.getUiSettings().setCompassEnabled(true);
+            googleMap.getUiSettings().setZoomControlsEnabled(true);
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sfLatLng, 10));
+
+        } catch (Exception e) {
+            message = e.getMessage();
+        }
+
+
     }
-
-
 }
-
-*/
