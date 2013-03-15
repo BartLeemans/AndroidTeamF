@@ -45,7 +45,7 @@ public class getTripsUser extends AsyncTask<Object[],Integer,List<Trip>> {
         User u = (User)params[0][1];
         MultiValueMap<String, String> mvm = new LinkedMultiValueMap<String, String>();
 
-        mvm.add("userid",1+"");
+        mvm.add("userid",u.getUserID()+"");
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
         List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();

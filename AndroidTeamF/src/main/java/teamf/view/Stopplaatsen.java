@@ -36,7 +36,7 @@ public class Stopplaatsen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stopplaatsen);
 
-        tripid = getIntent().getIntExtra("tripid",0);
+        tripid = getIntent().getIntExtra("trip",0);
         sc.getStopsTrip(tripid);
         plaatsen = new ArrayList<StopPlaats>(sc.getStops());
 
@@ -51,7 +51,7 @@ public class Stopplaatsen extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
                 Boolean end = false;
-                if(position == plaatsen.size()){
+                if(position == plaatsen.size()-1){
                     end = true;
                 }
                 Intent stopDetail = new Intent(Stopplaatsen.this, Stopplaats_detail.class);
@@ -77,14 +77,10 @@ public class Stopplaatsen extends Activity {
             if(resultCode == RESULT_OK){
                 Boolean result = data.getBooleanExtra("result", false);
                 if(plaatsnamen.size()<= plaatsen.size()&& result){
-                    stops++;
-                    plaatsnamen.add(plaatsen.get(stops).getAdres());
-                    setStopsList();
+                     stops++;
+                     plaatsnamen.add(plaatsen.get(stops).getAdres());
+                     setStopsList();
                 }
-
-            }
-            if (resultCode == RESULT_CANCELED) {
-                //Write your code on no result return
             }
         }
     }

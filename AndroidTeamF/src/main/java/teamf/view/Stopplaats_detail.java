@@ -43,9 +43,9 @@ public class Stopplaats_detail extends Activity {
             setVraag();
         }else{
              next.setVisibility(View.VISIBLE);
-            if(getIntent().getBooleanExtra("Einde",false)){
-                next.setText("Terug");
-            }
+        }
+        if(getIntent().getBooleanExtra("Einde",false)){
+            next.setText("Terug");
         }
 
     }
@@ -54,9 +54,15 @@ public class Stopplaats_detail extends Activity {
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("result",true);
-                setResult(RESULT_OK,returnIntent);
-                finish();
+                if(getIntent().getBooleanExtra("Einde",false)){
+                    returnIntent.putExtra("result",false);
+                    setResult(RESULT_CANCELED,returnIntent);
+                    finish();
+                }else{
+                    returnIntent.putExtra("result",true);
+                    setResult(RESULT_OK,returnIntent);
+                    finish();
+                }
             }
         });
     }
