@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidTeamF/AndroidTeamF.iml" filepath="$PROJECT_DIR$/AndroidTeamF/AndroidTeamF.iml" />
+      <module fileurl="file://D:/Program Files (x86)/adt-bundle-windows-x86_64/sdk/extras/google/google_play_services/libproject/google-play-services_lib/google-play-services_lib.iml" filepath="D:/Program Files (x86)/adt-bundle-windows-x86_64/sdk/extras/google/google_play_services/libproject/google-play-services_lib/google-play-services_lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../adt-bundle-windows-x86_64/sdk/extras/google/google_play_services/libproject/google-play-services_lib/google-play-services_lib.iml" filepath="$PROJECT_DIR$/../../adt-bundle-windows-x86_64/sdk/extras/google/google_play_services/libproject/google-play-services_lib/google-play-services_lib.iml" />
       <module fileurl="file://$USER_HOME$/Desktop/Android/android-sdk/extras/google/google_play_services/libproject/google-play-services_lib/google-play-services_lib.iml" filepath="$USER_HOME$/Desktop/Android/android-sdk/extras/google/google_play_services/libproject/google-play-services_lib/google-play-services_lib.iml" />
     </modules>
