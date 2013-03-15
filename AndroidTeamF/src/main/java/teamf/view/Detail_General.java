@@ -33,7 +33,6 @@ public class Detail_General extends Activity {
         setDates();
         setLocation();
         setEquipment();
-
         setButtonListener();
 
     }

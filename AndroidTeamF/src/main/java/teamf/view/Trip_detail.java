@@ -54,6 +54,15 @@ public class Trip_detail extends TabActivity {
 
         tabHost.addTab(generalspec);
 
+        //Map tab
+        Intent mapIntent = new Intent(this,Map.class);
+        mapIntent.putExtra("Trip",detail);
+        TabHost.TabSpec mapspec = tabHost.newTabSpec("Map");
+        mapspec.setIndicator("Map",getResources().getDrawable(R.drawable.options_icon));
+        mapspec.setContent(mapIntent);
+
+        tabHost.addTab(mapspec);
+
         //Chat tab
         Intent chatIntent = new Intent(this,Chat.class);
         chatIntent.putExtra("Trip",detail);

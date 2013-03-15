@@ -3,9 +3,7 @@ package teamf.view;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 import com.project.TeamFAndroid.R;
 import teamf.controller.ServerCaller;
 import teamf.model.StopPlaats;
@@ -24,15 +22,24 @@ import java.util.List;
 public class Stopplaats_detail extends Activity {
 
     private ServerCaller se = ServerCaller.getInstance();
+    private StopPlaats detail;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stopplaats_detail);
 
-        StopPlaats detail = (StopPlaats)getIntent().getSerializableExtra("Stop");
+        detail = (StopPlaats)getIntent().getSerializableExtra("Stop");
         TextView stop = (TextView)findViewById(R.id.stoptest);
+        Button next = (Button)findViewById(R.id.nextStop);
         stop.setText(detail.getAdres());
 
-        try{
+        if(detail.getVraag()!=null){
+            setVraag();
+        }
+
+    }
+
+    private void setVraag() {
         if(detail.getVraag()!=null){
             TextView vraag = (TextView)findViewById(R.id.vraag);
             ListView antwoorden = (ListView)findViewById(R.id.antwoordList);
@@ -42,15 +49,19 @@ public class Stopplaats_detail extends Activity {
 
             vraag.setText(detail.getVraag());
 
-            //se.getVraagStop(detail.getStopPlaatsID());
-            List<String> antw = new ArrayList<String>(detail.getAntwoorden());
+            final List<String> antw = new ArrayList<String>(detail.getAntwoorden());
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, antw);
             antwoorden.setAdapter(adapter);
-        }
-        }catch(Exception e){
-            String message = e.getMessage();
-        }
 
+            antwoorden.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    String antwoord = antw.get(i);
+                    if(antwoord.equals(detail.getCorrectAntwoord())){
+                        Toast.makeText(getApplicationContext(), "Correct", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 
 }

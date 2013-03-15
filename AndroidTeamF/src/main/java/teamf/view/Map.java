@@ -2,7 +2,6 @@ package teamf.view;
 
 import android.app.Activity;
 import android.os.Bundle;
-import com.google.android.maps.MapActivity;
 import com.project.TeamFAndroid.R;
 
 

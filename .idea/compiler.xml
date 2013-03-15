@@ -6,6 +6,7 @@
       <directory url="file://$PROJECT_DIR$/AndroidTeamF/gen" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/AndroidTeamF/gen-external-apklibs/com.actionbarsherlock_actionbarsherlock_4.2.0/gen" includeSubdirectories="true" />
       <directory url="file://$USER_HOME$/Desktop/Android/android-sdk/extras/google/google_play_services/libproject/google-play-services_lib/gen" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/../../adt-bundle-windows-x86_64/sdk/extras/google/google_play_services/libproject/google-play-services_lib/gen" includeSubdirectories="true" />
     </excludeFromCompile>
     <resourceExtensions />
     <wildcardResourcePatterns>
