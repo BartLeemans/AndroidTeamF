@@ -8,9 +8,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.project.TeamFAndroid.R;
 
 
-import android.app.Activity;
 import android.app.FragmentManager;
-import android.os.Bundle;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -27,8 +25,12 @@ import java.util.List;
 public class Map extends Activity implements LocationListener {
     private ServerCaller sc = ServerCaller.getInstance();
     private Trip detail;
+    private ArrayList<MarkerOptions> otherPositions = new ArrayList<MarkerOptions>();
     private List<StopPlaats> plaatsen;
     private GoogleMap googleMap;
+    private String provider;
+    private LocationManager lm;
+    private MarkerOptions currentMarker= new MarkerOptions();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,9 +39,10 @@ public class Map extends Activity implements LocationListener {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.map);
 
-            LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
-            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0, this);
-            String provider = lm.getBestProvider(new Criteria(), true);
+            lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 4000, 0, this);
+            provider = lm.getBestProvider(new Criteria(), true);
+
 
             FragmentManager fragmentManager = getFragmentManager();
             MapFragment mapFragment = (MapFragment) fragmentManager.findFragmentById(R.id.map);
@@ -66,33 +69,36 @@ public class Map extends Activity implements LocationListener {
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 11));
             }
             googleMap.addPolyline(rectOptions);
+            currentMarker.title("Current Position");
+            currentMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+            currentMarker.position(new LatLng(lm.getLastKnownLocation(provider).getLatitude(), lm.getLastKnownLocation(provider).getLongitude()));
+            googleMap.addMarker(currentMarker);
 
-            LatLng current = new LatLng(lm.getLastKnownLocation(provider).getLatitude(), lm.getLastKnownLocation(provider).getLatitude());
-
-            googleMap.addMarker(new MarkerOptions()
-                    .title("Current Pos")
-                    .snippet("")
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
-                    .position(current));
-
+            List<LatLng> locs = sc.getLocOthers(sc.getCurrentUser().getUserID(),detail.getTripId());
+            for(LatLng l : locs){
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(l);
+                otherPositions.add(markerOptions);
+            }
 
 
         } catch (Exception e) {
             message = e.getMessage();
         }
-
-
     }
 
     public void onLocationChanged(Location location) {
-        LatLng current = new LatLng(location.getLatitude(), location.getLatitude());
+        LatLng current = new LatLng(lm.getLastKnownLocation(provider).getLatitude(), lm.getLastKnownLocation(provider).getLongitude());
+        currentMarker.position(current);
+        sc.sendCurLoc(current.latitude, current.longitude, sc.getCurrentUser().getUserID(), detail.getTripId());
+        List<LatLng> locs = sc.getLocOthers(sc.getCurrentUser().getUserID(),detail.getTripId());
+        int i =0;
+        for(LatLng l : locs){
+            MarkerOptions markerOptions = otherPositions.get(i);
+            markerOptions.position(l);
+            i++;
+        }
 
-        googleMap.addMarker(new MarkerOptions()
-                .title("Current Pos")
-                .snippet("")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
-                .position(current)
-        );
     }
 
     public void onStatusChanged(String s, int i, Bundle bundle) {

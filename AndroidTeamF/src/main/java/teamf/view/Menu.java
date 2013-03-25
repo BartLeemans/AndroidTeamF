@@ -1,6 +1,7 @@
 package teamf.view;
 
 import android.app.TabActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.GestureDetector;
@@ -8,7 +9,13 @@ import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.widget.TabHost;
+import android.widget.Toast;
 import com.project.TeamFAndroid.R;
+import teamf.controller.ServerCaller;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,6 +1,7 @@
 package teamf.controller;
 
 import android.os.Message;
+import com.google.android.gms.maps.model.LatLng;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -94,6 +95,28 @@ chatList = restTemplate.getForObject("http://" + ipAddress + "/ProjectTeamF-1.0/
     }
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
+    }
+
+    public void sendCurLoc(Double lat, Double lng,Integer userid,Integer tripid){
+        String URL = "http://"+ipAddress+"/ProjectTeamF-1.0/service/updatePosition.json";
+        Object[] params = new Object[]{URL,lng,lat,userid,tripid};
+        sendCurLoc scl = new sendCurLoc();
+        scl.execute(params);
+    }
+
+    public List<LatLng> getLocOthers(Integer userid,Integer tripid){
+        String URL = "http://"+ipAddress+"/ProjectTeamF-1.0/service/getPositions.json";
+        Object[] params = new Object[]{URL,tripid,userid};
+        getLocOthers glo = new getLocOthers();
+        glo.execute(params);
+        try {
+            return glo.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (ExecutionException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        return null;
     }
 
     public static ServerCaller getInstance(){

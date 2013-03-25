@@ -1,6 +1,7 @@
 package teamf.view;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -12,6 +13,10 @@ import android.widget.Toast;
 import com.project.TeamFAndroid.R;
 import teamf.controller.ServerCaller;
 import teamf.controller.ServerError;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class Login extends Activity {
     private ServerCaller serverCaller;
@@ -84,6 +89,7 @@ public class Login extends Activity {
 
                 ServerError se = serverCaller.login(username.getText().toString(),password.getText().toString());
                 if(se == ServerError.NoError){
+
 
                     Intent intent = new Intent(Login.this, Menu.class);
                     startActivity(intent);
