@@ -26,12 +26,12 @@ import java.util.List;
  * Time: 13:54
  * To change this template use File | Settings | File Templates.
  */
-public class getLocOthers  extends AsyncTask<Object[],Integer,List<LatLng>> {
+public class getLocOthers  extends AsyncTask<Object[],Integer,List<String>> {
     @Override
-    protected List<LatLng> doInBackground(Object[]... objects) {
+    protected List<String> doInBackground(Object[]... objects) {
 
 
-        ArrayList<LatLng> list = new ArrayList<LatLng>();
+
 
         String url = (String)objects[0][0];
         Integer tripid = (Integer)objects[0][1];
@@ -53,16 +53,7 @@ public class getLocOthers  extends AsyncTask<Object[],Integer,List<LatLng>> {
         Type collectionType = new TypeToken<String[]>() {}.getType();
         Gson gson = new Gson();
         String[] u = gson.fromJson(restTemplate.postForObject(url,mvm, String.class), collectionType);
-
-        for(String s: Arrays.asList(u)){
-            String[] split = s.split(";");
-            double lat = Double.valueOf(split[0]);
-            double lng = Double.valueOf(split[1]);
-            LatLng latLng = new LatLng(lat,lng);
-            list.add(latLng);
-        }
-
-        return list;
+        return Arrays.asList(u);
 
 
     }

@@ -104,7 +104,7 @@ chatList = restTemplate.getForObject("http://" + ipAddress + "/ProjectTeamF-1.0/
         scl.execute(params);
     }
 
-    public List<LatLng> getLocOthers(Integer userid,Integer tripid){
+    public List<String> getLocOthers(Integer userid,Integer tripid){
         String URL = "http://"+ipAddress+"/ProjectTeamF-1.0/service/getPositions.json";
         Object[] params = new Object[]{URL,tripid,userid};
         getLocOthers glo = new getLocOthers();

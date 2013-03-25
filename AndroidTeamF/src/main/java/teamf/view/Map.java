@@ -20,6 +20,7 @@ import teamf.model.StopPlaats;
 import teamf.model.Trip;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Map extends Activity implements LocationListener {
@@ -74,12 +75,7 @@ public class Map extends Activity implements LocationListener {
             currentMarker.position(new LatLng(lm.getLastKnownLocation(provider).getLatitude(), lm.getLastKnownLocation(provider).getLongitude()));
             googleMap.addMarker(currentMarker);
 
-            List<LatLng> locs = sc.getLocOthers(sc.getCurrentUser().getUserID(),detail.getTripId());
-            for(LatLng l : locs){
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(l);
-                otherPositions.add(markerOptions);
-            }
+            getLocOthers();
 
 
         } catch (Exception e) {
@@ -91,15 +87,11 @@ public class Map extends Activity implements LocationListener {
         LatLng current = new LatLng(lm.getLastKnownLocation(provider).getLatitude(), lm.getLastKnownLocation(provider).getLongitude());
         currentMarker.position(current);
         sc.sendCurLoc(current.latitude, current.longitude, sc.getCurrentUser().getUserID(), detail.getTripId());
-        List<LatLng> locs = sc.getLocOthers(sc.getCurrentUser().getUserID(),detail.getTripId());
-        int i =0;
-        for(LatLng l : locs){
-            MarkerOptions markerOptions = otherPositions.get(i);
-            markerOptions.position(l);
-            i++;
-        }
+
+        getLocOthers();
 
     }
+
 
     public void onStatusChanged(String s, int i, Bundle bundle) {
         //To change body of implemented methods use File | Settings | File Templates.
@@ -111,6 +103,24 @@ public class Map extends Activity implements LocationListener {
 
     public void onProviderDisabled(String s) {
         //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+
+    private void getLocOthers() {
+        List<String> strings = sc.getLocOthers(sc.getCurrentUser().getUserID(),detail.getTripId());
+
+        int i =0;
+        for(String s: strings){
+            String[] split = s.split(";");
+            double lat = Double.valueOf(split[0]);
+            double lng = Double.valueOf(split[1]);
+            LatLng latLng = new LatLng(lat,lng);
+            String userName = String.valueOf(split[2]);
+            MarkerOptions markerOptions = otherPositions.get(i);
+            markerOptions.position(latLng);
+            markerOptions.snippet(userName);
+            i++;
+        }
     }
 }
 
