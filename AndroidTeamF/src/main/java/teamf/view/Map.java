@@ -77,6 +77,10 @@ public class Map extends Activity implements LocationListener {
 
             getLocOthers();
 
+            for(MarkerOptions marker : otherPositions){
+                googleMap.addMarker(marker);
+            }
+
 
         } catch (Exception e) {
             message = e.getMessage();
