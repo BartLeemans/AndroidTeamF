@@ -61,7 +61,7 @@ public class Trip_detail extends TabActivity {
         mapspec.setIndicator("Map",getResources().getDrawable(R.drawable.options_icon));
         mapspec.setContent(mapIntent);
 
-        tabHost.addTab(mapspec);
+       tabHost.addTab(mapspec);
 
         //Chat tab
         Intent chatIntent = new Intent(this,Chat.class);

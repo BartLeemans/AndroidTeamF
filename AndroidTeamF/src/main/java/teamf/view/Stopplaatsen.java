@@ -41,7 +41,11 @@ public class Stopplaatsen extends Activity {
         plaatsen = new ArrayList<StopPlaats>(sc.getStops());
 
         if(plaatsen.size()!=0){
-            plaatsnamen.add(plaatsen.get(0).getAdres());
+            for (StopPlaats sp : plaatsen){
+                if(sp.isVrijgegeven()){
+                    plaatsnamen.add(sp.getAdres());
+                }
+            }
         }
 
         stops=0;
@@ -78,8 +82,11 @@ public class Stopplaatsen extends Activity {
                 Boolean result = data.getBooleanExtra("result", false);
                 if(plaatsnamen.size()<= plaatsen.size()&& result){
                      stops++;
-                     plaatsnamen.add(plaatsen.get(stops).getAdres());
-                     setStopsList();
+                    if(!plaatsnamen.contains(plaatsen.get(stops).getAdres())){
+                        plaatsnamen.add(plaatsen.get(stops).getAdres());
+                        setStopsList();
+                    }
+
                 }
             }
         }

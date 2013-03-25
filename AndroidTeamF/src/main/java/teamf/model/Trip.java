@@ -30,7 +30,6 @@ public class Trip implements Serializable {
 
     private String startLocation;
 
-
     private Collection<String> equipment;
 
     private boolean visible;
@@ -49,7 +48,7 @@ public class Trip implements Serializable {
 
     private User organiser;
 
-    private TripType tripType;
+    private String tripType;
 
     private Collection<StopPlaats> stopPlaatsen;
 
@@ -58,6 +57,8 @@ public class Trip implements Serializable {
     private Collection<Deelname> deelnames;
 
     private Collection<Chat> chats;
+
+    private Collection<BroadcastMessage> broadcastMessages;
 
     public Trip() {
     }
@@ -135,11 +136,11 @@ public class Trip implements Serializable {
         this.tripCategorieen = tripCategorieen;
     }
 
-    public TripType getTripType() {
+    public String getTripType() {
         return tripType;
     }
 
-    public void setTripType(TripType tripType) {
+    public void setTripType(String tripType) {
         this.tripType = tripType;
     }
 
@@ -229,5 +230,13 @@ public class Trip implements Serializable {
 
     public void setChats(Collection<Chat> chats) {
         this.chats = chats;
+    }
+
+    public Collection<BroadcastMessage> getBroadcastMessages() {
+        return broadcastMessages;
+    }
+
+    public void setBroadcastMessages(Collection<BroadcastMessage> broadcastMessages) {
+        this.broadcastMessages = broadcastMessages;
     }
 }

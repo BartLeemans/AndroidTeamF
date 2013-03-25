@@ -1,9 +1,10 @@
 <component name="libraryTable">
   <library name="google-play-services">
     <CLASSES>
-      <root url="jar://D:/Program Files (x86)/adt-bundle-windows-x86_64/sdk/extras/google/google_play_services/libproject/google-play-services_lib/libs/google-play-services.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../adt-bundle-windows-x86_64/sdk/extras/google/google_play_services/libproject/google-play-services_lib/libs" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../../adt-bundle-windows-x86_64/sdk/extras/google/google_play_services/libproject/google-play-services_lib/libs" recursive="false" />
   </library>
 </component>

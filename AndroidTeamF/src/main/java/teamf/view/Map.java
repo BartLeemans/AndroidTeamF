@@ -1,3 +1,4 @@
+
 package teamf.view;
 
 import android.app.Activity;
@@ -43,6 +44,7 @@ public class Map extends Activity implements LocationListener {
             FragmentManager fragmentManager = getFragmentManager();
             MapFragment mapFragment = (MapFragment) fragmentManager.findFragmentById(R.id.map);
             googleMap = mapFragment.getMap();
+            googleMap.setMyLocationEnabled(true);
 
             detail = (Trip)getIntent().getSerializableExtra("Trip");
             sc.getStopsTrip(detail.getTripId());
@@ -105,3 +107,4 @@ public class Map extends Activity implements LocationListener {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 }
+

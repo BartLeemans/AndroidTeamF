@@ -41,10 +41,11 @@
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
+    <orderEntry type="module" module-name="google-play-services_lib" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://D:/Program Files (x86)/adt-bundle-windows-x86_64/sdk/extras/google/google_play_services/libproject/google-play-services_lib/libs/google-play-services.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../adt-bundle-windows-x86_64/sdk/extras/google/google_play_services/libproject/google-play-services_lib/libs/google-play-services.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
