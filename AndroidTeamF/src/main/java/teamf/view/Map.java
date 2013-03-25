@@ -78,6 +78,7 @@ public class Map extends Activity implements LocationListener {
             getLocOthers();
 
             for(MarkerOptions marker : otherPositions){
+                marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)) ;
                 googleMap.addMarker(marker);
             }
 
