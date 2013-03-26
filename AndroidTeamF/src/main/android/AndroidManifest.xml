@@ -68,7 +68,7 @@
         <activity android:name="teamf.view.Detail_General"/>
         <activity android:name="teamf.view.Stopplaatsen"/>
         <activity android:name="teamf.view.Stopplaats_detail"/>
-
+        <activity android:name="teamf.view.Messages"/>
 
         <activity android:name="teamf.view.Map"
                   android:label="@string/app_name">

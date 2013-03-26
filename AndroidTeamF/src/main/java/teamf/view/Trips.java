@@ -58,6 +58,7 @@ public class Trips extends Activity {
                 Intent tripDetail = new Intent(Trips.this,Trip_detail.class);
                 tripDetail.putExtra("Trip",trips.get(position));
                 startActivity(tripDetail);
+
                 }catch(Exception e){
                     String message = e.getMessage();
                 }
