@@ -72,7 +72,7 @@ public class Map extends Activity implements LocationListener {
             googleMap.addPolyline(rectOptions);
             currentMarker.title("Current Position");
             currentMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-            if(lm.getLastKnownLocation(provider)!=null){
+            if(lm.getLastKnownLocation(provider)==null){
                 LatLng temp = new LatLng(0,0);
               currentMarker.position(temp);
             }  else {
