@@ -72,7 +72,12 @@ public class Map extends Activity implements LocationListener {
             googleMap.addPolyline(rectOptions);
             currentMarker.title("Current Position");
             currentMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-            currentMarker.position(new LatLng(lm.getLastKnownLocation(provider).getLatitude(), lm.getLastKnownLocation(provider).getLongitude()));
+            if(lm.getLastKnownLocation(provider)!=null){
+                LatLng temp = new LatLng(0,0);
+              currentMarker.position(temp);
+            }  else {
+                currentMarker.position(new LatLng(lm.getLastKnownLocation(provider).getLatitude(), lm.getLastKnownLocation(provider).getLongitude()));
+            }
             googleMap.addMarker(currentMarker);
 
             getLocOthers();
@@ -81,6 +86,7 @@ public class Map extends Activity implements LocationListener {
                 marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)) ;
                 googleMap.addMarker(marker);
             }
+
 
 
         } catch (Exception e) {
@@ -126,6 +132,8 @@ public class Map extends Activity implements LocationListener {
             markerOptions.snippet(userName);
             i++;
         }
+
+
     }
 }
 
