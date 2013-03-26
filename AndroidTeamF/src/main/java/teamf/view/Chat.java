@@ -10,6 +10,8 @@ import teamf.model.Trip;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,6 +24,13 @@ public class Chat extends Activity {
     private ServerCaller se = ServerCaller.getInstance();
     private int lastChatId = 0;
     private Trip detail;
+    Timer t = new Timer();
+
+    @Override
+    protected void onDestroy() {
+        t.cancel();
+        super.onDestroy();    //To change body of overridden methods use File | Settings | File Templates.
+    }
 
     List<String> chat = new ArrayList<String>();
     public void onCreate(Bundle savedInstanceState) {
@@ -33,18 +42,30 @@ public class Chat extends Activity {
 
         getChatMsg();
 
+
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Chat.this.runOnUiThread(new Runnable() {
+                    public void run() {
+                        getChatMsg();
+                    }
+                });
+            }
+        },10000,10000);
+
         btnChat.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 EditText input = (EditText) findViewById(R.id.inputChat);
                 se.addChat(input.getText().toString(), detail.getTripId());
                 input.setText("");
+                getChatMsg();
             }
         });
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-
                 getChatMsg();
             }
         });

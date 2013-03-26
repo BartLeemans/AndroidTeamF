@@ -10,10 +10,7 @@ import teamf.model.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,18 +25,37 @@ public class Messages extends Activity {
 
     List<String> msgs = new ArrayList<String>();
 
+    Timer t = new Timer();
+
+    @Override
+    protected void onDestroy() {
+        t.cancel();
+        super.onDestroy();    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.messages);
         detail = (Trip)getIntent().getSerializableExtra("Trip");
         fillList();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Messages.this.runOnUiThread(new Runnable() {
+                    public void run() {
+                        fillList();
+                    }
+                });
+            }
+        },60000,60000);
+
     }
 
     private void fillList() {
         ListView listView = (ListView) findViewById(R.id.msgView);
 
         //Collection<BroadcastMessage> bmsg = detail.getBroadcastMessages();
-
+         msgs = new ArrayList<String>();
         se.getBroadcasts(detail.getTripId());
         List<BroadcastMessage> bmsg = se.getBroadcastList();
 
