@@ -57,7 +57,7 @@ public class Detail_General extends Activity {
 
         stops=0;
         listView = (ListView) findViewById(R.id.stopPlaatsenList);
-
+          //brol
         setStopsList();
 
         back.setOnClickListener(new View.OnClickListener() {
