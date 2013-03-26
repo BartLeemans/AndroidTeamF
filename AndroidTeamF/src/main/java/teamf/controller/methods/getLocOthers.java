@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.FormHttpMessageConverter;
@@ -50,9 +51,18 @@ public class getLocOthers  extends AsyncTask<Object[],Integer,List<String>> {
         restTemplate.setMessageConverters(messageConverters);
 
 
-        Type collectionType = new TypeToken<String[]>() {}.getType();
+        Type collectionType = new TypeToken<String[]>(){}.getType();
         Gson gson = new Gson();
-        String[] u = gson.fromJson(restTemplate.postForObject(url,mvm, String.class), collectionType);
+        JSONObject json=null;
+        String[] u=null;
+        try {
+            json = new JSONObject(restTemplate.postForObject(url,mvm, String.class));
+
+            u = gson.fromJson(json.get("stringList").toString(),collectionType );
+        } catch (JSONException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
         return Arrays.asList(u);
 
 

@@ -80,6 +80,10 @@ public class Map extends Activity implements LocationListener {
             }
             googleMap.addMarker(currentMarker);
 
+            List<String> strings = sc.getLocOthers(sc.getCurrentUser().getUserID(),detail.getTripId());
+            for(String s: strings){
+                otherPositions.add(new MarkerOptions());
+            }
             getLocOthers();
 
             for(MarkerOptions marker : otherPositions){
@@ -98,6 +102,7 @@ public class Map extends Activity implements LocationListener {
         LatLng current = new LatLng(lm.getLastKnownLocation(provider).getLatitude(), lm.getLastKnownLocation(provider).getLongitude());
         currentMarker.position(current);
         sc.sendCurLoc(current.latitude, current.longitude, sc.getCurrentUser().getUserID(), detail.getTripId());
+
 
         getLocOthers();
 
@@ -118,7 +123,9 @@ public class Map extends Activity implements LocationListener {
 
 
     private void getLocOthers() {
+
         List<String> strings = sc.getLocOthers(sc.getCurrentUser().getUserID(),detail.getTripId());
+
 
         int i =0;
         for(String s: strings){
@@ -129,6 +136,7 @@ public class Map extends Activity implements LocationListener {
             String userName = String.valueOf(split[2]);
             MarkerOptions markerOptions = otherPositions.get(i);
             markerOptions.position(latLng);
+            markerOptions.title("naam");
             markerOptions.snippet(userName);
             i++;
         }
