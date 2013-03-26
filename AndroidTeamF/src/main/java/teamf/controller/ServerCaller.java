@@ -129,19 +129,18 @@ chatList = restTemplate.getForObject("http://" + ipAddress + "/ProjectTeamF-1.0/
     }
 
     public List<String> getLocOthers(Integer userid,Integer tripid){
-        List<String> strings= new ArrayList<String>();
         String URL = "http://"+ipAddress+"/ProjectTeamF-1.0/service/getPositions.json";
         Object[] params = new Object[]{URL,tripid,userid};
         getLocOthers glo = new getLocOthers();
         glo.execute(params);
         try {
-            strings =  glo.get();
+            return glo.get();
         } catch (InterruptedException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         } catch (ExecutionException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        return strings;
+        return null;
     }
 
     public static ServerCaller getInstance(){
