@@ -3,9 +3,7 @@ package teamf.controller.methods;
 import android.os.AsyncTask;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.FormHttpMessageConverter;
@@ -13,7 +11,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import teamf.model.Trip;
 import teamf.model.User;
@@ -34,7 +31,7 @@ import java.util.List;
 public class getTripsUser extends AsyncTask<Object[],Integer,List<Trip>> {
     @Override
     protected List<Trip> doInBackground(Object[]... params) {
-
+        //qsdfqsdfqsdfqsdfqsdfqsdf
         String message="";
 
         List<Trip> trips = new ArrayList<Trip>();
