@@ -36,6 +36,12 @@ public class Trips extends Activity {
         sc.getTripsUser(sc.getCurrentUser());
 
         final List<Trip> trips = new ArrayList<Trip>(sc.getTrips());
+        if(trips.size()==1){
+            Intent tripDetail = new Intent(Trips.this,Trip_detail.class);
+            tripDetail.putExtra("Trip",trips.get(0));
+            startActivity(tripDetail);
+        }
+
 
         for(Trip t:trips){
             tripNames.add(t.getTripName());

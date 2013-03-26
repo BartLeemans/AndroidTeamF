@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import com.project.TeamFAndroid.R;
 import teamf.controller.ServerCaller;
@@ -36,6 +37,8 @@ public class Stopplaatsen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stopplaatsen);
 
+        Button back = (Button)findViewById(R.id.det_gen_back);
+
         tripid = getIntent().getIntExtra("trip",0);
         sc.getStopsTrip(tripid);
         plaatsen = new ArrayList<StopPlaats>(sc.getStops());
@@ -52,6 +55,7 @@ public class Stopplaatsen extends Activity {
         listView = (ListView) findViewById(R.id.stopPlaatsenList);
 
         setStopsList();
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
                 Boolean end = false;
@@ -65,6 +69,8 @@ public class Stopplaatsen extends Activity {
 
             }
         });
+
+
 
     }
 

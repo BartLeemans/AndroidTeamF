@@ -41,7 +41,7 @@ public class ServerCaller {
     //10.0.2.2
     //192.168.173.1
     //private static final String ipAddress = "10.0.2.2:8080";
-    private static final String ipAddress = "192.168.43.177:8080";
+    private static final String ipAddress = "192.168.43.176:8080";
     private RestTemplate restTemplate = new RestTemplate();
 
     private List<HttpMessageConverter<?>> messageConverters;
