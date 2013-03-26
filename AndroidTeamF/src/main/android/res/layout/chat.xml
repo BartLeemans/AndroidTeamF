@@ -5,34 +5,17 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:id="@+id/buttonsChat"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:weightSum="2"
-            >
     <Button
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:layout_weight="1"
             android:layout_margin="3dp"
-            android:text="@string/chatUpdate"
-            android:id="@+id/btnUpdate"
-            android:layout_gravity="center"
-            android:background="@drawable/button_gold"/>
-    <Button
-            android:layout_width="fill_parent"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:layout_margin="3dp"
+            android:padding="5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             android:text="@string/chatChat"
             android:id="@+id/btnChat"
             android:background="@drawable/button_gold"/>
-</LinearLayout>
 
     <EditText
             android:layout_width="fill_parent"
@@ -40,7 +23,8 @@
             android:id="@+id/inputChat"
             android:layout_gravity="center"
             android:hint="@string/message"
-            android:layout_above="@id/buttonsChat"/>
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@id/btnChat"/>
     <ListView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

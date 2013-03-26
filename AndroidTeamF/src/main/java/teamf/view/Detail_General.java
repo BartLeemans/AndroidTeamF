@@ -38,6 +38,7 @@ public class Detail_General extends Activity {
 
         detail = (Trip)getIntent().getSerializableExtra("Trip");
         vf = (ViewFlipper)findViewById(R.id.ViewFlipper);
+        Button back = (Button)findViewById(R.id.det_gen_back);
         setDates();
         setLocation();
         setEquipment();
@@ -58,6 +59,12 @@ public class Detail_General extends Activity {
         listView = (ListView) findViewById(R.id.stopPlaatsenList);
 
         setStopsList();
+
+        back.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                vf.showPrevious();
+            }
+        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
