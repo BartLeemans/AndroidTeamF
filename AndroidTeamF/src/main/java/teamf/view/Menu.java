@@ -59,7 +59,6 @@ public class Menu extends TabActivity implements OnGestureListener {
         }
 
 
-
     }
 
     @Override

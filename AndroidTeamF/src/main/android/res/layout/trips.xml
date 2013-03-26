@@ -1,36 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
-    <EditText
-            android:layout_width="183dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/search"
-            android:id="@+id/edtSearch" android:layout_gravity="left|center_vertical"/>
-    <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/clear"
-            android:id="@+id/btnClear"/>
-    <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/search"
-            android:id="@+id/btnSearch"/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ParticipatingTrips"
             android:textAlignment="center"
-            android:textSize="40dp"/>
+            android:textSize="30dp"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/tripsText"/>
+    <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/btnClear"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tripsText"
+            android:background="@drawable/icon_delete"
+            />
+    <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/btnSearch"
+            android:layout_toLeftOf="@id/btnClear"
+            android:layout_below="@id/tripsText"
+            android:background="@drawable/icon_search"/>
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/search"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/edtSearch"
+            android:layout_toLeftOf="@id/btnSearch"
+            android:layout_below="@id/tripsText"/>
 
     <ListView
             android:id="@+id/ParticipatingList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edtSearch"
+            >
     </ListView>
 
-</LinearLayout>
+</RelativeLayout>
