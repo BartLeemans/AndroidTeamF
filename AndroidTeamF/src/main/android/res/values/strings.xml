@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Trips Planner</string>
+    <string name="app_name">Trip Planner</string>
     <string name="hello">Hello World!</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
@@ -9,7 +9,7 @@
     <string name="mytrips">My trips</string>
     <string name="myacc">My account</string>
     <string name="general"><u>General</u></string>
-    <string name="account">ACCOUN HERE</string>
+    <string name="account">ACCOUNT HERE</string>
     <string name="opentrips"><b>Open trips</b></string>
     <string name="chatChat">Chat!</string>
     <string name="chatUpdate">Update</string>

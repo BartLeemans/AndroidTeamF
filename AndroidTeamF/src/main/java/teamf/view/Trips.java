@@ -61,32 +61,38 @@ public class Trips extends Activity {
         List<Trip> trips = new ArrayList<Trip>(sc.getTrips());
         List<Trip> searchTrips = new ArrayList<Trip>();
 
-        for(Trip t:trips){
-            if(t.getTripName().contains(s)) {
-                searchTrips.add(t);
-                tripNames.add(t.getTripName());
-            }
-        }
-        if(tripNames.size() == 0) {
-            tripNames.add("No results!");
-        }
+        if (trips.size() == 1) {
+            Intent tripDetail = new Intent(Trips.this, Trip_detail.class);
+            tripDetail.putExtra("Trip", trips.get(0));
+            startActivity(tripDetail);
+        } else {
 
-        final List<Trip> tempTrips = new ArrayList<Trip>(searchTrips);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, tripNames);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-                try{
-                    Intent tripDetail = new Intent(Trips.this,Trip_detail.class);
-                    tripDetail.putExtra("Trip",tempTrips.get(position));
-                    startActivity(tripDetail);
-
-                }catch(Exception e){
-                    String message = e.getMessage();
+            for (Trip t : trips) {
+                if (t.getTripName().contains(s)) {
+                    searchTrips.add(t);
+                    tripNames.add(t.getTripName());
                 }
             }
-        });
+            if (tripNames.size() == 0) {
+                tripNames.add("No results!");
+            }
 
+            final List<Trip> tempTrips = new ArrayList<Trip>(searchTrips);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, tripNames);
+            listView.setAdapter(adapter);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    try {
+                        Intent tripDetail = new Intent(Trips.this, Trip_detail.class);
+                        tripDetail.putExtra("Trip", tempTrips.get(position));
+                        startActivity(tripDetail);
+
+                    } catch (Exception e) {
+                        String message = e.getMessage();
+                    }
+                }
+            });
+        }
     }
 }

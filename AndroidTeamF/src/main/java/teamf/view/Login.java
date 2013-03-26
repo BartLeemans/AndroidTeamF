@@ -66,7 +66,7 @@ public class Login extends Activity {
                 if(se == ServerError.NoError){
 
 
-                    Intent intent = new Intent(Login.this, Menu.class);
+                    Intent intent = new Intent(Login.this, Trips.class);
                     startActivity(intent);
 
                 }else{
