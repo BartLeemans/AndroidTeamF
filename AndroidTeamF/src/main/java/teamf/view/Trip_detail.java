@@ -72,6 +72,15 @@ public class Trip_detail extends TabActivity {
 
         tabHost.addTab(chatspec);
 
+        //broadcast tab
+        Intent broadcastIntent = new Intent(this,Messages.class);
+        broadcastIntent.putExtra("Trip",detail);
+        TabHost.TabSpec broadcastspec = tabHost.newTabSpec("Messages");
+        broadcastspec.setIndicator("Messages",getResources().getDrawable(R.drawable.options_icon));
+        broadcastspec.setContent(broadcastIntent);
+
+        tabHost.addTab(broadcastspec);
+
         tabHost.setCurrentTab(0);
 
 

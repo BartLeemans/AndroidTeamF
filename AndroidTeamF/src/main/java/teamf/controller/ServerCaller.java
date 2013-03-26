@@ -13,10 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import teamf.controller.methods.*;
 import teamf.controller.methods.chat.chat;
 import teamf.controller.methods.chat.getChatList;
-import teamf.model.Chat;
-import teamf.model.StopPlaats;
-import teamf.model.Trip;
-import teamf.model.User;
+import teamf.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +27,21 @@ public class ServerCaller {
     private List<Message> messagesList;
     private List<String> usernames = new ArrayList<String>();
     private List<Chat> chatList;
+
+    public List<BroadcastMessage> getBroadcastList() {
+        return broadcastList;
+    }
+
+    public void setBroadcastList(List<BroadcastMessage> broadcastList) {
+        this.broadcastList = broadcastList;
+    }
+
+    private List<BroadcastMessage> broadcastList;
+
     //10.0.2.2
     //192.168.173.1
     //private static final String ipAddress = "10.0.2.2:8080";
-    private static final String ipAddress = "192.168.43.176:8080";
+    private static final String ipAddress = "192.168.43.177:8080";
     private RestTemplate restTemplate = new RestTemplate();
 
     private List<HttpMessageConverter<?>> messageConverters;
@@ -68,7 +76,7 @@ public class ServerCaller {
 
     public ServerError addChat(String msg, int trip ) {
 
-        String URL = "http://"+ipAddress+"/ProjectTeamF-1.0/android/add.json";
+        String URL = "http://" + ipAddress + "/ProjectTeamF-1.0/android/add.json";
         Object[] params = new Object[]{URL,msg,trip,restTemplate};
         chat c = new chat();
         c.execute(params);
@@ -93,6 +101,22 @@ chatList = restTemplate.getForObject("http://" + ipAddress + "/ProjectTeamF-1.0/
 
         return ServerError.NoError;
     }
+
+    public ServerError getBroadcasts(int tripid) {
+        String URL = "http://" + ipAddress + "/ProjectTeamF-1.0/broadcast/getMessages.json?trip=" + tripid;
+
+        getBroadcastList gcl = new getBroadcastList();
+        gcl.execute(URL);
+        try {
+            broadcastList = gcl.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace(); //To change body of catch statement use File | Settings | File Templates.
+        } catch (ExecutionException e) {
+            e.printStackTrace(); //To change body of catch statement use File | Settings | File Templates.
+        }
+        return ServerError.NoError;
+    }
+
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
     }

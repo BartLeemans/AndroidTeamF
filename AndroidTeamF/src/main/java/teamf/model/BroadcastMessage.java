@@ -1,5 +1,6 @@
 package teamf.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,13 +12,13 @@ import java.util.Date;
  */
 
 
-public class BroadcastMessage {
+public class BroadcastMessage  {
 
     private int broadcastMessageID;
 
     private String msg;
 
-    private Date date;
+    private String date;
 
     private Trip trip;
 
@@ -37,11 +38,11 @@ public class BroadcastMessage {
         this.msg = msg;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

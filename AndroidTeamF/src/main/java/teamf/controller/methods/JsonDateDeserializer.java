@@ -22,7 +22,7 @@ public class JsonDateDeserializer implements JsonDeserializer<Date> {
     public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         String s = json.getAsJsonPrimitive().getAsString();
 
-        SimpleDateFormat format = new SimpleDateFormat("dd MMMMM yyyy - HH:mm:ss", Locale.ENGLISH);
+        SimpleDateFormat format = new SimpleDateFormat("dd MMMM yyyy - HH:mm:ss", Locale.ENGLISH);
         Date d = null;
         try {
 
@@ -30,6 +30,6 @@ public class JsonDateDeserializer implements JsonDeserializer<Date> {
         } catch (ParseException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        return d;
+        return (d);
     }
 }

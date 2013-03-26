@@ -31,6 +31,7 @@ public class Chat extends Activity {
         Button btnChat = (Button) findViewById(R.id.btnChat);
         Button btnUpdate = (Button) findViewById(R.id.btnUpdate);
 
+        getChatMsg();
 
         btnChat.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -44,21 +45,25 @@ public class Chat extends Activity {
 
             public void onClick(View view) {
 
-                ListView listView = (ListView) findViewById(R.id.chatListView);
-
-                se.getChats(detail.getTripId(), lastChatId);  //parameter = trip ID
-                List<teamf.model.Chat> cl = se.getChatList();
-                if(cl != null) {
-                    for(teamf.model.Chat c : cl) {
-                        chat.add(/*"(" + c.getDate() + ")" +*/ c.getUser().getUsername() + ": " + c.getMsg());
-                        lastChatId = c.getChatID();
-                    }
-                    ArrayAdapter<String> arrayAdapt = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, chat);
-                    listView.setAdapter(arrayAdapt);
-                }
-                listView.setSelection(listView.getCount() - 1);
+                getChatMsg();
             }
         });
+    }
+
+    private void getChatMsg() {
+        ListView listView = (ListView) findViewById(R.id.chatListView);
+
+        se.getChats(detail.getTripId(), lastChatId);  //parameter = trip ID
+        List<teamf.model.Chat> cl = se.getChatList();
+        if(cl != null) {
+            for(teamf.model.Chat c : cl) {
+                chat.add(/*"(" + c.getDate() + ")" +*/ c.getUser().getUsername() + ": " + c.getMsg());
+                lastChatId = c.getChatID();
+            }
+            ArrayAdapter<String> arrayAdapt = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, chat);
+            listView.setAdapter(arrayAdapt);
+        }
+        listView.setSelection(listView.getCount() - 1);
     }
 
 }
