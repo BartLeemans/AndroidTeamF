@@ -10,7 +10,6 @@
     <string name="myacc">My account</string>
     <string name="general"><u>General</u></string>
     <string name="account">ACCOUN HERE</string>
-    <string name="options">OPTIONS HERE</string>
     <string name="opentrips"><b>Open trips</b></string>
     <string name="chatChat">Chat!</string>
     <string name="chatUpdate">Update</string>
@@ -25,4 +24,6 @@
     <string name="nextStop">Next stop</string>
     <string name="vraag"><u>Vraag</u></string>
     <string name="back">Back</string>
+    <string name="search">Search</string>
+    <string name="clear">x</string>
 </resources>

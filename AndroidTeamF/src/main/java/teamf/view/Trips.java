@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.*;
 import com.project.TeamFAndroid.R;
 import teamf.controller.ServerCaller;
 import teamf.model.Trip;
@@ -25,50 +23,70 @@ import java.util.List;
  */
 public class Trips extends Activity {
     List<String> tripNames = new ArrayList<String>();
+    ListView listView;
+    ServerCaller sc;
+    EditText edt;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trips);
 
-        ListView listView = (ListView) findViewById(R.id.ParticipatingList);
+        listView = (ListView) findViewById(R.id.ParticipatingList);
+        Button b = (Button) findViewById(R.id.btnSearch);
+        Button bClear = (Button) findViewById(R.id.btnClear);
+        edt = (EditText) findViewById(R.id.edtSearch);
 
-        ServerCaller sc = ServerCaller.getInstance();
+
+        sc = ServerCaller.getInstance();
         sc.getTripsUser(sc.getCurrentUser());
 
-        final List<Trip> trips = new ArrayList<Trip>(sc.getTrips());
-        if(trips.size()==1){
-            Intent tripDetail = new Intent(Trips.this,Trip_detail.class);
-            tripDetail.putExtra("Trip",trips.get(0));
-            startActivity(tripDetail);
-        }
+        search("");
 
+        bClear.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                edt.setText("");
+                search("");
+            }
+        });
+
+        b.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                search(edt.getText().toString());
+            }
+        });
+    }
+
+    public void search(String s) {
+        tripNames.clear();
+        List<Trip> trips = new ArrayList<Trip>(sc.getTrips());
+        List<Trip> searchTrips = new ArrayList<Trip>();
 
         for(Trip t:trips){
-            tripNames.add(t.getTripName());
+            if(t.getTripName().contains(s)) {
+                searchTrips.add(t);
+                tripNames.add(t.getTripName());
+            }
         }
-        String[] stringValues = new String[tripNames.size()];
-        for(int i = 0;i<tripNames.size();i++){
-            stringValues[i]=tripNames.get(i);
+        if(tripNames.size() == 0) {
+            tripNames.add("No results!");
         }
 
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, stringValues);
-
-
+        final List<Trip> tempTrips = new ArrayList<Trip>(searchTrips);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, tripNames);
         listView.setAdapter(adapter);
-
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
                 try{
-                Intent tripDetail = new Intent(Trips.this,Trip_detail.class);
-                tripDetail.putExtra("Trip",trips.get(position));
-                startActivity(tripDetail);
+                    Intent tripDetail = new Intent(Trips.this,Trip_detail.class);
+                    tripDetail.putExtra("Trip",tempTrips.get(position));
+                    startActivity(tripDetail);
 
                 }catch(Exception e){
                     String message = e.getMessage();
                 }
             }
         });
+
     }
 }

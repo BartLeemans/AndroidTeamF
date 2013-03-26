@@ -43,40 +43,37 @@ public class Menu extends TabActivity implements OnGestureListener {
         gDetector = new GestureDetector(this);
     }
 
-   private void init_tabs() {
+    private void init_tabs() {
         tabHost = getTabHost();
 
-       //Trips tab
-       try{
-       Intent tripIntent = new Intent(this,Trips.class);
-       TabHost.TabSpec tripspec = tabHost.newTabSpec("Trips");
-       tripspec.setIndicator("Trips",getResources().getDrawable(R.drawable.acc_icon));
-       tripspec.setContent(tripIntent);
+        //Trips tab
+        try {
+            Intent tripIntent = new Intent(this, Trips.class);
+            TabHost.TabSpec tripspec = tabHost.newTabSpec("Trips");
+            tripspec.setIndicator("Trips", getResources().getDrawable(R.drawable.acc_icon));
+            tripspec.setContent(tripIntent);
 
-       tabHost.addTab(tripspec);
-       }catch(Exception e){
-           String message = e.getMessage();
-       }
+            tabHost.addTab(tripspec);
+        } catch (Exception e) {
+            String message = e.getMessage();
+        }
         //account tab
-        Intent accountIntent = new Intent(this,Account.class);
+        Intent accountIntent = new Intent(this, Account.class);
         TabHost.TabSpec accountspec = tabHost.newTabSpec("account");
-        accountspec.setIndicator("account",getResources().getDrawable(R.drawable.acc_icon));
+        accountspec.setIndicator("account", getResources().getDrawable(R.drawable.acc_icon));
         accountspec.setContent(accountIntent);
 
         tabHost.addTab(accountspec);
 
-        //options tab
-        Intent optionsIntent = new Intent(this,Options.class);
-        TabHost.TabSpec optionsspec = tabHost.newTabSpec("Options");
-        optionsspec.setIndicator("Options",getResources().getDrawable(R.drawable.options_icon));
-        optionsspec.setContent(optionsIntent);
+        //search tab
+        Intent searchIntent = new Intent(this, Search.class);
+        TabHost.TabSpec searchspec = tabHost.newTabSpec("Search");
+        searchspec.setIndicator("Search", getResources().getDrawable(R.drawable.options_icon));
+        searchspec.setContent(searchIntent);
 
-        tabHost.addTab(optionsspec);
+        tabHost.addTab(searchspec);
 
-
-
-       tabHost.setCurrentTab(0);
-
+        tabHost.setCurrentTab(0);
 
 
     }
@@ -88,7 +85,7 @@ public class Menu extends TabActivity implements OnGestureListener {
 
     public boolean onDown(MotionEvent e) {
         return true;
-      //To change body of implemented methods use File | Settings | File Templates.
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public void onShowPress(MotionEvent e) {
@@ -108,11 +105,10 @@ public class Menu extends TabActivity implements OnGestureListener {
     }
 
     public boolean onFling(MotionEvent start, MotionEvent stop, float velocityX, float velocityY) {
-       if(start.getRawX()<stop.getRawX()){
-           tabHost.setCurrentTab(tabHost.getCurrentTab()-1);
-       }
-        else if(start.getRawX()>stop.getRawX()){
-            tabHost.setCurrentTab(tabHost.getCurrentTab()+1);
+        if (start.getRawX() < stop.getRawX()) {
+            tabHost.setCurrentTab(tabHost.getCurrentTab() - 1);
+        } else if (start.getRawX() > stop.getRawX()) {
+            tabHost.setCurrentTab(tabHost.getCurrentTab() + 1);
         }
 
 

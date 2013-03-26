@@ -86,6 +86,7 @@ public class Trip_detail extends TabActivity {
         Intent broadcastIntent = new Intent(this,Messages.class);
         broadcastIntent.putExtra("Trip",detail);
         TabHost.TabSpec broadcastspec = tabHost.newTabSpec("Messages");
+
         broadcastspec.setIndicator("Messages",getResources().getDrawable(R.drawable.options_icon));
         broadcastspec.setContent(broadcastIntent);
 
@@ -93,8 +94,8 @@ public class Trip_detail extends TabActivity {
 
         tabHost.setCurrentTab(0);
 
-
-
     }
+
+
 
 }

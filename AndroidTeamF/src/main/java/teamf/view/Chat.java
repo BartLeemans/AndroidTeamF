@@ -38,6 +38,7 @@ public class Chat extends Activity {
         setContentView(R.layout.chat);
         detail = (Trip)getIntent().getSerializableExtra("Trip");
         Button btnChat = (Button) findViewById(R.id.btnChat);
+        Button btnUpdate = (Button) findViewById(R.id.btnUpdate);
 
         getChatMsg();
 
@@ -58,8 +59,10 @@ public class Chat extends Activity {
                 EditText input = (EditText) findViewById(R.id.inputChat);
                 se.addChat(input.getText().toString(), detail.getTripId());
                 input.setText("");
+                getChatMsg();
             }
         });
+
     }
 
     private void getChatMsg() {
