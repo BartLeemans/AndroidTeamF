@@ -14,6 +14,6 @@ import com.project.TeamFAndroid.R;
 public class NoMap extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.noMap);
+        setContentView(R.layout.nomap);
     }
 }

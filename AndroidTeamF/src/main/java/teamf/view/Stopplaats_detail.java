@@ -87,6 +87,10 @@ public class Stopplaats_detail extends Activity {
                     String antwoord = antw.get(i);
                     if(antwoord.equals(detail.getCorrectAntwoord())){
                         next.setVisibility(View.VISIBLE);
+                        Toast.makeText(getApplicationContext(), "Correct!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        next.setVisibility(View.VISIBLE);
+                        Toast.makeText(getApplicationContext(), "Fout, het correcte antwoord was:\n"+detail.getCorrectAntwoord(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
