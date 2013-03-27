@@ -38,7 +38,6 @@ public class Chat extends Activity {
         setContentView(R.layout.chat);
         detail = (Trip)getIntent().getSerializableExtra("Trip");
         Button btnChat = (Button) findViewById(R.id.btnChat);
-        Button btnUpdate = (Button) findViewById(R.id.btnUpdate);
 
         getChatMsg();
 

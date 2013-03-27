@@ -5,6 +5,9 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
+import android.view.MotionEvent;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -24,7 +27,6 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class Trip_detail extends TabActivity {
-
     private TabHost tabHost;
     private Trip detail;
 
@@ -37,8 +39,8 @@ public class Trip_detail extends TabActivity {
         detail = (Trip)getIntent().getSerializableExtra("Trip");
         this.setTitle(detail.getTripName());
 
-
         init_tabs();
+
 
     }
 
@@ -49,7 +51,7 @@ public class Trip_detail extends TabActivity {
         Intent generalIntent = new Intent(this,Detail_General.class);
         generalIntent.putExtra("Trip",detail);
         TabHost.TabSpec generalspec = tabHost.newTabSpec("General");
-        generalspec.setIndicator("General",getResources().getDrawable(R.drawable.options_icon));
+        generalspec.setIndicator("General",getResources().getDrawable(R.drawable.icon_info));
         generalspec.setContent(generalIntent);
 
         tabHost.addTab(generalspec);
@@ -59,13 +61,13 @@ public class Trip_detail extends TabActivity {
             Intent mapIntent = new Intent(this,Map.class);
             mapIntent.putExtra("Trip",detail);
             TabHost.TabSpec mapspec = tabHost.newTabSpec("Map");
-            mapspec.setIndicator("Map",getResources().getDrawable(R.drawable.options_icon));
+            mapspec.setIndicator("Map",getResources().getDrawable(R.drawable.icon_map));
             mapspec.setContent(mapIntent);
             tabHost.addTab(mapspec);
         }  else {
             Intent mapIntent = new Intent(this,NoMap.class);
             TabHost.TabSpec mapspec = tabHost.newTabSpec("Map");
-            mapspec.setIndicator("Map",getResources().getDrawable(R.drawable.options_icon));
+            mapspec.setIndicator("Map",getResources().getDrawable(R.drawable.icon_map));
             mapspec.setContent(mapIntent);
             tabHost.addTab(mapspec);
         }
@@ -77,7 +79,7 @@ public class Trip_detail extends TabActivity {
         Intent chatIntent = new Intent(this,Chat.class);
         chatIntent.putExtra("Trip",detail);
         TabHost.TabSpec chatspec = tabHost.newTabSpec("Chat");
-        chatspec.setIndicator("Chat",getResources().getDrawable(R.drawable.options_icon));
+        chatspec.setIndicator("Chat",getResources().getDrawable(R.drawable.icon_chat));
         chatspec.setContent(chatIntent);
 
         tabHost.addTab(chatspec);
@@ -85,9 +87,9 @@ public class Trip_detail extends TabActivity {
         //broadcast tab
         Intent broadcastIntent = new Intent(this,Messages.class);
         broadcastIntent.putExtra("Trip",detail);
-        TabHost.TabSpec broadcastspec = tabHost.newTabSpec("Messages");
+        TabHost.TabSpec broadcastspec = tabHost.newTabSpec("Broadcast");
 
-        broadcastspec.setIndicator("Messages",getResources().getDrawable(R.drawable.options_icon));
+        broadcastspec.setIndicator("Broadcast",getResources().getDrawable(R.drawable.icon_broadcast));
         broadcastspec.setContent(broadcastIntent);
 
         tabHost.addTab(broadcastspec);
@@ -95,7 +97,4 @@ public class Trip_detail extends TabActivity {
         tabHost.setCurrentTab(0);
 
     }
-
-
-
 }

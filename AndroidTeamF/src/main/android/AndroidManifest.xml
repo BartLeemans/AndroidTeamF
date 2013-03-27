@@ -64,7 +64,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="teamf.view.Account"/>
         <activity android:name="teamf.view.NoMap"/>
         <activity android:name="teamf.view.Detail_General"/>
         <activity android:name="teamf.view.Stopplaatsen"/>

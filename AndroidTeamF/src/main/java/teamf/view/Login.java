@@ -51,6 +51,7 @@ public class Login extends Activity {
 
         main.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 Intent mainPage = new Intent(Login.this,Main.class);
                 startActivity(mainPage);
             }
@@ -66,7 +67,7 @@ public class Login extends Activity {
                 if(se == ServerError.NoError){
 
 
-                    Intent intent = new Intent(Login.this, Menu.class);
+                    Intent intent = new Intent(Login.this, Trips.class);
                     startActivity(intent);
 
                 }else{
