@@ -16,13 +16,13 @@ import teamf.controller.ServerCaller;
 import teamf.model.StopPlaats;
 import teamf.model.Trip;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Map extends Activity implements LocationListener {
     private ServerCaller sc = ServerCaller.getInstance();
-    private Trip detail;
+    private Trip trip;
     private ArrayList<MarkerOptions> otherPositions = new ArrayList<MarkerOptions>();
     private List<StopPlaats> plaatsen;
     private GoogleMap googleMap;
@@ -47,48 +47,14 @@ public class Map extends Activity implements LocationListener {
             googleMap = mapFragment.getMap();
             googleMap.setMyLocationEnabled(true);
 
-            detail = (Trip)getIntent().getSerializableExtra("Trip");
-            sc.getStopsTrip(detail.getTripId());
+            trip = (Trip)getIntent().getSerializableExtra("Trip");
+            sc.getStopsTrip(trip.getTripId());
             plaatsen = new ArrayList<StopPlaats>(sc.getStops());
 
-            final Geocoder geocoder = new Geocoder(getBaseContext());
-            PolylineOptions rectOptions = new PolylineOptions();
-            for(StopPlaats p :plaatsen){
-                List<Address> GeocodeResponse = geocoder.getFromLocationName(p.getAdres(), 10);
-                LatLng position = new LatLng(GeocodeResponse.get(0).getLatitude(), GeocodeResponse.get(0).getLongitude());
-                googleMap.addMarker(new MarkerOptions()
-                        .position(position)
-                        .title(p.getAdres())
-                        .snippet(p.getInformatie())
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-                rectOptions.add(position);
-                googleMap.getUiSettings().setCompassEnabled(true);
-                googleMap.getUiSettings().setZoomControlsEnabled(true);
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 11));
-            }
-            googleMap.addPolyline(rectOptions);
+            addStopplaatsenToMap();
+            addCurrentMarkerToMap();
+            addOtherMarkers();
 
-            currentMarker.title("Current Position");
-            currentMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-            if(lm.getLastKnownLocation(provider)==null){
-                LatLng temp = new LatLng(0,0);
-              currentMarker.position(temp);
-            }  else {
-                currentMarker.position(new LatLng(lm.getLastKnownLocation(provider).getLatitude(), lm.getLastKnownLocation(provider).getLongitude()));
-            }
-            googleMap.addMarker(currentMarker);
-
-            List<String> strings = sc.getLocOthers(sc.getCurrentUser().getUserID(),detail.getTripId());
-            for(String s: strings){
-                otherPositions.add(new MarkerOptions());
-            }
-
-            getLocOthers();
-
-            for(MarkerOptions marker : otherPositions){
-                marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)) ;
-                googleMap.addMarker(marker);
-            }
 
 
 
@@ -98,15 +64,10 @@ public class Map extends Activity implements LocationListener {
     }
 
     public void onLocationChanged(Location location) {
-        googleMap.setMyLocationEnabled(false);
-        LatLng current = new LatLng(lm.getLastKnownLocation(provider).getLatitude(), lm.getLastKnownLocation(provider).getLongitude());
-        currentMarker.position(current);
-        sc.sendCurLoc(current.latitude, current.longitude, sc.getCurrentUser().getUserID(), detail.getTripId());
-        googleMap.setMyLocationEnabled(true);
-        googleMap.addMarker(currentMarker);
-
-        getLocOthers();
-
+        googleMap.clear();
+        addStopplaatsenToMap();
+        addCurrentMarkerToMap();
+        addOtherMarkers();
     }
 
 
@@ -123,10 +84,8 @@ public class Map extends Activity implements LocationListener {
     }
 
 
-    private void getLocOthers() {
-
-        List<String> strings = sc.getLocOthers(sc.getCurrentUser().getUserID(),detail.getTripId());
-
+    private void addOtherMarkers() {
+        List<String> strings = sc.getLocOthers(sc.getCurrentUser().getUserID(), trip.getTripId());
 
         int i =0;
         for(String s: strings){
@@ -135,14 +94,53 @@ public class Map extends Activity implements LocationListener {
             double lng = Double.valueOf(split[1]);
             LatLng latLng = new LatLng(lat,lng);
             String userName = String.valueOf(split[2]);
-            MarkerOptions markerOptions = otherPositions.get(i);
-            markerOptions.position(latLng);
-            markerOptions.title("naam");
-            markerOptions.snippet(userName);
+            MarkerOptions markerOther = new MarkerOptions();
+            markerOther.position(latLng);
+            markerOther.title("naam");
+            markerOther.snippet(userName);
+            markerOther.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+            otherPositions.add(markerOther);
+            googleMap.addMarker(markerOther);
             i++;
         }
 
 
+    }
+
+    private void addStopplaatsenToMap() {
+        final Geocoder geocoder = new Geocoder(getBaseContext());
+        PolylineOptions rectOptions = new PolylineOptions();
+        for(StopPlaats p :plaatsen){
+            List<Address> GeocodeResponse = null;
+            try {
+                GeocodeResponse = geocoder.getFromLocationName(p.getAdres(), 10);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            LatLng position = new LatLng(GeocodeResponse.get(0).getLatitude(), GeocodeResponse.get(0).getLongitude());
+            googleMap.addMarker(new MarkerOptions()
+                    .position(position)
+                    .title(p.getAdres())
+                    .snippet(p.getInformatie())
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+            rectOptions.add(position);
+            googleMap.getUiSettings().setCompassEnabled(true);
+            googleMap.getUiSettings().setZoomControlsEnabled(true);
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 11));
+        }
+        googleMap.addPolyline(rectOptions);
+    }
+
+    private void addCurrentMarkerToMap() {
+        currentMarker.title("Current Position");
+        currentMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        if(lm.getLastKnownLocation(provider)==null){
+            LatLng temp = new LatLng(0,0);
+            currentMarker.position(temp);
+        }  else {
+            currentMarker.position(new LatLng(lm.getLastKnownLocation(provider).getLatitude(), lm.getLastKnownLocation(provider).getLongitude()));
+        }
+        googleMap.addMarker(currentMarker);
     }
 }
 
