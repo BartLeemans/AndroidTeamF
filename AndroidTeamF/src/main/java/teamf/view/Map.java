@@ -4,7 +4,7 @@ package teamf.view;
 import android.app.Activity;
 import android.location.*;
 import android.os.Bundle;
-import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.maps.model.*;
 import com.project.TeamFAndroid.R;
 
 
@@ -12,9 +12,6 @@ import android.app.FragmentManager;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import teamf.controller.ServerCaller;
 import teamf.model.StopPlaats;
 import teamf.model.Trip;
@@ -70,6 +67,7 @@ public class Map extends Activity implements LocationListener {
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 11));
             }
             googleMap.addPolyline(rectOptions);
+
             currentMarker.title("Current Position");
             currentMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
             if(lm.getLastKnownLocation(provider)==null){
@@ -84,6 +82,7 @@ public class Map extends Activity implements LocationListener {
             for(String s: strings){
                 otherPositions.add(new MarkerOptions());
             }
+
             getLocOthers();
 
             for(MarkerOptions marker : otherPositions){
@@ -99,10 +98,12 @@ public class Map extends Activity implements LocationListener {
     }
 
     public void onLocationChanged(Location location) {
+        googleMap.setMyLocationEnabled(false);
         LatLng current = new LatLng(lm.getLastKnownLocation(provider).getLatitude(), lm.getLastKnownLocation(provider).getLongitude());
         currentMarker.position(current);
         sc.sendCurLoc(current.latitude, current.longitude, sc.getCurrentUser().getUserID(), detail.getTripId());
-
+        googleMap.setMyLocationEnabled(true);
+        googleMap.addMarker(currentMarker);
 
         getLocOthers();
 
