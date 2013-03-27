@@ -29,6 +29,7 @@ public class Map extends Activity implements LocationListener {
     private String provider;
     private LocationManager lm;
     private MarkerOptions currentMarker= new MarkerOptions();
+    private int refresh;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class Map extends Activity implements LocationListener {
             addStopplaatsenToMap();
             addCurrentMarkerToMap();
             addOtherMarkers();
-
+            refresh=0;
 
 
 
@@ -64,7 +65,10 @@ public class Map extends Activity implements LocationListener {
     }
 
     public void onLocationChanged(Location location) {
-        googleMap.clear();
+        if(refresh==200){
+            googleMap.clear();
+            refresh=0;
+        }
         addStopplaatsenToMap();
         addCurrentMarkerToMap();
         addOtherMarkers();
@@ -85,6 +89,13 @@ public class Map extends Activity implements LocationListener {
 
 
     private void addOtherMarkers() {
+        if(refresh<200){
+            int i=0;
+            for(MarkerOptions temp: otherPositions ){
+                temp.visible(false);
+                otherPositions.add(i,new MarkerOptions());
+            }
+        }
         List<String> strings = sc.getLocOthers(sc.getCurrentUser().getUserID(), trip.getTripId());
 
         int i =0;
@@ -132,6 +143,10 @@ public class Map extends Activity implements LocationListener {
     }
 
     private void addCurrentMarkerToMap() {
+        if(refresh<200){
+            currentMarker.visible(false);
+            currentMarker = new MarkerOptions();
+        }
         currentMarker.title("Current Position");
         currentMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
         if(lm.getLastKnownLocation(provider)==null){
