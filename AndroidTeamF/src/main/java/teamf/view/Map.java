@@ -149,7 +149,7 @@ public class Map extends Activity implements LocationListener {
             currentMarker = new MarkerOptions();
         }
         currentMarker.title("Current Position");
-        currentMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        currentMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
         if(lm.getLastKnownLocation(provider)==null){
             LatLng temp = new LatLng(0,0);
             currentMarker.position(temp);
