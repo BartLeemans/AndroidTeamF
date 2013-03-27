@@ -39,7 +39,7 @@ public class Map extends Activity implements LocationListener {
             setContentView(R.layout.map);
 
             lm = (LocationManager) getSystemService(LOCATION_SERVICE);
-            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 4000, 0, this);
+            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0, this);
             provider = lm.getBestProvider(new Criteria(), true);
 
 
@@ -51,7 +51,8 @@ public class Map extends Activity implements LocationListener {
             trip = (Trip)getIntent().getSerializableExtra("Trip");
             sc.getStopsTrip(trip.getTripId());
             plaatsen = new ArrayList<StopPlaats>(sc.getStops());
-
+            googleMap.getUiSettings().setCompassEnabled(true);
+            googleMap.getUiSettings().setZoomControlsEnabled(true);;
             addStopplaatsenToMap();
             addCurrentMarkerToMap();
             addOtherMarkers();
@@ -136,9 +137,7 @@ public class Map extends Activity implements LocationListener {
                     .snippet(p.getInformatie())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
             rectOptions.add(position);
-            googleMap.getUiSettings().setCompassEnabled(true);
-            googleMap.getUiSettings().setZoomControlsEnabled(true);
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 11));
+
         }
         googleMap.addPolyline(rectOptions);
     }
