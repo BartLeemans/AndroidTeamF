@@ -72,6 +72,7 @@ public class Map extends Activity implements LocationListener {
         addStopplaatsenToMap();
         addCurrentMarkerToMap();
         addOtherMarkers();
+        refresh++;
     }
 
 
